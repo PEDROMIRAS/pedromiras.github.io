@@ -72,7 +72,7 @@
 }
 
 /* Pantallas grandes (>=1600px) */
-@media (min-width: 1600px) {
+@media (min-width: 1650px) {
     html {
       font-size: 18px;
     }
@@ -92,7 +92,7 @@
 
     section {
       padding-inline: 80px;
-      max-width: 1600px;
+      max-width: 1650px;
     }
     .section-title {
       margin-bottom: 60px;
