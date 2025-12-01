@@ -1,0 +1,14 @@
+@import url(variables.css);
+
+
+/* RESET BÁSICO */
+
+* {
+    margin: 0;               /* Quitar márgenes por defecto */
+    padding: 0;              /* Quitar rellenos por defecto */
+    box-sizing: border-box;  /* Incluir padding y border en el tamaño */
+}
+
+[id]{
+    scroll-margin-top: var(--header-offset);
+}

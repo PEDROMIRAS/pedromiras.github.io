@@ -1,0 +1,25 @@
+@import url(variables.css);
+
+/* FOOTER */
+footer {
+    width: 100%;                              
+    padding: 20px 0;                         
+    text-align: center;                        
+    background-color: var(--color-header-bg); /* Fondo translúcido */
+    color: var(--color-text-light);           /* Texto claro */
+    border-top: 1px solid var(--color-border);/* Borde superior sutil */
+    backdrop-filter: blur(10px);              /* Desenfoque del fondo */
+    -webkit-backdrop-filter: blur(10px);      /* Compatibilidad Safari */
+    font-size: 0.9rem;                        /* Texto más pequeño */
+}
+
+/* Enlaces en el footer */
+footer a {
+    color: var(--color-primary);              /* Color principal */
+    text-decoration: none;                    /* Sin subrayado */
+    transition: color var(--transition);      /* Transición suave */
+}
+
+footer a:hover {
+    color: var(--color-primary-dark);         /* Color más oscuro al hover */
+}

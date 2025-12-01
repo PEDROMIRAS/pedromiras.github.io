@@ -1,0 +1,317 @@
+/* ============================= */
+/* RESET BÁSICO */
+/* ============================= */
+
+/* Normaliza márgenes, padding y box-sizing */
+* {
+    margin: 0;              
+    padding: 0;             
+    box-sizing: border-box; 
+}
+
+/* ============================= */
+/* VARIABLES DE COLOR */
+/* ============================= */
+
+/* Definición de colores y valores globales */
+:root {
+    --color-primary: #c70039;  
+    --color-dark: #111;        
+    --color-light: #f8f8f8;    
+    --color-text: #222;        
+    --max-width: 1200px;       
+    --header-offset: 110px;   
+}
+
+/* ============================= */
+/* BODY */
+/* ============================= */
+
+/* Estilo global del body y comportamiento del scroll */
+body {
+    font-family: "Roboto", Arial, sans-serif;
+    line-height: 1.7;                         
+    color: var(--color-light);                
+    background: linear-gradient(#900c27, #c70039);
+    background-attachment: fixed;             
+    scroll-behavior: smooth;                  
+}
+
+/* Ajuste del scroll para anclas internas */
+[id]{
+    scroll-margin-top: var(--header-offset);
+}
+
+/* ============================= */
+/* HEADER */
+/* ============================= */
+
+/* Contenedor principal del header */
+header {
+    width: 96%;                                
+    max-width: var(--max-width);               
+    margin: 0 auto;                            
+    display: flex;                             
+    justify-content: space-between;            
+    align-items: center;                      
+    padding: 1.2rem 2rem;                    
+    background: rgba(0, 0, 0, 0.3);          
+    backdrop-filter: blur(6px);                
+    border-radius: 14px;                      
+    position: sticky;                          
+    top: 1.2rem;                               
+    z-index: 1000;                             
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Título del header */
+header h1 {
+    font-size: 1.6rem;              
+    color: var(--color-light);      
+    text-transform: uppercase;      
+    letter-spacing: 1px;            
+}
+
+/* ============================= */
+/* NAVBAR */
+/* ============================= */
+
+/* Lista de enlaces del menú */
+.navbar ul {
+    display: flex;                  
+    gap: 2rem;                      
+    list-style: none;            
+}
+
+/* Estilo de los enlaces del menú */
+.navbar a {
+    text-decoration: none;          
+    color: var(--color-light);      
+    font-weight: 500;               
+    position: relative;             
+    transition: color 0.3s ease;    
+}
+
+/* Subrayado animado de los enlaces */
+.navbar a::after {
+    content: "";                    
+    position: absolute;             
+    bottom: -5px;                   
+    left: 0;
+    width: 0%;                      
+    height: 2px;                    
+    background-color: var(--color-primary); 
+    transition: width 0.3s ease;    
+}
+
+/* Hover en los enlaces */
+.navbar a:hover {
+    color: #fff;                    
+}
+
+.navbar a:hover::after {
+    width: 100%;                    
+}
+
+/* ============================= */
+/* MAIN LAYOUT */
+/* ============================= */
+
+/* Contenedor principal del contenido */
+main {
+    width: 100%;                               
+    max-width: var(--max-width);              
+    margin: 2rem auto 4rem;               
+    padding: 2rem;                           
+}
+
+/* ============================= */
+/* SECCIONES */
+/* ============================= */
+
+/* Contenedor general de cada sección */
+.section {
+    margin-bottom: 4rem;          
+    color: var(--color-light);    
+}
+
+/* Contenedor de contenido dentro de la sección (texto + imágenes) */
+.section-content {
+    display: flex;                
+    flex-wrap: wrap;              
+    align-items: center;          
+    gap: 2.5rem;                  
+}
+
+/* Columna de texto dentro de la sección */
+.section-text {
+    flex: 1 1 50%;                
+}
+
+/* Títulos dentro de la sección */
+.section-text h2 {
+    color: #fff;                  
+    font-size: 1.8rem;            
+    margin-bottom: 1rem;          
+    border-left: 5px solid var(--color-light);
+    padding-left: 0.7rem;         
+}
+
+/* Párrafos dentro de la sección */
+.section-text p {
+    margin-bottom: 1rem;          
+    text-align: justify;          
+}
+
+/* Contenedor de imágenes individuales */
+.section-img {
+    flex: 1 1 40%;                
+    display: flex;
+    flex-direction: column;       
+    gap: 1.5rem;                  
+    align-items: center;          
+}
+
+/* Estilo de cada imagen */
+.section-img img {
+    width: 100%;                  
+    max-width: 480px;             
+    border-radius: 12px;          
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+/* Hover sobre las imágenes */
+.section-img img:hover {
+    transform: scale(1.03);       
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Texto de pie de imagen */
+.section-img figcaption {
+    font-size: 0.9rem;            
+    opacity: 0.9;                 
+    text-align: center;           
+}
+
+/* Grid de imágenes de motores */
+.section-img-motores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* Estilo de imágenes de motores */
+.section-img-motores img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-img-motores img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+/* Grid general de imágenes dentro de una sección */
+.section-img-grid {
+    flex: 1 1 50%;                 /* Ocupa mitad del espacio si se usa flex */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    justify-items: center;
+}
+
+/* Estilo de imágenes dentro del grid */
+.section-img-grid img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-img-grid img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+/* Alternar lado de imagen y texto */
+.section-content.reverse {
+    flex-direction: row-reverse;  
+}
+
+/* ============================= */
+/* SECCIÓN SIGLO XXI */
+/* ============================= */
+
+/* Ajustes de párrafos para sección Siglo XXI */
+#siglo-xxi .section-text p {
+    margin-bottom: 2rem;  
+}
+
+/* Interlineado más cómodo en sección Siglo XXI */
+#siglo-xxi .section-text {
+    line-height: 2.2;       
+}
+
+/* Centrado del texto de figcaption en grid */
+.section-img-grid figcaption{
+    text-align: center;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+/* Contenedor y estilo del footer */
+footer {
+    text-align: center;                           
+    padding: 2rem;                                
+    background: rgba(0, 0, 0, 0.4);               
+    color: var(--color-light);                    
+    border-top: 1px solid rgba(255, 255, 255, 0.15); 
+    font-size: 0.9rem;                            
+    letter-spacing: 0.5px;                        
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;    /* Logo y menú uno debajo del otro */
+        gap: 1rem;                 /* Separación vertical */
+        text-align: center;        /* Centra todo */
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;           /* Menú se parte si no cabe */
+        justify-content: center;   /* Centrado */
+    }
+
+    .section-content {
+        flex-direction: column;    /* Texto e imagen uno bajo otro */
+    }
+
+    .section-img img {
+        max-width: 100%;           /* Imagen ocupa todo el ancho disponible */
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 0.95rem;        /* Reduce tamaño general del texto */
+    }
+
+    header h1 {
+        font-size: 1.3rem;         /* Título más pequeño */
+    }
+
+    .navbar ul {
+        gap: 1rem;                 /* Menor espacio entre enlaces */
+    } 
+}

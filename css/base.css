@@ -1,0 +1,36 @@
+@import url(variables.css);
+
+/* BODY Y FONDO */
+
+body {
+    font-family: "Roboto", Arial, sans-serif; /* Fuente principal */
+    min-height: 100vh;                        /* Altura mínima de la ventana */
+    color: var(--color-text-light);           /* Texto claro por defecto */
+    background: linear-gradient(
+        to bottom right, 
+        var(--color-bg-start), 
+        var(--color-bg-mid), 
+        var(--color-bg-end)
+    );                                         /* Fondo degradado */
+    background-attachment: fixed;             /* Fondo fijo al hacer scroll */
+}
+
+/* SECCION */
+section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-inline: 40px;
+}
+
+
+/* SECCIONES GENERALES */
+
+.home,
+.about,
+.skills,
+.projects,
+.contact{
+    width: 90%;                     /* Ancho máximo */
+    margin: 0 auto;                 /* Centrado horizontal */
+    padding-block: var(--gap-main); /* Espaciado vertical */
+}

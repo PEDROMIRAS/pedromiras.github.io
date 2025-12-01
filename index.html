@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO básico -->
+    <title>Pedro Miras - Web Developer Portfolio</title>
+    <meta name="description" content="Portfolio of Pedro Miras, a Web Developer from Spain. Explore projects, skills, and contact for web development services.">
+    <meta name="keywords" content="Pedro Miras, Web Developer, Portfolio, HTML, CSS, JavaScript, React, PHP, Symfony, Bootstrap, Java, Frontend, Backend, Fullstack">
+    <meta name="author" content="Pedro Miras">
+    <meta name="robots" content="index, follow">
+
+    <!-- VARIABLES Y RESET -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/reset.css">
+
+    <!-- ESTILOS BASE -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/header.css">
+
+    <!-- SECCIONES -->
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="./css/skills.css">
+    <link rel="stylesheet" href="./css/projects.css">
+    <link rel="stylesheet" href="./css/contact.css">
+
+    <!-- FOOTER Y RESPONSIVE -->
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    
+    <!-- ICONS -->
+    <script src="https://kit.fontawesome.com/f97389225c.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="./assets/img/moto.png" type="image/svg">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="name-title">
+            <h1>Pedro Miras</h1>
+        </div>
+        <nav class="menu" aria-label="Main Navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="home">
+            <div class="home-content">
+                <h2>Hello, I'm <span>Pedro Miras</span></h2>
+                <h3>Web Developer</h3>
+                <p>
+                    I am a passionate Web Developer who creates modern, responsive, and high-performance websites.
+                    I focus on clean design, intuitive user experiences, and efficient, maintainable code.
+                    Welcome to my portfolio—explore and get to know my work!
+                </p>
+                <a href="#about" class="btn">Learn More About Me</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <figure class="about-img">
+                <img src="./assets/img/portfolio-image.JPG" alt="Pedro Miras, Web Developer" loading="lazy">
+            </figure>
+            <div class="about-text">
+                <h2>ABOUT ME</h2>
+                <p>
+                    I’m Pedro Miras, a 25-year-old Web Developer from Lorca, Spain. I recently graduated in Web Application Development and enjoy creating efficient, user-friendly web solutions. 
+                    I am highly motivated to learn new technologies, solve challenges, and grow as a developer while contributing to meaningful projects. 
+                    My goal is to combine creativity and technical skills to build websites that people enjoy using.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills" aria-label="Skills">
+            <h2 class="skills-title">SKILLS</h2>
+            <div class="skills-container">
+                <div class="skills-item">
+                    <i class="fa-brands fa-html5"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="skills-item">
+                    <i class="fa-brands fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="skills-item">
+                    <i class="fa-brands fa-js"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="skills-item">
+                    <i class="fa-brands fa-php"></i>
+                    <span>PHP</span>
+                </div>
+                <div class="skills-item">
+                    <i class="fa-brands fa-react"></i>
+                    <span>React</span>
+                </div>
+                <div class="skills-item">
+                    <i class="fa-brands fa-bootstrap"></i>
+                    <span>Bootstrap</span>
+                </div>
+                <div class="skills-item">
+                    <i class="fa-brands fa-symfony"></i>
+                    <span>Symfony</span>
+                </div>
+                <div class="skills-item">
+                    <i class="fa-brands fa-java"></i>
+                    <span>Java</span>
+                </div>
+            </div>
+        </section>
+        <!-- Projects Section -->
+        <section id="projects" class="projects" aria-labelledby="projects-title">
+            <h2 id="projects-title" class="projects-title">PROJECTS</h2>
+            
+            <div class="projects-container">
+            
+                <article class="project">
+                    <h3 class="project-name">Ducati Website</h3>
+                    <div class="project-info">
+                        <p>
+                            This page is dedicated to Ducati's history and its most iconic models. It was created entirely with 
+                            HTML and CSS, with special attention to visual design, content organization, and user experience. 
+                            The project includes well-structured sections, representative images, and a modern style, showcasing 
+                            my ability to create attractive and functional pages without the need for JavaScript or additional 
+                            frameworks.
+                        </p>
+                    <img src="./assets/img/ducatiPage.png" alt="Pagina de la historia de Ducati">
+                    </div>
+                    <div class="project-links">
+                    <a href="./ducati/index.html" class="btn">View Project</a>
+                    <a href="https://github.com/PEDROMIRAS/DAW2/tree/main/DI/T2/portafolio/ducati" class="btn">View Code</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2 class="contact-title">CONTACT</h2>
+            <div class="contact-form">
+                <form action="/" method="POST" aria-label="Contact Form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your Message" required aria-required="true"></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            &copy; 2025 Pedro Miras. All rights reserved. 
+            <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer">GitHub</a> |
+            <a href="https://www.linkedin.com/in/pedro-miras-p%C3%A9rez-castej%C3%B3n-b9b991151/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

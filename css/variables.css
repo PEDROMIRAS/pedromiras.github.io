@@ -1,0 +1,36 @@
+
+/* VARIABLES GLOBALES */
+
+:root {
+/* Variables generales de estilo */
+--radius: 16px;                    /* Radio de bordes global */
+--transition: 0.3s ease;           /* Transición global */
+--gap-main: 120px;                  /* Espacio vertical entre secciones */
+--header-offset: 80px;              /* Altura del header */
+
+/* COLORES */
+
+/* --- Fondo degradado --- */
+--color-bg-start: #0a0a0a;        /* Negro profundo */
+--color-bg-mid: #1c1c1c;          /* Gris muy oscuro */
+--color-bg-end: #2e2e2e;          /* Gris oscuro más claro */
+
+/* --- Colores principales / detalles --- */
+--color-primary: #8e44ad;         /* Violeta / púrpura principal */
+--color-primary-dark: #6f2d91;    /* Violeta oscuro para hover */
+
+/* --- Texto --- */
+--color-text-light: #ffffff;      /* Texto principal claro */
+--color-text-secondary: #bbbbbb;  /* Texto secundario gris claro */
+--color-text-muted: #888888;      /* Texto más suave */
+
+/* --- Header y bordes --- */
+--color-header-bg: rgba(255,255,255,0.05); /* Fondo translúcido header */
+--color-border: rgba(255,255,255,0.1);     /* Borde suave */
+
+/* --- Fondos y bordes con alpha para tarjetas y detalles --- */
+--bg-alpha-1: rgba(142,68,173,0.1);   /* Fondo ligero tarjetas */
+--bg-alpha-2: rgba(142,68,173,0.2);   /* Fondo hover tarjetas */
+--border-alpha-1: rgba(142,68,173,0.3); /* Borde tarjeta normal */
+--border-alpha-2: rgba(142,68,173,0.5); /* Borde hover */
+}
