@@ -40,6 +40,17 @@
     box-shadow: 0 8px 25px var(--color-primary-dark);
 }
 
+/* BLUR entre tarjetas */
+.skills-container:hover .skills-item {
+    filter: blur(4px);
+    opacity: 0.5;
+}
+/* Solo la HOVERED queda visible */
+.skills-container .skills-item:hover {
+    filter: none;
+    opacity: 1;
+}
+
 .skills-item i {
     font-size: 3rem;
     color: var(--color-primary);

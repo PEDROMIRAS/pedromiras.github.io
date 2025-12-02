@@ -11,17 +11,26 @@ header {
     background-color: var(--color-header-bg); /* Fondo translúcido */
     color: var(--color-text-light);           /* Color del texto */
     padding: 20px 40px;                       
-    position: sticky;                         /* Fijo al hacer scroll */
-    top: 1.5em;                               /* Margen superior */
+
+    position: fixed;                         /* Fijo al hacer scroll */
+    top: 1.5em;        
+    left: 50%;
+    transform: translateX(-50%);
+
     z-index: 1000;                            /* Prioridad de superposición */
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);   
-    transition: background-color var(--transition); /* Suave al cambiar fondo */
+    transition: opacity var(--transition); /* Suave al cambiar fondo */
     backdrop-filter: blur(10px);              /* Desenfoque de fondo */
     -webkit-backdrop-filter: blur(10px);      /* Compatibilidad Safari */
     border-radius: 50px;                      
     border: 1px solid var(--color-border);  
 }
 
+/* Ocultar header cuando se hace scroll hacia abajo */
+header.nav-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
 
 /* LOGO */
 
