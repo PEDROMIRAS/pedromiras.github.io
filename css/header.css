@@ -4,7 +4,7 @@
 /* HEADER */
 header {
     width: 96%;                               
-    margin: 0 auto;                           /* Centrado horizontal */
+    
     display: flex;                            /* Flexbox para layout */
     justify-content: space-between;           /* Separar logo y menú */
     align-items: center;                      /* Centrado vertical */
