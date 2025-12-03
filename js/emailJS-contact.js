@@ -14,14 +14,21 @@ const submitButton = document.querySelector('button[type="submit"]');
 contactForm.addEventListener('submit', function(e){
     e.preventDefault(); //Prevenir recarga de pagina
 
+    //Validacion basica
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
     //Deshabilitar botton mientras se envia para reducir el riesgo de fallo
     submitButton.disabled = true;
     submitButton.textContent = 'Enviando...';
 
     const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value
+        from_name: "Mi Portfolio Contact Form", // aparecerá como remitente
+        reply_to: email, // responderá al visitante
+        name: name,
+        email: email,
+        message: message
     }
 
     //Enviar email usando EmailJS
