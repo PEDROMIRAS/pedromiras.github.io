@@ -34,6 +34,9 @@
     <script src="https://kit.fontawesome.com/f97389225c.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="./assets/img/moto.png" type="image/svg">
 
+    <!-- EMAILJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 </head>
 <body>
     <!-- Header -->
@@ -102,10 +105,10 @@
                     <i class="fa-brands fa-php"></i>
                     <span>PHP</span>
                 </div>
-                <div class="skills-item">
+                <!--<div class="skills-item">
                     <i class="fa-brands fa-react"></i>
                     <span>React</span>
-                </div>
+                </div>-->
                 <div class="skills-item">
                     <i class="fa-brands fa-bootstrap"></i>
                     <span>Bootstrap</span>
@@ -149,7 +152,7 @@
         <section id="contact" class="contact">
             <h2 class="contact-title">CONTACT</h2>
             <div class="contact-form">
-                <form action="/" method="POST" aria-label="Contact Form">
+                <form aria-label="Contact Form">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
@@ -163,6 +166,7 @@
                         <textarea id="message" name="message" placeholder="Your Message" required aria-required="true"></textarea>
                     </div>
                     <button type="submit">Send Message</button>
+                    
                 </form>
             </div>
         </section>
@@ -177,5 +181,6 @@
         </p>
     </footer>
     <script src="./js/nav.js"></script>
+    <script src="./js/emailJS-contact.js"></script>
 </body>
 </html>
