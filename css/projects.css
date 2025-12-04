@@ -58,8 +58,12 @@
     border-radius: var(--radius);
     object-fit: cover;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform var(--transition);
 }
-
+.project-info img:hover{
+    transform: scale(1.04);
+    box-shadow: 0 4px 20px var(--color-primary);
+}
 
 .project-links {
     display: flex;
