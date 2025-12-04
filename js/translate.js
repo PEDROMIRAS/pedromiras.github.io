@@ -1,6 +1,7 @@
 // Limpiar cookies de Google Translate
 function clearGoogleTranslateCookies() {
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //Limpiamos la cookies para cualquier dominio, window.location.hostname recoge el dominio 
     document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + window.location.hostname;
 }
 
@@ -25,13 +26,13 @@ function googleTranslateElementInit() {
     setTimeout(() => {
         const combo = document.querySelector(".goog-te-combo");
         if (combo) {
-            combo.value = currentLang === "es" ? "es" : ""; //Vacio quiere decir el idioma por defecto de la pagina
+            combo.value = currentLang === "es" ? "es" : "";
             if (currentLang === "es") {
                 combo.dispatchEvent(new Event("change"));
             }
             updateButton();
         }
-    }, 100);
+    }, 500);
 }
 
 // Función para cambiar idioma
@@ -51,6 +52,6 @@ function toggleLanguage() {
 function updateButton() {
     const btn = document.getElementById("lang-toggle-btn");
     if (btn) {
-        btn.textContent = currentLang === "en" ? "ES" : "EN";
+        btn.textContent = currentLang === "en" ? "EN" : "ES";
     }
 }
