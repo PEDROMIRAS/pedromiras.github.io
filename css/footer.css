@@ -3,7 +3,8 @@
 /* FOOTER */
 footer {
     width: 100%;                              
-    padding: 20px 0;                         
+    padding: 20px 0;
+    margin-top: 60px;                         
     text-align: center;                        
     background-color: var(--color-header-bg); /* Fondo translúcido */
     color: var(--color-text-light);           /* Texto claro */

@@ -13,17 +13,17 @@ header {
     padding: 20px 40px;                       
 
     position: fixed;                         /* Fijo al hacer scroll */
-    top: 1.5em;        
+    top: 1.5rem;      
     left: 50%;
     transform: translateX(-50%);
 
     z-index: 1000;                            /* Prioridad de superposición */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);   
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);   
     transition: opacity var(--transition); /* Suave al cambiar fondo */
     backdrop-filter: blur(10px);              /* Desenfoque de fondo */
     -webkit-backdrop-filter: blur(10px);      /* Compatibilidad Safari */
-    border-radius: 50px;                      
-    border: 1px solid var(--color-border);  
+    border-radius: var(--radius);                      
+    /*border: 1px solid var(--color-border);  */
 }
 
 /* Ocultar header cuando se hace scroll hacia abajo */
@@ -32,6 +32,19 @@ header.nav-hidden {
     pointer-events: none;
 }
 
+.translate-btn {
+    padding: 8px 12px;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 12px;
+}
+
+.translate-btn:hover {
+    background: #444;
+}
 /* LOGO */
 
 .name-title {
