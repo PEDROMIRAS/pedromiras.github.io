@@ -13,12 +13,11 @@ body {
         var(--color-bg-end)
     );                                          /* Fondo degradado */
     background-attachment: fixed;               /* Fondo fijo al hacer scroll */
-    top: 0px !important;                        /* Empujar el body hacia arriba */
 }
-/* Ocultar la barra superior de Google Translate */
-.goog-te-banner-frame.skiptranslate {
-    display: none !important;
-}
+/* Ocultar Google Translate */
+.goog-te-banner-frame { display: none !important; }
+body { top: 0 !important; }
+.skiptranslate { display: none !important; }
 
 /* SECCION */
 section {
@@ -26,7 +25,6 @@ section {
     margin: 0 auto;
     padding-inline: 40px;
 }
-
 
 /* SECCIONES GENERALES */
 

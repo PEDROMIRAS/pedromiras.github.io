@@ -1,32 +1,56 @@
-// Idioma original de la página
-let currentLang = "en";
+// Limpiar cookies de Google Translate
+function clearGoogleTranslateCookies() {
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + window.location.hostname;
+}
+
+// Limpiar al cargar
+clearGoogleTranslateCookies();
+
+// Obtener idioma guardado
+let currentLang = localStorage.getItem("userLang") || "en";
 
 // Inicializar Google Translate
 function googleTranslateElementInit() {
     new google.translate.TranslateElement(
         {
             pageLanguage: "en",
-            includedLanguages: "en,es"
+            includedLanguages: "en,es",
+            autoDisplay: false
         },
         "google_translate_element"
     );
+    
+    // Aplicar idioma guardado
+    setTimeout(() => {
+        const combo = document.querySelector(".goog-te-combo");
+        if (combo) {
+            combo.value = currentLang === "es" ? "es" : ""; //Vacio quiere decir el idioma por defecto de la pagina
+            if (currentLang === "es") {
+                combo.dispatchEvent(new Event("change"));
+            }
+            updateButton();
+        }
+    }, 100);
 }
 
 // Función para cambiar idioma
 function toggleLanguage() {
-    const combo = document.querySelector(".goog-te-combo");
-
-    if (!combo) return;
-
     // Cambiar idioma
     const newLang = currentLang === "en" ? "es" : "en";
-    combo.value = newLang;
-    combo.dispatchEvent(new Event("change"));
+    
+    // Guardar en localStorage
+    localStorage.setItem("userLang", newLang);
+    
+    // Limpiar cookies y recargar
+    clearGoogleTranslateCookies();
+    location.reload();
+}
 
-    // Actualizar estado
-    currentLang = newLang;
-
-    // Cambiar texto del botón
+// Actualizar botón
+function updateButton() {
     const btn = document.getElementById("lang-toggle-btn");
-    btn.textContent = currentLang === "en" ? "ES" : "EN";
+    if (btn) {
+        btn.textContent = currentLang === "en" ? "ES" : "EN";
+    }
 }
