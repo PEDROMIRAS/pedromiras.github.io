@@ -11,8 +11,13 @@ body {
         var(--color-bg-start), 
         var(--color-bg-mid), 
         var(--color-bg-end)
-    );                                         /* Fondo degradado */
-    background-attachment: fixed;             /* Fondo fijo al hacer scroll */
+    );                                          /* Fondo degradado */
+    background-attachment: fixed;               /* Fondo fijo al hacer scroll */
+    top: 0px !important;                        /* Empujar el body hacia arriba */
+}
+/* Ocultar la barra superior de Google Translate */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
 }
 
 /* SECCION */
