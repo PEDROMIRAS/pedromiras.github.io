@@ -14,7 +14,8 @@
 .skills-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 tarjetas por fila */
-    gap: 20px;                            /* Espacio entre tarjetas */
+    gap: 20px;   
+    padding: 40px clamp(20px, 4vw, 60px);                         /* Espacio entre tarjetas */
 }
 
 .skills-item,
@@ -42,7 +43,7 @@
 
 /* BLUR entre tarjetas */
 .skills-container:hover .skills-item {
-    filter: blur(4px);
+    filter: blur(2px);
     opacity: 0.5;
 }
 /* Solo la HOVERED queda visible */
