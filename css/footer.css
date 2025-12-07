@@ -13,14 +13,3 @@ footer {
     -webkit-backdrop-filter: blur(10px);      /* Compatibilidad Safari */
     font-size: 0.9rem;                        /* Texto más pequeño */
 }
-
-/* Enlaces en el footer */
-footer a {
-    color: var(--color-primary);              /* Color principal */
-    text-decoration: none;                    /* Sin subrayado */
-    transition: color var(--transition);      /* Transición suave */
-}
-
-footer a:hover {
-    color: var(--color-primary-dark);         /* Color más oscuro al hover */
-}
