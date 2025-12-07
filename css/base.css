@@ -3,7 +3,7 @@
 /* BODY Y FONDO */
 
 body {
-    font-family: "Roboto", Arial, sans-serif; /* Fuente principal */
+    font-family: var(--font-primary);
     min-height: 100vh;                        /* Altura mínima de la ventana */
     color: var(--color-text-light);           /* Texto claro por defecto */
     background: linear-gradient(
@@ -13,6 +13,12 @@ body {
         var(--color-bg-end)
     );                                          /* Fondo degradado */
     background-attachment: fixed;               /* Fondo fijo al hacer scroll */
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: var(--font-heading);
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-shadow: var(--text-shadow-3d);
 }
 /* Ocultar Google Translate */
 .goog-te-banner-frame { display: none !important; }

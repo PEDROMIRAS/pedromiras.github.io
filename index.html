@@ -50,7 +50,7 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <div class="name-title">
+        <div>
             <button id="lang-toggle-btn" class="translate-btn" onclick="toggleLanguage()">ES</button>
         </div>
     </header>
@@ -146,28 +146,58 @@
                     <a href="https://github.com/PEDROMIRAS/DAW2/tree/main/DI/T2/portafolio/ducati" target="_blank" class="btn">View Code</a>
                     </div>
                 </article>
+                <article class="project">
+                    <h3 class="project-name">TODO APP</h3>
+                    <div class="project-info">
+                        <p>
+                            A fully functional task management application built with vanilla JavaScript, HTML, and CSS. 
+                            This project demonstrates my skills in DOM manipulation, localStorage implementation for data 
+                            persistence, and creating interactive user interfaces. Features include task filtering (all, 
+                            active, completed), real-time statistics, smooth animations, and a responsive design that 
+                            adapts to any device. The application showcases clean code architecture and modern web 
+                            development practices without relying on external frameworks.
+                        </p>
+                        <a href="./todoApp/index.html" target="_blank"><img src="./assets/img/todoApp.png.png" alt="Aplicacion lista de tareas"></a>
+                    </div>
+                    <div class="project-links">
+                        <a href="./todoApp/index.html" target="_blank" class="btn">View Project</a>
+                        <a href="https://github.com/PEDROMIRAS/DAW2/tree/main/DI/T2/portafolio/todoApp" target="_blank" class="btn">View Code</a>
+                    </div>
+                </article>
             </div>
         </section>
         <!-- Contact Section -->
         <section id="contact" class="contact">
             <h2 class="contact-title">CONTACT</h2>
-            <div class="contact-form">
-                <form aria-label="Contact Form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
+            <div class="contact-container">
+                <div class="contact-links">
+                    <div class="link">
+                        <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i>GitHub</a>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true">
+                    <div class="link">
+                        <a href="https://www.linkedin.com/in/pedro-miras/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
                     </div>
-                    <div class="form-group full-width">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Your Message" required aria-required="true"></textarea>
+                    <div class="link">
+                        <a href=""><i class="fa-regular fa-envelope"></i>Gmail</a>
                     </div>
-                    <button type="submit">Send Message</button>
-                    
-                </form>
+                </div>
+                <div class="contact-form">
+                    <form aria-label="Contact Form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Your Message" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
@@ -176,8 +206,6 @@
     <footer>
         <p>
             &copy; 2025 Pedro Miras. 
-            <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer">GitHub</a> |
-            <a href="https://www.linkedin.com/in/pedro-miras-p%C3%A9rez-castej%C3%B3n-b9b991151/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </p>
     </footer>
     <div id="google_translate_element" style="display: none;"></div>

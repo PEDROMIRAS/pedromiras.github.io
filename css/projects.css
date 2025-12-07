@@ -3,19 +3,23 @@
 /* PROJECTS */
 
 .projects-container {
-    max-width: 1300px;
+    max-width: 1600px;
     width: 100%;
     margin: 0 auto;
     padding: 40px clamp(20px, 4vw, 60px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 2 columnas */
+    gap: 40px;                               /* Espacio entre proyectos */
 }
 
-
 .project {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
     opacity: 0;                              /* Para animación inicial */
     transform: translateY(20px);            /* Levantar al aparecer */
     animation: fadeUp 0.6s ease forwards;   /* Animación suave */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 /* Hover de project junto con hover de skills para sintetizar codigo */
@@ -29,47 +33,57 @@
 
 .project h3 {
     text-transform: uppercase;              /* Texto en mayúsculas */
-    text-align: left;
-    font-size: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
     color: var(--color-primary);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .project-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;          /* Imagen + texto */
+    display: flex;
+    flex-direction: column;              /* Apilar verticalmente */
     align-items: center;
-    gap: 1em;
+    gap: 1.5em;
+    flex: 1;
 }
 
 .project-info p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: var(--color-text-secondary);
-    max-width: 600px;
-    margin-left: 1rem;
+    text-align: justify;
+    margin: 0 1rem;
+    flex-shrink: 0;
+}
+
+.project-info > a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .project-info img {
-    margin-right: 1rem;
     width: 100%;
-    max-width: 500px;
-    height: auto;
+    max-width: 100%;
+    height: 100%;
     border-radius: var(--radius);
-    object-fit: cover;
+    object-fit: fill;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    transition: transform var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition);
 }
-.project-info img:hover{
-    transform: scale(1.04);
-    box-shadow: 0 4px 20px var(--color-primary);
+
+.project-info img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
 }
 
 .project-links {
     display: flex;
     justify-content: center;
     gap: 1em;
-    margin: 1em 2em;
+    margin-top: 1.5em;
+    flex-shrink: 0;
 }
 
 .project-links a {
@@ -78,6 +92,7 @@
     border-radius: var(--radius);
     color: var(--color-primary);
 }
+
 .project-links a:hover,
 .project-links a:focus {
     background-color: var(--color-primary-dark);

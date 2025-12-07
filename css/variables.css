@@ -1,4 +1,6 @@
-
+/* IMPORTAR FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&display=swap');
 /* VARIABLES GLOBALES */
 
 :root {
@@ -8,8 +10,20 @@
 --gap-main: 130px;                  /* Espacio vertical entre secciones */
 --header-offset: 90px;              /* Altura del header */
 
-/* COLORES */
 
+/* Fuentes */
+--font-primary: 'Roboto', sans-serif;
+--font-heading: 'Orbitron', sans-serif;
+
+/* Efecto 3D para texto */
+--text-shadow-3d: 
+    1px 1px 0 var(--color-primary-dark),
+    2px 2px 0 var(--color-primary-dark),
+    3px 3px 0 var(--color-primary-dark),
+    4px 4px 0 rgba(0, 0, 0, 0.3),
+    5px 5px 10px rgba(0, 0, 0, 0.5);
+
+/* COLORES */
 /* --- Fondo degradado --- */
 --color-bg-start: #0a0a0a;        /* Negro profundo */
 --color-bg-mid: #1c1c1c;          /* Gris muy oscuro */

@@ -44,17 +44,6 @@ header.nav-hidden {
 .translate-btn:hover {
     background: #444;
 }
-/* LOGO */
-
-.name-title {
-    display: flex;          /* Mostrar elementos en fila */
-    align-items: center;    /* Centrar verticalmente */
-}
-
-.name-title h1 {
-    font-size: 24px;        /* Tamaño del texto del logo */
-    letter-spacing: 1px;    /* Espaciado entre letras */
-}
 
 /* MENÚ PRINCIPAL */
 
@@ -62,6 +51,7 @@ header.nav-hidden {
     list-style: none;      /* Quitar puntos de lista */
     display: flex;         /* Mostrar elementos en fila */
     gap: 20px;             /* Espacio entre enlaces */
+    text-shadow: var(--text-shadow-3d);
 }
 
 .menu a {
@@ -86,10 +76,7 @@ header.nav-hidden {
     background-color: var(--color-primary);
     transition: width var(--transition);
 }
-.menu a:hover, .menu a:focus {
-    color: var(--color-primary);
-}
-
+    
 .menu a:hover::after{
     width: 100%;
 }

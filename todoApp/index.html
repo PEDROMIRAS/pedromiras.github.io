@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO APP</title>
+    <link rel="stylesheet" href="./css/todo.css">
+    <link rel="shortcut icon" href="./img/3D-Clipboard-and-checklist-on-transparent-background-PNG.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Tareas</h1>
+        
+        <div class="input-container">
+            <input type="text" id="todoInput" placeholder="Añade una nueva tarea...">
+            <button id="addBtn">Añadir</button>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="active">Activas</button>
+            <button class="filter-btn" data-filter="completed">Completadas</button>
+        </div>
+
+        <ul id="todoList"></ul>
+
+        <div class="stats" id="stats"></div>
+    </div>
+    <script src="./js/todoApp.js"></script>
+</body>
+</html>
