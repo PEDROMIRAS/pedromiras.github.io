@@ -22,7 +22,7 @@
 .link a {
     display: flex;
     align-items: center;
-    justify-content: center; /* CORRECCIÓN 1: Centra el contenido horizontalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
     gap: 15px;
     padding: 20px;
     width: 100%;
@@ -37,7 +37,7 @@
     transition: transform 0.4s ease;
 }
 
-/* CORRECCIÓN 2: El hover se activa en el enlace 'a', pero afecta al 'i' */
+/* El hover se activa en el enlace 'a', pero afecta al 'i' */
 .link a:hover i {
     transform: rotate(360deg);
     color: white;

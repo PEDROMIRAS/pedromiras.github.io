@@ -11,8 +11,45 @@
     margin-bottom: 10px;
 }
 
+/* EFECTO 3D SÓLIDO PARA EL NOMBRE */
 .home h2 span {
-    color: var(--color-primary);
+    display: inline-block;
+    background: none;
+    -webkit-text-fill-color: initial;
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+    
+    /* Color base */
+    color: var(--color-text-ligth);
+    
+    /* La magia del 3D: Capas de sombra sólida */
+    text-shadow: 
+        1px 1px 0px #8e44ad,
+        2px 2px 0px #8e44ad,
+        3px 3px 0px #6f2d91,
+        4px 4px 0px #6f2d91,
+        5px 5px 0px #4a1c61,
+        6px 6px 0px #4a1c61,
+        8px 8px 15px rgba(0, 0, 0, 0.6); /* Sombra final suave */
+        
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animación opcional: El texto "salta" al pasar el mouse */
+.home h2 span:hover {
+    transform: translateY(-5px) scale(1.03);
+    text-shadow: /*Capas de sombra haciendo un degradado*/
+        1px 1px 0px #8e44ad,
+        2px 2px 0px #8e44ad,
+        3px 3px 0px #6f2d91,
+        4px 4px 0px #6f2d91,
+        5px 5px 0px #4a1c61,
+        6px 6px 0px #4a1c61,
+        7px 7px 0px #4a1c61,
+        8px 8px 0px #300b40,
+        9px 9px 0px #300b40,
+        10px 10px 0px #300b40,
+        15px 15px 30px rgba(0, 0, 0, 0.8);
 }
 
 .home h3 {

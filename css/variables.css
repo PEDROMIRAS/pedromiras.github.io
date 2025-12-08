@@ -17,11 +17,11 @@
 
 /* Efecto 3D para texto */
 --text-shadow-3d: 
-    1px 1px 0 var(--color-primary-dark),
-    2px 2px 0 var(--color-primary-dark),
-    3px 3px 0 var(--color-primary-dark),
-    4px 4px 0 rgba(0, 0, 0, 0.3),
-    5px 5px 10px rgba(0, 0, 0, 0.5);
+        1px 1px 0 #6f2d91,
+        2px 2px 0 #5a2476,
+        3px 3px 0 #461c5c,
+        4px 4px 0 #311341,
+        6px 6px 10px rgba(0,0,0,0.6); /* Sombra final suave */
 
 /* COLORES */
 /* --- Fondo degradado --- */
