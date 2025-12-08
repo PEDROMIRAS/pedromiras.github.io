@@ -4,7 +4,7 @@
 @media (max-width: 1024px) {
     /* Ajustes generales */
     .home, .about, .skills, .projects, .contact {
-        /* En móviles, reducimos el padding superior porque el header ocupa menos o desaparece */
+        /* En móviles, reducimos el padding superior porque el header ocupa menos */
         padding-top: 100px; 
     }
 
@@ -32,15 +32,54 @@
 
 /* --- MÓVILES PEQUEÑOS ( < 600px ) --- */
 @media (max-width: 600px) {
-    .menu ul { gap: 10px; font-size: 0.8rem; }
+    
+    /* --- MENÚ MULTILÍNEA --- */
+    header {
+        width: 100%;
+        padding: 15px 10px;
+        height: auto;       /* Permite que crezca si hay 2 líneas */
+        flex-wrap: wrap;    /* Permite saltos de línea */
+        justify-content: center; 
+        gap: 15px;
+    }
+
+    .menu {
+        width: 100%;
+        overflow: visible; /* Mostramos todo, nada oculto */
+        flex: none;
+    }
+    
+    .menu ul {
+        display: flex;
+        flex-wrap: wrap;    /* CLAVE: Los items bajan si no caben */
+        justify-content: center;
+        gap: 8px 12px;      /* Espacio entre botones (Vertical Horizontal) */
+        width: 100%;
+        padding: 0;
+    }
+    
+    .menu a {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+
+    .translate-btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+        margin-top: 5px; 
+    }
+
+    /* --- AJUSTES DE CONTENIDO --- */
     .home h2 { font-size: 1.8rem; }
     
     .skills-container { grid-template-columns: 1fr; }
     .project, .contact-form { padding: 20px; }
     
-    /* Ajuste fino del scroll en pantallas muy pequeñas */
+    /* Aumentamos espacio superior porque el header ahora puede tener 2 líneas */
     .home, .about, .skills, .projects, .contact {
-        padding-top: 140px; /* Más espacio si el menú se pliega en vertical */
+        padding-top: 150px; 
     }
 }
 
