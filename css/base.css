@@ -1,50 +1,139 @@
 @import url(variables.css);
 
-/* BODY Y FONDO */
+/* --- 1. RESET & CONFIGURACIÓN GLOBAL --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
 
 body {
     font-family: var(--font-primary);
-    min-height: 100vh;                        /* Altura mínima de la ventana */
-    color: var(--color-text-light);           /* Texto claro por defecto */
+    min-height: 100vh;
+    color: var(--color-text-light);
     background-color: var(--color-bg-start);
+    overflow-x: hidden;
 }
-h1,h2,h3,h4,h5,h6{
+
+/* Evitar problemas con el ancla y el menú fijo */
+[id] {
+    scroll-margin-top: 0; /* Reseteamos esto para que el fondo cubra todo */
+}
+
+/* Ocultar elementos de Google Translate */
+.goog-te-banner-frame, .skiptranslate { display: none !important; }
+body { top: 0 !important; }
+
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 800;
     letter-spacing: 2px;
     text-shadow: var(--text-shadow-3d);
 }
-/* Ocultar Google Translate */
-.goog-te-banner-frame { display: none !important; }
-body { top: 0 !important; }
-.skiptranslate { display: none !important; }
 
-/* SECCION */
-section {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-inline: 40px;
+/* --- 2. ESTRUCTURA DE SECCIONES (Full Screen) --- */
+.home, .about, .skills, .projects, .contact {
+    width: 100%;
+    min-height: 100vh; /* Ocupa siempre toda la pantalla */
+    position: relative;
+    
+    /* Flexbox para centrar contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrado vertical */
+    align-items: center;     /* Centrado horizontal */
+    
+    /* Scroll Snap */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    /* ESPACIADO INTERNO (La solución al menú fijo) */
+    /* 120px asegura que el contenido empiece debajo del menú */
+    padding-top: 130px; 
+    padding-bottom: 60px;
+    padding-inline: 20px; /* Margen lateral de seguridad */
 }
 
-/* SECCIONES GENERALES */
-/* SECCIONES GENERALES */
+/* Contenedores de contenido (limitan el ancho del texto) */
+.home-content, 
+.about-content, 
+.skills-container, 
+.projects-container, 
+.contact-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+}
 
-.home,
-.about,
-.skills,
-.projects,
-.contact {
-    width: 100%;                    /* Ocupar todo el ancho (como vimos antes) */
-    min-height: 100vh;              /* OBLIGATORIO: Mínimo el 100% de la altura de la pantalla */
-    
-    /* Configuración para centrar contenido vertical y horizontalmente */
-    display: flex;
-    flex-direction: column;         /* Apilar título y contenido uno sobre otro */
-    justify-content: center;        /* Centrar verticalmente */
-    align-items: center;            /* Centrar horizontalmente */
-    
-    margin: 0;
-    padding-block: 60px;            /* Reducir un poco el padding para que no moleste en 100vh */
-    position: relative;             /* Necesario si usas efectos de fondo absolutos */
-    box-sizing: border-box;         /* Asegura que el padding no sume al 100vh */
+/* --- 3. CLASES DE UTILIDAD (DRY) --- */
+
+/* Títulos de Sección */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+/* Efecto Cristal (Glassmorphism) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    transition: all 0.35s ease;
+}
+
+/* Interacción Hover para tarjetas */
+.glass-card-interactive {
+    cursor: pointer;
+}
+.glass-card-interactive:hover {
+    transform: translateY(-8px);
+    background: var(--bg-alpha-2);
+    border-color: var(--color-primary);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary-dark);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--color-primary);
+    box-shadow: 0 0 15px var(--color-primary-dark);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-text-light);
+}
+.btn-outline:hover {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: 0 0 15px var(--color-primary-dark);
+    transform: translateY(-2px);
 }

@@ -1,58 +1,30 @@
 @import url(variables.css);
 
-
-/* HOME */
-
 .home {
     background: linear-gradient(135deg, var(--color-bg-start), #1a051a);
-    position: relative;
     z-index: 1;
-    display: flex;              /* Centrar contenido */
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    min-height: 90vh;           /* Ocupa casi toda la pantalla */
-    perspective: 12em; /* profundidad 3D */
 }
 
 .home h2 {
-    font-size: 2.6rem;          
-    margin-bottom: 10px;        
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 10px;
 }
 
 .home h2 span {
-    display: inline-flex;
     color: var(--color-primary);
 }
 
-
 .home h3 {
-    font-size: 1.5rem;          
-    font-weight: 400;           
+    font-size: 1.5rem;
+    font-weight: 400;
     color: var(--color-text-secondary);
     margin-bottom: 20px;
 }
 
 .home p {
-    font-size: 1.1rem;          
-    line-height: 1.8;           
-    max-width: 700px;           
-    margin: 0 auto 40px;        /* Centrado + separación inferior */
-    color: var(--color-text-light);
-}
-
-.btn {
-    background-color: var(--color-primary-dark);  
-    color: var(--color-text-secondary);          
-    padding: 12px 28px;                                 /* Espaciado interno */
-    border-radius: var(--radius);                      
-    font-weight: bold;
-    text-decoration: none;
-    transition: background-color var(--transition); /* Animación hover */
-}
-
-.btn:hover { 
-    background-color: var(--color-primary); /* Hover oscuro */
-    color: var(--color-text-light);
-    box-shadow: 0 0 10px var(--color-primary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto 40px;
 }
