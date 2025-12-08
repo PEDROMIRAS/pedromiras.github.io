@@ -4,6 +4,7 @@
 /* CONTACT SECTION */
 
 .contact {
+    background: linear-gradient(to top, #000000, #1a1a1a);
     width: 100%;
     display: flex;
     flex-direction: column;

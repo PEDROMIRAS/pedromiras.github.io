@@ -3,6 +3,10 @@
 /* ABOUT */
 
 .about {
+    background-color: #121212; 
+    background-image: radial-gradient(#8e44ad 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 1;
     display: flex; 
     gap: 60px;                  /* Espacio entre imagen y texto */
     flex-wrap: wrap;            /* Permite que se acomoden en móviles */

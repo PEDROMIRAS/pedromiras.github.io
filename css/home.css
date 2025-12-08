@@ -4,6 +4,9 @@
 /* HOME */
 
 .home {
+    background: linear-gradient(135deg, var(--color-bg-start), #1a051a);
+    position: relative;
+    z-index: 1;
     display: flex;              /* Centrar contenido */
     justify-content: center;
     align-items: center;

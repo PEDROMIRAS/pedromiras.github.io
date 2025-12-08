@@ -6,13 +6,7 @@ body {
     font-family: var(--font-primary);
     min-height: 100vh;                        /* Altura mínima de la ventana */
     color: var(--color-text-light);           /* Texto claro por defecto */
-    background: linear-gradient(
-        to bottom right, 
-        var(--color-bg-start), 
-        var(--color-bg-mid), 
-        var(--color-bg-end)
-    );                                          /* Fondo degradado */
-    background-attachment: fixed;               /* Fondo fijo al hacer scroll */
+    background-color: var(--color-bg-start);
 }
 h1,h2,h3,h4,h5,h6{
     font-family: var(--font-heading);
@@ -33,13 +27,24 @@ section {
 }
 
 /* SECCIONES GENERALES */
+/* SECCIONES GENERALES */
 
 .home,
 .about,
 .skills,
 .projects,
-.contact{
-    width: 90%;                     /* Ancho máximo */
-    margin: 0 auto;                 /* Centrado horizontal */
-    padding-block: var(--gap-main); /* Espaciado vertical */
+.contact {
+    width: 100%;                    /* Ocupar todo el ancho (como vimos antes) */
+    min-height: 100vh;              /* OBLIGATORIO: Mínimo el 100% de la altura de la pantalla */
+    
+    /* Configuración para centrar contenido vertical y horizontalmente */
+    display: flex;
+    flex-direction: column;         /* Apilar título y contenido uno sobre otro */
+    justify-content: center;        /* Centrar verticalmente */
+    align-items: center;            /* Centrar horizontalmente */
+    
+    margin: 0;
+    padding-block: 60px;            /* Reducir un poco el padding para que no moleste en 100vh */
+    position: relative;             /* Necesario si usas efectos de fondo absolutos */
+    box-sizing: border-box;         /* Asegura que el padding no sume al 100vh */
 }

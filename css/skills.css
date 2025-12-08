@@ -2,43 +2,85 @@
 
 /* SKILLS */
 
+.skills {
+    /* Fondo base oscuro */
+    background-color: var(--color-bg-start);
+    position: relative; /* Necesario para posicionar las luces */
+    overflow: hidden;   /* Para que la luz no se salga de la sección */
+}
+
+/* --- EFECTO DE LUCES (GLOW) --- */
+.skills::before,
+.skills::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: var(--color-primary); /* Tu color violeta */
+    filter: blur(120px); /* Difuminado muy fuerte para que parezca luz */
+    opacity: 0.12;       /* Opacidad baja para que sea sutil */
+    border-radius: 50%;  /* Hacemos que sea redondo */
+    z-index: 0;          /* Detrás del contenido */
+}
+
+/* Luz superior izquierda */
+.skills::before {
+    top: -150px;
+    left: -150px;
+}
+
+/* Luz inferior derecha */
+.skills::after {
+    bottom: -150px;
+    right: -150px;
+}
+
+/* --- CONTENIDO --- */
+/* Aseguramos que el texto y tarjetas estén POR ENCIMA de las luces */
 .skills-title,
-.projects-title,
-.contact-title {
-    text-align: center;         /* Centrar títulos */
+.skills-container {
+    position: relative;
+    z-index: 1;
+}
+
+.skills-title {
+    text-align: center;
     font-size: 2rem;
     color: var(--color-primary);
     margin-bottom: 30px;
+    text-shadow: var(--text-shadow-3d); /* Añadimos tu sombra 3D */
 }
 
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 tarjetas por fila */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;   
-    padding: 40px clamp(20px, 4vw, 60px);                         /* Espacio entre tarjetas */
+    padding: 40px clamp(20px, 4vw, 60px);
 }
 
-.skills-item,
-.project {
+.skills-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
     padding: 30px 20px;
-    background: var(--bg-alpha-1);
+    
+    /* Fondo de la tarjeta semi-transparente para que se vea la luz detrás */
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(10px); /* Efecto cristal */
+    
     border: 1px solid var(--border-alpha-1);
     border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.35s ease;
 }
 
-.skills-item:hover,
-.project:hover {
+.skills-item:hover {
     transform: translateY(-8px);
     background: var(--bg-alpha-2);
-    border-color: var(--border-alpha-2);
-    box-shadow: 0 8px 25px var(--color-primary-dark);
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 25px rgba(142, 68, 173, 0.25);
 }
 
 /* BLUR entre tarjetas */
@@ -46,7 +88,7 @@
     filter: blur(2px);
     opacity: 0.5;
 }
-/* Solo la HOVERED queda visible */
+
 .skills-container .skills-item:hover {
     filter: none;
     opacity: 1;
@@ -59,8 +101,9 @@
 }
 
 .skills-item:hover i {
-    color: var(--color-primary-dark);
+    color: var(--color-text-light); /* Cambio a blanco al hacer hover queda mejor */
     transform: scale(1.15);
+    text-shadow: 0 0 15px var(--color-primary); /* El icono brilla */
 }
 
 .skills-item span {

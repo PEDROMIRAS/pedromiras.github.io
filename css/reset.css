@@ -8,8 +8,15 @@
     padding: 0;              /* Quitar rellenos por defecto */
     box-sizing: border-box;  /* Incluir padding y border en el tamaño */
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 }
 
 [id]{
     scroll-margin-top: var(--header-offset);
+}
+
+/* En tus secciones (.home, .about, etc.) */
+.home, .about, .skills, .projects, .contact {
+    scroll-snap-align: start; /* El scroll se detendrá justo al inicio de la sección */
+    scroll-snap-stop: always; /* Fuerza la parada, evita saltarse secciones rápido */
 }
