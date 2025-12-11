@@ -3,6 +3,7 @@
 .skills {
     background-color: var(--color-bg-start);
     overflow: hidden;
+    padding-bottom: 100px; /* Más espacio al final de la sección */
 }
 
 /* Luces de fondo */
@@ -21,12 +22,43 @@
 .skills::before { top: -200px; left: -200px; }
 .skills::after { bottom: -200px; right: -200px; }
 
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+/* --- AQUÍ ESTÁ EL CAMBIO DE ESPACIADO --- */
+.skill-category-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    
+    /* Aumentamos mucho el margen superior para separar del bloque anterior */
+    margin-top: 60px; 
+    
+    /* Aumentamos el margen inferior para separar de sus propias tarjetas */
+    margin-bottom: 30px; 
+    
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Un poco más de espacio entre letras queda más elegante */
     position: relative;
     z-index: 1;
+    
+    /* Opcional: Una línea sutil debajo del título */
+    /* border-bottom: 2px solid var(--color-primary); */
+    /* display: inline-block; */
+}
+
+/* Ajuste específico para el PRIMER subtítulo (Frontend) para que no choque con el H2 principal */
+.skill-category-title:first-of-type {
+    margin-top: 20px; /* Menos margen arriba porque ya tiene el del Título Principal */
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Un poco más de espacio entre tarjetas */
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .skills-item {
@@ -36,8 +68,13 @@
     justify-content: center;
     gap: 15px;
     padding: 40px 20px;
+    
+    /* Tamaño de las tarjetas */
+    flex: 0 1 180px; 
+    min-width: 150px;
 }
 
+/* Iconos */
 .skills-item i {
     font-size: 3.5rem;
     color: var(--color-text-secondary);
@@ -48,4 +85,10 @@
     color: var(--color-text-light);
     transform: scale(1.2);
     text-shadow: 0 0 20px var(--color-primary);
+}
+
+.skills-item span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-light);
 }
