@@ -22,6 +22,8 @@ body {
     width: 100%;
     max-width: 500px;
     padding: 30px;
+    /* Añadido para asegurar que nada se desborde ocultamente */
+    overflow: hidden; 
 }
 
 h1 {
@@ -44,6 +46,8 @@ h1 {
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s;
+    /* Asegura que el input no se haga demasiado pequeño antes de colapsar */
+    min-width: 0; 
 }
 
 #todoInput:focus {
@@ -61,6 +65,8 @@ h1 {
     cursor: pointer;
     transition: background 0.3s;
     font-weight: 600;
+    /* Evita que el texto del botón se rompa en dos líneas */
+    white-space: nowrap; 
 }
 
 #addBtn:hover{
@@ -72,6 +78,8 @@ h1 {
     gap: 10px;
     margin-bottom: 20px;
     justify-content: center;
+    /* SOLUCIÓN CLAVE: Permite que los botones bajen si no caben */
+    flex-wrap: wrap; 
 }
 
 .filter-btn{
@@ -143,12 +151,16 @@ h1 {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    /* Evita que el checkbox se aplaste */
+    flex-shrink: 0; 
 }
 
 .todo-text{
     flex: 1;
     font-size: 16px;
     color: #333;
+    /* SOLUCIÓN: Rompe palabras largas para que no empujen el botón de borrar */
+    word-break: break-word; 
 }
 
 .delete-btn{
@@ -160,6 +172,8 @@ h1 {
     cursor: pointer;
     transition: background 0.3s;
     font-size: 14px;
+    /* Evita que el botón se aplaste */
+    flex-shrink: 0; 
 }
 
 .delete-btn:hover{
@@ -178,4 +192,57 @@ h1 {
     color:#666;
     margin-top: 20px;
     font-size: 14px;
+}
+
+/* --- RESPONSIVE (MEDIA QUERIES) --- */
+
+/* Ajustes para pantallas menores a 480px (Móviles) */
+@media (max-width: 480px) {
+    
+    body {
+        padding: 10px; /* Menos padding en el body para aprovechar espacio */
+    }
+
+    .container {
+        padding: 20px; /* Reducir padding interno del contenedor */
+    }
+
+    h1 {
+        font-size: 1.5em; /* Título un poco más pequeño */
+        margin-bottom: 20px;
+    }
+
+    /* 1. Input y Botón Agregar en columna */
+    .input-container {
+        flex-direction: column; /* Pone el input arriba y el botón abajo */
+        gap: 10px;
+    }
+
+    #addBtn {
+        width: 100%; /* Botón ocupa todo el ancho */
+        padding: 12px;
+    }
+
+    /* 2. Filtros responsivos */
+    .filters {
+        gap: 8px; /* Reducir espacio entre botones */
+    }
+
+    .filter-btn {
+        padding: 8px 12px; /* Reducir padding lateral de los botones */
+        font-size: 13px; /* Texto un poco más pequeño */
+        flex: 1; /* Hace que se distribuyan equitativamente */
+        text-align: center;
+        min-width: 80px; /* Ancho mínimo para que no se vean mal */
+    }
+
+    /* 3. Ajustes en la lista de tareas */
+    .todo-item {
+        padding: 10px; /* Menos padding en cada item */
+        gap: 10px;
+    }
+
+    .delete-btn {
+        padding: 8px 10px; /* Botón de borrar un poco más compacto */
+    }
 }
