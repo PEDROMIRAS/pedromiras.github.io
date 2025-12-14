@@ -106,7 +106,7 @@ h1 {
     background-color: #8e44ad;
 }
 
-#todolist{
+#todoList{
     list-style: none;
 }
 
@@ -195,54 +195,54 @@ h1 {
 }
 
 /* --- RESPONSIVE (MEDIA QUERIES) --- */
-
-/* Ajustes para pantallas menores a 480px (Móviles) */
 @media (max-width: 480px) {
     
     body {
-        padding: 10px; /* Menos padding en el body para aprovechar espacio */
+        padding: 10px;
     }
 
     .container {
-        padding: 20px; /* Reducir padding interno del contenedor */
+        padding: 20px 15px; /* Menos padding lateral para ganar ancho útil */
     }
 
     h1 {
-        font-size: 1.5em; /* Título un poco más pequeño */
+        font-size: 1.5em;
         margin-bottom: 20px;
     }
 
-    /* 1. Input y Botón Agregar en columna */
+    /* Input y Botón en columna */
     .input-container {
-        flex-direction: column; /* Pone el input arriba y el botón abajo */
+        flex-direction: column;
         gap: 10px;
     }
 
     #addBtn {
-        width: 100%; /* Botón ocupa todo el ancho */
+        width: 100%;
         padding: 12px;
     }
 
-    /* 2. Filtros responsivos */
     .filters {
-        gap: 8px; /* Reducir espacio entre botones */
+        gap: 5px; /* Reducimos el hueco entre botones */
+        justify-content: space-between; /* Distribuye el espacio */
     }
 
     .filter-btn {
-        padding: 8px 12px; /* Reducir padding lateral de los botones */
-        font-size: 13px; /* Texto un poco más pequeño */
-        flex: 1; /* Hace que se distribuyan equitativamente */
-        text-align: center;
-        min-width: 80px; /* Ancho mínimo para que no se vean mal */
+        padding: 8px 5px; /* Muy poco padding lateral */
+        font-size: 12px;  /* Letra más pequeña para que quepa todo */
+        flex: 1;          /* Que intenten ocupar el mismo ancho... */
+        min-width: 0;     /* ...pero permite que se encojan si es necesario */
+        width: auto;
     }
 
-    /* 3. Ajustes en la lista de tareas */
+    /* Lista de tareas */
     .todo-item {
-        padding: 10px; /* Menos padding en cada item */
+        padding: 10px;
         gap: 10px;
+        flex-direction: row; /* Mantenemos fila */
     }
 
     .delete-btn {
-        padding: 8px 10px; /* Botón de borrar un poco más compacto */
+        padding: 6px 10px;
+        font-size: 12px;
     }
 }
