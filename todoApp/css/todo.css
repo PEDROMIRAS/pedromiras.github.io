@@ -194,7 +194,7 @@ h1 {
     font-size: 14px;
 }
 
-/* --- RESPONSIVE (MEDIA QUERIES) --- */
+/* --- RESPONSIVE: AJUSTES PARA MÓVILES --- */
 @media (max-width: 480px) {
     
     body {
@@ -202,47 +202,44 @@ h1 {
     }
 
     .container {
-        padding: 20px 15px; /* Menos padding lateral para ganar ancho útil */
+        /* Reducimos el padding lateral para ganar espacio útil */
+        padding: 20px 15px; 
     }
 
-    h1 {
-        font-size: 1.5em;
-        margin-bottom: 20px;
+    .filters {
+        display: flex;
+        flex-wrap: wrap; /* Permite que los botones bajen si no caben */
+        justify-content: center;
+        gap: 8px; /* Espacio pequeño entre botones */
     }
 
-    /* Input y Botón en columna */
+    .filter-btn {
+        padding: 8px 12px; 
+        font-size: 13px; /* Letra un poco más pequeña */
+        flex: 1 1 auto;  /* Esto hace que se estiren para llenar huecos */
+        text-align: center;
+    }
+
     .input-container {
-        flex-direction: column;
+        flex-direction: column; /* Pone uno encima del otro */
         gap: 10px;
     }
 
     #addBtn {
-        width: 100%;
-        padding: 12px;
+        width: 100%; /* Botón ancho completo */
     }
 
-    .filters {
-        gap: 5px; /* Reducimos el hueco entre botones */
-        justify-content: space-between; /* Distribuye el espacio */
-    }
-
-    .filter-btn {
-        padding: 8px 5px; /* Muy poco padding lateral */
-        font-size: 12px;  /* Letra más pequeña para que quepa todo */
-        flex: 1;          /* Que intenten ocupar el mismo ancho... */
-        min-width: 0;     /* ...pero permite que se encojan si es necesario */
-        width: auto;
-    }
-
-    /* Lista de tareas */
     .todo-item {
         padding: 10px;
         gap: 10px;
-        flex-direction: row; /* Mantenemos fila */
+    }
+    
+    .todo-text {
+        font-size: 14px; /* Texto de tarea un pelín más chico */
     }
 
     .delete-btn {
-        padding: 6px 10px;
+        padding: 8px 10px;
         font-size: 12px;
     }
 }
