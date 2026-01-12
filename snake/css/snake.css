@@ -1,23 +1,54 @@
 #game-container {
     width: 700px;
     height: 700px;
-    background-color: #222;
     position: relative;
     margin: 20px auto;
     border: 5px solid #555;
-    /* Esto evita que la serpiente se vea sobre el borde */
     overflow: hidden; 
+
+    /* FONTO DE CUADRÍCULA */
+    background-color: #222; /* Color oscuro */
+    background-image: conic-gradient(
+        #2a2a2a 90deg, 
+        transparent 90deg 180deg, 
+        #2a2a2a 180deg 270deg, 
+        transparent 270deg
+    );
+    /* El tamaño debe ser el doble del gridSize (20px * 2 = 40px) */
+    background-size: 40px 40px; 
 }
-.snake-part {
+
+.snake-head {
     width: 20px;
     height: 20px;
-    background-color: lime;
     position: absolute;
+    background-image: url('../img/head.png'); 
+    /* Aumentamos el tamaño al 350% para que la cara llene el cuadro de 20px */
+    background-size: 350%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 10;
+    /* Suavizado para pixel art */
+    image-rendering: pixelated; 
 }
+
+.snake-body {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-image: url('../img/body.png'); 
+    /* También hacemos zoom al cuerpo para que las escamas se vean grandes */
+    background-size: 250%; 
+    background-position: center;
+    image-rendering: pixelated;
+}
+
 .fruit {
     width: 20px;
     height: 20px;
     background-color: red;
     position: absolute;
     border-radius: 50%;
+    /* Efecto de brillo para la fruta */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
