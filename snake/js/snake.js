@@ -113,32 +113,61 @@ function gameLose() {
  * Renderiza (dibuja) la serpiente y la fruta en el HTML
  */
 function draw() {
-    // Limpiamos el contenedor antes de volver a dibujar
+    // 1. Limpiamos el contenedor para redibujar todo desde cero
     game_container.innerHTML = ''; 
     
-    // Dibujamos cada segmento de la serpiente
+    // 2. Recorremos cada segmento de la serpiente
     snake.forEach((part, index) => {
         const snakeEl = document.createElement('div');
         snakeEl.style.left = `${part.x}px`;
         snakeEl.style.top = `${part.y}px`;
         
-        // Si es el índice 0, es la cabeza; si no, es el cuerpo
         if (index === 0) {
+            // --- CABEZA ---
+            // Usamos la rotación controlada por las flechas (0° es abajo)
             snakeEl.classList.add('snake-head');
-            // Aplicamos la rotación aquí
             snakeEl.style.transform = `rotate(${rotation}deg)`;
+            
+        } else if (index === snake.length - 1 && snake.length > 1) {
+            // --- COLA ---
+            // La cola debe apuntar hacia afuera. Comparamos con el segmento de delante (prev).
+            snakeEl.classList.add('snake-tail');
+            
+            const prev = snake[index - 1]; 
+            let tailRotation = 0;
+
+            let diffX = prev.x - part.x;
+            let diffY = prev.y - part.y;
+
+            // Corrección por si atraviesa paredes (wrapping)
+            if (diffX > gridSize) diffX = -gridSize;
+            else if (diffX < -gridSize) diffX = gridSize;
+            if (diffY > gridSize) diffY = -gridSize;
+            else if (diffY < -gridSize) diffY = gridSize;
+
+            // LOGICA DE GIRO PARA TAIL.JPG (Que apunta a la derecha por defecto):
+            // Si el cuerpo está a la derecha (diffX > 0), la punta de la cola debe mirar a la IZQUIERDA.
+            if (diffX > 0) tailRotation = 180;      // Punta a la izquierda
+            else if (diffX < 0) tailRotation = 0;   // Punta a la derecha
+            else if (diffY > 0) tailRotation = 270; // Punta hacia arriba
+            else if (diffY < 0) tailRotation = 90;  // Punta hacia abajo
+            
+            snakeEl.style.transform = `rotate(${tailRotation}deg)`;
+            
         } else {
+            // --- CUERPO ---
+            // Segmentos de escamas intermedios
             snakeEl.classList.add('snake-body');
         }
         
         game_container.appendChild(snakeEl);
     });
 
-    // Dibujamos la fruta
+    // 3. Dibujamos la fruta
     const fruitEl = document.createElement('div');
     fruitEl.style.left = `${food.x}px`;
     fruitEl.style.top = `${food.y}px`;
-    fruitEl.classList.add('fruit'); // Aplica los estilos de snake.css
+    fruitEl.classList.add('fruit');
     game_container.appendChild(fruitEl);
 }
 

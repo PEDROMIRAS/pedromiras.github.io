@@ -43,6 +43,22 @@
     image-rendering: pixelated;
 }
 
+.snake-tail {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-image: url('../img/tail.png'); 
+    /* Usamos 350% para compensar el margen gris de tus imágenes JPG/PNG */
+    background-size: 350%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 5;
+    /* Evita que el pixel-art se vea borroso al escalar */
+    image-rendering: pixelated; 
+    /* Añade una pequeña transición para que el giro no sea tan brusco */
+    transition: transform 0.05s linear;
+}
+
 .fruit {
     width: 20px;
     height: 20px;
