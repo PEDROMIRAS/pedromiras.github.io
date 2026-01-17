@@ -128,32 +128,6 @@ function draw() {
             snakeEl.classList.add('snake-head');
             snakeEl.style.transform = `rotate(${rotation}deg)`;
             
-        } else if (index === snake.length - 1 && snake.length > 1) {
-            // --- COLA ---
-            // La cola debe apuntar hacia afuera. Comparamos con el segmento de delante (prev).
-            snakeEl.classList.add('snake-tail');
-            
-            const prev = snake[index - 1]; 
-            let tailRotation = 0;
-
-            let diffX = prev.x - part.x;
-            let diffY = prev.y - part.y;
-
-            // Corrección por si atraviesa paredes (wrapping)
-            if (diffX > gridSize) diffX = -gridSize;
-            else if (diffX < -gridSize) diffX = gridSize;
-            if (diffY > gridSize) diffY = -gridSize;
-            else if (diffY < -gridSize) diffY = gridSize;
-
-            // LOGICA DE GIRO PARA TAIL.JPG (Que apunta a la derecha por defecto):
-            // Si el cuerpo está a la derecha (diffX > 0), la punta de la cola debe mirar a la IZQUIERDA.
-            if (diffX > 0) tailRotation = 180;      // Punta a la izquierda
-            else if (diffX < 0) tailRotation = 0;   // Punta a la derecha
-            else if (diffY > 0) tailRotation = 270; // Punta hacia arriba
-            else if (diffY < 0) tailRotation = 90;  // Punta hacia abajo
-            
-            snakeEl.style.transform = `rotate(${tailRotation}deg)`;
-            
         } else {
             // --- CUERPO ---
             // Segmentos de escamas intermedios
