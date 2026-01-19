@@ -58,15 +58,15 @@ function moveSnake() {
     // LÓGICA DE "WRAPPING" (Atravesar paredes)
     // Si sale por la izquierda (< 0), aparece por la derecha (700)
     if (nextX < 0) {
-        nextX = 700 - gridSize; 
-    } else if (nextX >= 700) { // Si sale por la derecha, aparece por la izquierda
+        nextX = 600 - gridSize; 
+    } else if (nextX >= 600) { // Si sale por la derecha, aparece por la izquierda
         nextX = 0; 
     }
 
     // Lo mismo para el eje vertical (arriba y abajo)
     if (nextY < 0) {
-        nextY = 700 - gridSize; 
-    } else if (nextY >= 700) {
+        nextY = 600 - gridSize; 
+    } else if (nextY >= 600) {
         nextY = 0; 
     }
 
