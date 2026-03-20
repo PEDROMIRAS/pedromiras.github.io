@@ -113,12 +113,19 @@ export default function SushiCounter({ playerName, onUpdateName }) {
         setIsMenuOpen(false);
     };
 
+    /**
+   * Invoca la Web Share API nativa del sistema operativo para compartir estadísticas personalizadas.
+   */
     const handleShare = async () => {
         if (navigator.share) {
             try {
+                // Construimos un mensaje divertido  y dinámico con los conteos reales
+                const shareMessage = `🍣 ¡Acabo de meterme una buena comilona! En esta sesión he devorado ${currentCount} piezas de sushi, y mi total histórico en Sushi Tracker ya es de ${totalSushi} niguiris. ¿Quién se apunta a la siguiente?`;
+
                 await navigator.share({
                     title: 'Sushi Tracker',
-                    text: `¡Acabo de comerme ${currentCount} sushis! Llevo un total histórico de ${totalSushi} piezas.`,
+                    text: shareMessage,
+                    // Mantenemos la URL, pero el foco es el texto del conteo
                     url: window.location.href,
                 });
             } catch (err) {
@@ -189,7 +196,7 @@ export default function SushiCounter({ playerName, onUpdateName }) {
 
                 {currentCount > 0 && (
                     <button
-                        // ¡NUEVO! Ahora el botón abre el modal de confirmación en lugar de ejecutar la acción directa
+                        // Abre el modal de confirmación en lugar de ejecutar la acción directa
                         onClick={() => setIsFinishConfirmOpen(true)}
                         className="mt-8 bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-purple-900/40 transition-all active:scale-95 uppercase tracking-wide text-sm cursor-pointer"
                     >
@@ -238,7 +245,7 @@ export default function SushiCounter({ playerName, onUpdateName }) {
             {isSettingsOpen && (
                 <div className="absolute inset-0 z-30 flex items-center justify-center p-6">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" onClick={() => setIsSettingsOpen(false)} />
-                    <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl z-10 w-full max-w-sm flex flex-col gap-6">
+                    <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl z-10 w-[92%] max-w-sm flex flex-col gap-6">
                         <div className="flex justify-between items-center">
                             <h3 className="text-2xl font-black text-white">Ajustes</h3>
                             <button onClick={() => setIsSettingsOpen(false)} className="text-gray-400 hover:text-white font-bold p-2 cursor-pointer">✕</button>
