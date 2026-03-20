@@ -245,7 +245,7 @@ export default function SushiCounter({ playerName, onUpdateName }) {
             {isSettingsOpen && (
                 <div className="absolute inset-0 z-30 flex items-center justify-center p-6">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" onClick={() => setIsSettingsOpen(false)} />
-                    <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl z-10 w-[90%] max-w-sm flex flex-col gap-6">
+                    <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl z-10 w-[96%] max-w-sm flex flex-col gap-6">
                         <div className="flex justify-between items-center">
                             <h3 className="text-2xl font-black text-white">Ajustes</h3>
                             <button onClick={() => setIsSettingsOpen(false)} className="text-gray-400 hover:text-white font-bold p-2 cursor-pointer">✕</button>
