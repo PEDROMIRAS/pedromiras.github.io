@@ -3,12 +3,17 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  // Ponemos la ruta exacta donde GitHub Pages lee tu index.html
-  base: '/sushi-tracker/dist/', 
+  // ¡EL TRUCO DEFINITIVO! 'base' relativo. 
+  // Así los archivos siempre se encontrarán estén donde estén.
+  base: './', 
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        // Esto fuerza al Service Worker a limpiar cachés viejas
+        cleanupOutdatedCaches: true, 
+      },
       manifest: {
         name: 'Sushi Tracker',
         short_name: 'SushiTracker',
@@ -16,7 +21,7 @@ export default defineConfig({
         theme_color: '#000000',
         background_color: '#000000',
         display: 'standalone',
-        // El scope y la url de inicio deben coincidir con la base
+        // Mantenemos el scope explícito para GitHub Pages
         scope: '/sushi-tracker/dist/',
         start_url: '/sushi-tracker/dist/',
         icons: [
