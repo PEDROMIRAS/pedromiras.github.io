@@ -2,44 +2,60 @@ import { useState } from 'react';
 import Onboarding from './components/Onboarding';
 import SushiCounter from './components/SushiCounter';
 
+/* COMPONENTE RAÍZ (ROOT COMPONENT) */
+
+/**
+ * Componente App principal de la aplicación.
+ * Actúa como el controlador de vistas, decidiendo si mostrar la pantalla de bienvenida
+ * o la aplicación principal basándose en la existencia de los datos del usuario.
+ * * @returns {JSX.Element} La estructura principal de la aplicación (layout mobile-first).
+ */
 function App() {
-  /* ESTADO DEL JUGADOR: 
-    Usamos "Inicialización Perezosa" (pasando una función a useState).
-    Esto es crucial para el rendimiento: React solo ejecutará esta función 
-    la primera vez que la app cargue, leyendo el localStorage de forma síncrona.
-    Si pasáramos un valor por defecto y luego usáramos un useEffect, 
-    provocaríamos un doble renderizado innecesario.
-  */
+  
+  /* --- Estado Global (Global State) --- */
+
+  /**
+   * Estado del nombre del jugador.
+   * Utiliza Inicialización Perezosa (Lazy Initialization) mediante una función anónima.
+   * Esto asegura que la lectura del localStorage (síncrona y bloqueante) ocurra 
+   * SOLO durante el primer renderizado, evitando problemas de rendimiento.
+   */
   const [playerName, setPlayerName] = useState(() => {
-    const savedName = localStorage.getItem('sushiPlayerName');
-    return savedName || null;
+    return localStorage.getItem('sushiPlayerName') || null;
   });
 
-  /*
-    FUNCIÓN DE GUARDADO:
-    Esta función se la pasamos como "prop" (propiedad) al componente Onboarding.
-    Cuando el usuario envía el formulario allí, esta función se ejecuta aquí,
-    guardando el dato en el disco (localStorage) y actualizando la memoria (state).
-  */
+  /* MANEJADORES DE EVENTOS (EVENT HANDLERS) */
+
+  /**
+   * Actualiza el nombre del jugador tanto en la memoria (estado de React) 
+   * como en el disco (LocalStorage del navegador).
+   * * @param {string} name - El nombre introducido o modificado por el usuario.
+   */
   const handleSaveName = (name) => {
     localStorage.setItem('sushiPlayerName', name);
     setPlayerName(name);
   };
 
+  /* RENDERIZADO DE INTERFAZ (JSX) */
+
   return (
-    // Contenedor principal: Ocupa toda la pantalla (min-h-screen) y centra el contenido
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-      {/* Contenedor tipo móvil: Ancho máximo definido (max-w-md) y oculta el desbordamiento (overflow-hidden) */}
-      <div className="w-full max-w-md min-h-screen bg-white shadow-2xl overflow-hidden relative">
+    // Wrapper exterior para centrar la "pantalla de móvil" en monitores de escritorio
+    <div className="min-h-screen bg-gray-900 flex justify-center items-center">
+      
+      {/* Contenedor principal de la App (Simula la pantalla de un móvil con max-w-md) */}
+      <div className="w-full max-w-md min-h-screen bg-black shadow-2xl overflow-hidden relative">
         
-        {/* RENDERIZADO CONDICIONAL: 
-          Si playerName es null o vacío (!playerName), mostramos el Onboarding.
-          Si tiene datos, mostramos el contador principal y le pasamos el nombre.
+        {/* ENRUTAMIENTO CONDICIONAL (Conditional Rendering):
+          Si playerName es 'null' (usuario nuevo o reseteado), renderiza Onboarding.
+          Si playerName tiene texto, renderiza SushiCounter.
         */}
         {!playerName ? (
           <Onboarding onSaveName={handleSaveName} />
         ) : (
-          <SushiCounter playerName={playerName} />
+          <SushiCounter 
+            playerName={playerName} 
+            onUpdateName={handleSaveName} 
+          /> 
         )}
 
       </div>
