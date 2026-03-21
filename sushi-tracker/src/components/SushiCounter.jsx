@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import niguiriImage from '../assets/images/niguiri.png';
+import niguiriImage1 from '../assets/images/niguiri1.png';
 
 /* FUNCIONES AUXILIARES (HELPER FUNCTIONS) */
 
@@ -59,6 +60,17 @@ export default function SushiCounter({ playerName, onUpdateName }) {
 
         setCurrentCount(newCount);
         localStorage.setItem('sushiCurrentCount', newCount.toString());
+
+        //Añadimos vibracion para subir y bajar la cantidad del piezas del contador
+        if (navigator.vibrate) {
+            if (amount > 0) {
+                // Si está sumando sushi: Vibración cortita y alegre (50ms)
+                navigator.vibrate(50);
+            } else {
+                // Si está restando: Vibración un poco más pesada (100ms)
+                navigator.vibrate(100);
+            }
+        }
     };
 
     /**
@@ -117,22 +129,22 @@ export default function SushiCounter({ playerName, onUpdateName }) {
    * Invoca la Web Share API nativa del sistema operativo para compartir estadísticas personalizadas.
    */
     const handleShare = async () => {
-        if (navigator.share) {
-            try {
-                // Construimos un mensaje divertido  y dinámico con los conteos reales
-                const shareMessage = `🍣 ¡Acabo de meterme una buena comilona! En esta sesión he devorado ${currentCount} piezas de sushi, y mi total histórico en Sushi Tracker ya es de ${totalSushi} niguiris. ¿Quién se apunta a la siguiente?`;
+        const shareData = {
+            title: 'Mi récord en Sushi Tracker',
+            text: `¡Me acabo de zampar ${currentCount} piezas de sushi! 🍣 ¿Puedes superarlo?`,
+            // OJO: Pon aquí la URL real de tu GitHub Pages
+            url: 'https://pedromiras.github.io/sushi-tracker/dist/index.html'
+        };
 
-                await navigator.share({
-                    title: 'Sushi Tracker',
-                    text: shareMessage,
-                    // Mantenemos la URL, pero el foco es el texto del conteo
-                    url: window.location.href,
-                });
-            } catch (err) {
-                console.log('Interacción de compartir cancelada o fallida', err);
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else {
+                await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+                alert('¡Récord copiado al portapapeles para que lo pegues donde quieras!');
             }
-        } else {
-            alert('Tu navegador no soporta la función nativa de compartir.');
+        } catch (err) {
+            console.log('Error al compartir:', err);
         }
     };
 
@@ -212,9 +224,15 @@ export default function SushiCounter({ playerName, onUpdateName }) {
                 <div className="absolute inset-0 z-40 flex items-center justify-center p-6">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" onClick={() => setIsFinishConfirmOpen(false)} />
                     <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl z-10 w-full max-w-sm flex flex-col gap-6 text-center transform transition-all">
-                        <div className="mx-auto bg-purple-900/20 text-purple-500 p-4 rounded-full mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-10 h-10"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+
+                        <div className="mx-auto mb-2">
+                            <img
+                                src={niguiriImage1}
+                                alt="Niguiri delicioso"
+                                className="w-24 h-auto object-contain drop-shadow-[0_4px_10px_rgba(168,85,247,0.4)] transform hover:scale-110 transition-transform duration-300"
+                            />
                         </div>
+
                         <h3 className="text-2xl font-black text-white">¡Buen provecho!</h3>
                         <p className="text-gray-400 font-medium">¿Has terminado? Guardaremos estas {currentCount} piezas en tu historial.</p>
                         <div className="flex gap-3 mt-2">
