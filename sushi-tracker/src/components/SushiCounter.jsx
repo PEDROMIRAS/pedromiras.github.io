@@ -143,13 +143,11 @@ export default function SushiCounter() {
     /* -------------------------------------------------------------------------- */
 
     return (
-        /* Se utiliza h-[100dvh] para forzar la altura máxima visible en el navegador móvil */
         <div className="flex flex-col h-[100dvh] w-full bg-black overflow-hidden font-sans">
             <AnimatePresence mode="wait">
                 {
                     /* VISTA 1: HISTORIAL */
                     isMenuOpen ? (
-                        /* Se utiliza flex-1 para que el contenedor animado ceda todo el espacio a su hijo */
                         <motion.div key="history" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col w-full h-full overflow-hidden">
                             <HistoryDrawer
                                 history={history}
@@ -177,11 +175,14 @@ export default function SushiCounter() {
                             (
                                 <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col w-full h-full overflow-hidden">
 
-                                    <Header
-                                        playerName={playerName}
-                                        onOpenSettings={() => setIsSettingsOpen(true)}
-                                        onOpenHistory={() => setIsMenuOpen(true)}
-                                    />
+                                    {/* Ocultamos el Header si estamos dentro de una sesión activa (1 o 2 jugadores) */}
+                                    {!isSessionActive && (
+                                        <Header
+                                            playerName={playerName}
+                                            onOpenSettings={() => setIsSettingsOpen(true)}
+                                            onOpenHistory={() => setIsMenuOpen(true)}
+                                        />
+                                    )}
 
                                     <main className="flex-1 flex flex-col relative overflow-hidden">
                                         {!isSessionActive ? (
@@ -191,7 +192,7 @@ export default function SushiCounter() {
 
                                                 <div className="w-full max-w-sm space-y-4">
                                                     <div>
-                                                        <label className="text-xs font-bold text-gray-500 uppercase mb-2 block">Jugador 1</label>
+                                                        <label className="text-xs font-bold text-gray-500 uppercase mb-2 block">Jugador Principal</label>
                                                         <input
                                                             value={playerName}
                                                             onChange={e => setPlayerName(e.target.value)}
