@@ -1,207 +1,255 @@
-import { useState } from 'react';
-import niguiriImage1 from '../assets/images/niguiri1.png';
+// src/components/SushiCounter.jsx
+import { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { AnimatePresence, motion } from 'framer-motion';
 import Header from './Header';
 import MainCounter from './MainCounter';
 import HistoryDrawer from './HistoryDrawer';
 import SettingsView from './SettingsView';
 
-/* FUNCIONES AUXILIARES (HELPER FUNCTIONS) */
-
 /**
- * Carga el historial de sesiones desde LocalStorage.
- * Se utiliza para la inicialización perezosa (lazy initialization) del estado 'history'.
- * @returns {Array} Array de objetos con las sesiones previas, o un array vacío si no hay datos.
+ * Componente principal que gestiona el estado global de la aplicación.
+ * Actúa como controlador de vistas utilizando un enrutamiento condicional.
  */
-const loadInitialHistory = () => {
-    const savedHistory = localStorage.getItem('sushiHistory');
-    return savedHistory ? JSON.parse(savedHistory) : [];
-};
+export default function SushiCounter() {
+    /* -------------------------------------------------------------------------- */
+    /* ESTADOS DE DATOS                               */
+    /* -------------------------------------------------------------------------- */
 
-/**
- * Carga el contador de la sesión actual desde LocalStorage.
- * Previene la pérdida de datos si el usuario recarga la página a mitad de una comida.
- * @returns {number} La cantidad de piezas de la sesión actual, o 0 por defecto.
- */
-const loadCurrentSession = () => {
-    const savedCount = localStorage.getItem('sushiCurrentCount');
-    return savedCount ? parseInt(savedCount, 10) : 0;
-};
+    const [currentCount, setCurrentCount] = useState(() => parseInt(localStorage.getItem('sushiCurrentCount')) || 0);
+    const [history, setHistory] = useState(() => JSON.parse(localStorage.getItem('sushiHistory')) || []);
+    const [playerName, setPlayerName] = useState(() => localStorage.getItem('sushiPlayerName') || 'Pedro');
 
-/* COMPONENTE PRINCIPAL */
+    const [isSessionActive, setIsSessionActive] = useState(() => currentCount > 0);
 
-/**
- * Componente SushiCounter
- * Gestiona la sesión actual de comida, el historial de sesiones pasadas y la configuración del usuario.
- * @param {Object} props - Propiedades del componente.
- * @param {string} props.playerName - Nombre del usuario actual.
- * @param {function} props.onUpdateName - Función callback para actualizar el nombre en el componente padre.
- */
-export default function SushiCounter({ playerName, onUpdateName }) {
+    const [isMultiplayer, setIsMultiplayer] = useState(() => JSON.parse(localStorage.getItem('sushiIsMultiplayer')) || false);
+    const [player2Name, setPlayer2Name] = useState(() => localStorage.getItem('sushiPlayer2Name') || 'Rival');
+    const [player2Count, setPlayer2Count] = useState(() => parseInt(localStorage.getItem('sushiPlayer2Count')) || 0);
 
-    /* Estados de Datos (Data States) */
-    const [history, setHistory] = useState(loadInitialHistory);
-    const [currentCount, setCurrentCount] = useState(loadCurrentSession);
+    /* -------------------------------------------------------------------------- */
+    /* ESTADOS DE VISTA                              */
+    /* -------------------------------------------------------------------------- */
 
-    /* Estados de Interfaz (UI States) */
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-    // Estados para los modales de confirmación
-    const [isFinishConfirmOpen, setIsFinishConfirmOpen] = useState(false);
-
-    /* LÓGICA CORE: CONTROL DE SESIÓN */
+    /* -------------------------------------------------------------------------- */
+    /* EFECTOS                                      */
+    /* -------------------------------------------------------------------------- */
 
     /**
-     * Actualiza el contador de la sesión actual sumando o restando una cantidad.
-     * @param {number} amount - Cantidad a sumar (positiva) o restar (negativa).
+     * Efecto de persistencia automática.
+     * Guarda el progreso actual en LocalStorage cada vez que cambian los contadores o la configuración.
      */
-    const updateSushiCount = (amount) => {
-        const newCount = currentCount + amount;
-        if (newCount < 0) return;
+    useEffect(() => {
+        localStorage.setItem('sushiCurrentCount', currentCount);
+        localStorage.setItem('sushiPlayer2Count', player2Count);
+        localStorage.setItem('sushiIsMultiplayer', JSON.stringify(isMultiplayer));
+    }, [currentCount, player2Count, isMultiplayer]);
 
-        setCurrentCount(newCount);
-        localStorage.setItem('sushiCurrentCount', newCount.toString());
+    /* -------------------------------------------------------------------------- */
+    /* CONTROLADORES                                  */
+    /* -------------------------------------------------------------------------- */
 
-        //Añadimos vibracion para subir y bajar la cantidad del piezas del contador
-        if (navigator.vibrate) {
-            if (amount > 0) {
-                // Si está sumando sushi: Vibración cortita y alegre (50ms)
-                navigator.vibrate(50);
-            } else {
-                // Si está restando: Vibración un poco más pesada (100ms)
-                navigator.vibrate(100);
-            }
+    /**
+     * Actualiza el contador del jugador principal y activa el feedback háptico.
+     * @param {number} amount - Cantidad a sumar o restar.
+     */
+    const handleUpdateSushi = (amount) => {
+        setCurrentCount(prev => Math.max(0, prev + amount));
+        if (navigator.vibrate) navigator.vibrate(50);
+    };
+
+    /**
+     * Actualiza el contador del jugador secundario y activa el feedback háptico.
+     * @param {number} amount - Cantidad a sumar o restar.
+     */
+    const handleUpdateSushi2 = (amount) => {
+        setPlayer2Count(prev => Math.max(0, prev + amount));
+        if (navigator.vibrate) navigator.vibrate(50);
+    };
+
+    /**
+     * Inicializa una nueva sesión de conteo.
+     * @param {boolean} multiplayer - Determina si la sesión incluye a un segundo jugador.
+     */
+    const startSession = (multiplayer) => {
+        setIsMultiplayer(multiplayer);
+        setIsSessionActive(true);
+        setCurrentCount(0);
+        setPlayer2Count(0);
+
+        localStorage.setItem('sushiPlayerName', playerName);
+        if (multiplayer) {
+            localStorage.setItem('sushiPlayer2Name', player2Name);
         }
     };
 
     /**
-     * Ejecuta la lógica final para guardar la sesión. 
-     * Esta función es llamada desde el modal de confirmación.
+     * Finaliza la sesión actual y guarda los datos en el historial si procede.
      */
-    const confirmFinishSession = () => {
-        const now = new Date();
+    const handleFinishSession = () => {
+        if (currentCount === 0 && (!isMultiplayer || player2Count === 0)) {
+            setIsSessionActive(false);
+            return;
+        }
 
         const newRecord = {
             id: Date.now(),
-            date: now.toLocaleDateString('es-ES'),
-            time: now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
-            cantidad: currentCount
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            cantidad: currentCount,
+            isMultiplayer,
+            player2Count,
+            player1Name: playerName,
+            player2Name
         };
 
-        const newHistory = [newRecord, ...history];
+        const updatedHistory = [newRecord, ...history];
 
-        setHistory(newHistory);
-        localStorage.setItem('sushiHistory', JSON.stringify(newHistory));
+        setHistory(updatedHistory);
+        localStorage.setItem('sushiHistory', JSON.stringify(updatedHistory));
 
         setCurrentCount(0);
-        localStorage.setItem('sushiCurrentCount', '0');
-
-        // Cerramos el modal tras guardar
-        setIsFinishConfirmOpen(false);
+        setPlayer2Count(0);
+        setIsSessionActive(false);
     };
 
     /**
-     * Ejecuta el borrado total de los datos.
-     * Esta función es llamada desde el modal de confirmación de borrado.
+     * Borra permanentemente el historial y reinicia el estado de la aplicación.
      */
     const confirmClearHistory = () => {
-        localStorage.removeItem('sushiHistory');
-        localStorage.removeItem('sushiCurrentCount');
+        localStorage.clear();
         setHistory([]);
         setCurrentCount(0);
-        setIsMenuOpen(false);
+        setPlayer2Count(0);
+        setIsSessionActive(false);
     };
 
     /**
-   * Invoca la Web Share API nativa del sistema operativo para compartir estadísticas personalizadas.
-   */
-    const handleShare = async () => {
-        const shareData = {
-            title: 'Mi récord en Sushi Tracker',
-            text: `¡Me acabo de zampar ${currentCount} piezas de sushi! 🍣 ¿Puedes superarlo?`,
-            // OJO: Pon aquí la URL real de tu GitHub Pages
-            url: 'https://pedromiras.github.io/sushi-tracker/dist/index.html'
-        };
-
-        try {
-            if (navigator.share) {
-                await navigator.share(shareData);
-            } else {
-                await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-                alert('¡Récord copiado al portapapeles para que lo pegues donde quieras!');
-            }
-        } catch (err) {
-            console.log('Error al compartir:', err);
-        }
+     * Elimina un registro específico del historial mediante su ID.
+     * @param {number} idToRemove - Identificador único del registro.
+     */
+    const deleteHistoryRecord = (idToRemove) => {
+        const updatedHistory = history.filter(record => record.id !== idToRemove);
+        setHistory(updatedHistory);
+        localStorage.setItem('sushiHistory', JSON.stringify(updatedHistory));
     };
 
-    /* Cálculos Derivados (Derived State) --- */
-    const totalSushi = history.reduce((total, record) => total + record.cantidad, 0);
+    const totalSushi = history.reduce((acc, record) => acc + record.cantidad + (record.isMultiplayer ? record.player2Count : 0), 0);
 
-    /* RENDERIZADO DE INTERFAZ (JSX) */
+    /* -------------------------------------------------------------------------- */
+    /* RENDERIZADO                                  */
+    /* -------------------------------------------------------------------------- */
 
     return (
-        <div className="flex flex-col h-full min-h-screen bg-black relative overflow-hidden text-white">
-
-            {/* BARRA DE NAVEGACIÓN (HEADER) */}
-            <Header
-                playerName={playerName}
-                onOpenSettings={() => setIsSettingsOpen(true)}
-                onOpenHistory={() => setIsMenuOpen(true)}
-            />
-
-            {/* CONTENIDO PRINCIPAL (MAIN VIEW) */}
-            <MainCounter
-                currentCount={currentCount}
-                onUpdateSushi={updateSushiCount}
-                onFinishSession={() => setIsFinishConfirmOpen(true)}
-            />
-
-            {/* SISTEMA DE MODALES (OVERLAYS) */}
-
-            {/* MODAL: CONFIRMAR FIN DE SESIÓN (z-40) */}
-            {isFinishConfirmOpen && (
-                <div className="absolute inset-0 z-40 flex items-center justify-center p-6">
-                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" onClick={() => setIsFinishConfirmOpen(false)} />
-                    <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl z-10 w-full max-w-sm flex flex-col gap-6 text-center transform transition-all">
-
-                        <div className="mx-auto mb-2">
-                            <img
-                                src={niguiriImage1}
-                                alt="Niguiri delicioso"
-                                className="w-24 h-auto object-contain drop-shadow-[0_4px_10px_rgba(168,85,247,0.4)] transform hover:scale-110 transition-transform duration-300"
+        /* Se utiliza h-[100dvh] para forzar la altura máxima visible en el navegador móvil */
+        <div className="flex flex-col h-[100dvh] w-full bg-black overflow-hidden font-sans">
+            <AnimatePresence mode="wait">
+                {
+                    /* VISTA 1: HISTORIAL */
+                    isMenuOpen ? (
+                        /* Se utiliza flex-1 para que el contenedor animado ceda todo el espacio a su hijo */
+                        <motion.div key="history" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col w-full h-full overflow-hidden">
+                            <HistoryDrawer
+                                history={history}
+                                totalSushi={totalSushi}
+                                onClose={() => setIsMenuOpen(false)}
+                                onDeleteRecord={deleteHistoryRecord}
                             />
-                        </div>
+                        </motion.div>
+                    ) :
 
-                        <h3 className="text-2xl font-black text-white">¡Buen provecho!</h3>
-                        <p className="text-gray-400 font-medium">¿Has terminado? Guardaremos estas {currentCount} piezas en tu historial.</p>
-                        <div className="flex gap-3 mt-2">
-                            <button onClick={() => setIsFinishConfirmOpen(false)} className="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-bold py-4 rounded-xl transition-colors cursor-pointer">Cancelar</button>
-                            <button onClick={confirmFinishSession} className="flex-1 bg-purple-600 hover:bg-purple-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-900/40 transition-colors cursor-pointer">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+                        /* VISTA 2: AJUSTES */
+                        isSettingsOpen ? (
+                            <motion.div key="settings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col w-full h-full overflow-hidden">
+                                <SettingsView
+                                    playerName={playerName}
+                                    onUpdateName={setPlayerName}
+                                    onShare={() => { }}
+                                    onClearHistory={confirmClearHistory}
+                                    onClose={() => setIsSettingsOpen(false)}
+                                />
+                            </motion.div>
+                        ) :
 
-            {/* VISTA DE AJUSTES Y BORRADO */}
-            {isSettingsOpen && (
-                <SettingsView
-                    playerName={playerName}
-                    onUpdateName={onUpdateName}
-                    onShare={handleShare}
-                    onClearHistory={confirmClearHistory}
-                    onClose={() => setIsSettingsOpen(false)}
-                />
-            )}
+                            /* VISTA 3: PANTALLA PRINCIPAL */
+                            (
+                                <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col w-full h-full overflow-hidden">
 
-            {/* MENÚ LATERAL DESPLEGABLE (HISTORY DRAWER) */}
-            <HistoryDrawer
-                isOpen={isMenuOpen}
-                history={history}
-                totalSushi={totalSushi}
-                onClose={() => setIsMenuOpen(false)}
-            />
+                                    <Header
+                                        playerName={playerName}
+                                        onOpenSettings={() => setIsSettingsOpen(true)}
+                                        onOpenHistory={() => setIsMenuOpen(true)}
+                                    />
 
+                                    <main className="flex-1 flex flex-col relative overflow-hidden">
+                                        {!isSessionActive ? (
+                                            /* SUBVISTA 3.1: CONFIGURACIÓN INICIAL */
+                                            <div className="h-full flex flex-col items-center justify-center p-6">
+                                                <h2 className="text-3xl font-black text-white mb-8">¿Nueva Comilona?</h2>
+
+                                                <div className="w-full max-w-sm space-y-4">
+                                                    <div>
+                                                        <label className="text-xs font-bold text-gray-500 uppercase mb-2 block">Jugador 1</label>
+                                                        <input
+                                                            value={playerName}
+                                                            onChange={e => setPlayerName(e.target.value)}
+                                                            className="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-white focus:border-purple-500 outline-none"
+                                                        />
+                                                    </div>
+
+                                                    <div className="bg-gray-900/40 p-4 rounded-xl border border-gray-800">
+                                                        <div className="flex justify-between items-center">
+                                                            <span className="text-sm font-bold text-gray-300">MODO DUELO</span>
+                                                            <button
+                                                                onClick={() => setIsMultiplayer(!isMultiplayer)}
+                                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${isMultiplayer ? 'bg-blue-600' : 'bg-gray-700'}`}
+                                                            >
+                                                                <div className={`w-4 h-4 bg-white rounded-full transform transition-transform ${isMultiplayer ? 'translate-x-6' : ''}`} />
+                                                            </button>
+                                                        </div>
+
+                                                        {isMultiplayer && (
+                                                            <div className="mt-4 pt-4 border-t border-gray-800">
+                                                                <label className="text-xs font-bold text-blue-500 uppercase mb-2 block">Rival</label>
+                                                                <input
+                                                                    value={player2Name}
+                                                                    onChange={e => setPlayer2Name(e.target.value)}
+                                                                    className="w-full bg-gray-900 border border-blue-900/30 rounded-xl p-3 text-white focus:border-blue-500 outline-none"
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </div>
+
+                                                    <button
+                                                        onClick={() => startSession(isMultiplayer)}
+                                                        className="w-full bg-purple-600 text-white font-black py-4 rounded-xl uppercase tracking-widest active:scale-95 transition-transform"
+                                                    >
+                                                        ¡A Comer!
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            /* SUBVISTA 3.2: CONTADOR ACTIVO */
+                                            <div className="flex-1 flex flex-col h-full overflow-hidden">
+                                                <MainCounter
+                                                    currentCount={currentCount}
+                                                    onUpdateSushi={handleUpdateSushi}
+                                                    onFinishSession={handleFinishSession}
+                                                    player2Count={player2Count}
+                                                    onUpdateSushi2={handleUpdateSushi2}
+                                                    player1Name={playerName}
+                                                    player2Name={player2Name}
+                                                    isMultiplayer={isMultiplayer}
+                                                />
+                                            </div>
+                                        )}
+                                    </main>
+                                </motion.div>
+                            )
+                }
+            </AnimatePresence>
         </div>
     );
 }
