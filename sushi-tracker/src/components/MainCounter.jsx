@@ -45,10 +45,10 @@ export default function MainCounter({
                         </motion.div>
                     </div>
 
-                    {/* Imagen interactiva del Sushi - TAMAÑO AGRANDADO de w-32 a w-60 */}
+                    {/* Imagen interactiva del Sushi - TAMAÑO AGRANDADO de w-32 a w-40 */}
                     <motion.img
                         src={niguiriImage1} onClick={() => onUpdateSushi2(1)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.85 }}
-                        className="w-60 h-auto cursor-pointer select-none drop-shadow-2xl"
+                        className="w-40 h-auto cursor-pointer select-none drop-shadow-2xl"
                         style={{ WebkitTapHighlightColor: 'transparent' }}
                     />
 
@@ -89,10 +89,10 @@ export default function MainCounter({
                         </motion.div>
                     </div>
 
-                    {/* Imagen interactiva del Sushi - TAMAÑO AGRANDADO de w-32 a w-60 */}
+                    {/* Imagen interactiva del Sushi - TAMAÑO AGRANDADO de w-32 a w-40 */}
                     <motion.img
                         src={niguiriImage} onClick={() => onUpdateSushi(1)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.85 }}
-                        className="w-60 h-auto cursor-pointer select-none drop-shadow-2xl"
+                        className="w-40 h-auto cursor-pointer select-none drop-shadow-2xl"
                         style={{ WebkitTapHighlightColor: 'transparent' }}
                     />
 
