@@ -1,13 +1,13 @@
 # 👨‍💻 Pedro Miras - Web Developer Portfolio
 
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![EmailJS](https://img.shields.io/badge/EmailJS-%23F7DF1E.svg?style=for-the-badge&logo=gmail&logoColor=black)
 ![Google Translate](https://img.shields.io/badge/Google_Translate-4285F4?style=for-the-badge&logo=google-translate&logoColor=white)
 
-![Portfolio Preview](assets/img/portfolio-image.png)
-Welcome to my personal portfolio repository. This project showcases my skills, projects, and experience as a Web Developer. It is built with a focus on modern UI/UX trends, performance, and clean code.
+Welcome to my personal portfolio repository. This project showcases my skills, projects, and experience as a Web
+Developer. It is built with a focus on modern UI/UX trends, performance, and clean code.
 
 🔗 **Live Demo:** [Ver Portfolio Online](https://pedromiras.github.io/)
 
@@ -17,50 +17,80 @@ Welcome to my personal portfolio repository. This project showcases my skills, p
 
 * **Modern Design:** Dark theme with Neon accents and **Glassmorphism** effects using CSS backdrop-filters.
 * **Immersive Navigation:** Full-screen sectioning with **CSS Scroll Snap** for a smooth browsing experience.
-* **Responsive & Adaptive:** Fully responsive layout with a custom mobile navigation menu (horizontal scroll/multiline) designed for all devices.
-* **Interactive UI:** 3D text effects, hover animations, and dynamic elements.
-* **Functionality:**
-  * **Multi-language Support:** Integrated **Google Translate API** for automatic English/Spanish translation with a custom toggle button.
-  * **Working Contact Form:** Fully functional form integrated with **EmailJS** service.
-  * **Project Showcase:** Direct links to live demos and source code for sub-projects like the Ducati Landing Page and Todo App.
+* **Responsive & Adaptive:** Fully responsive layout with a custom mobile navigation menu (horizontal scroll/multiline).
+* **Multi-language Support:** Integrated **Google Translate API** for automatic English/Spanish translation.
+* **Working Contact Form:** Fully functional form integrated with **EmailJS**.
+* **Project Showcase:** Every project below is its own React app, linked from the Projects section.
 
 ---
 
 ## 🛠️ Technologies Used
 
-This project is built using pure **Vanilla Web Technologies** to demonstrate a strong understanding of the fundamentals.
+Every project in this repository is now built with **React** (Vite):
 
-* **HTML5:** Semantic structure and accessibility.
-* **CSS3:**
-  * CSS Variables (Custom Properties) for efficient theming.
-  * Flexbox & CSS Grid for advanced layouts.
-  * Centralized Media Queries for maintainable responsiveness.
-  * Animations & Transitions (Keyframes, Hover effects).
-* **JavaScript (ES6+):**
-  * DOM Manipulation.
-  * Logic for custom navigation, scroll handling, and sticky headers.
-  * **Integration with external APIs:**
-    * [EmailJS](https://www.emailjs.com/) (Contact Form).
-    * [Google Translate API](https://cloud.google.com/translate) (Localization/Internationalization).
-* **External Libraries:**
-  * [FontAwesome](https://fontawesome.com/) (Icons)
+* **React 18 + Vite** for the main site and every sub-project.
+* CSS Variables (Custom Properties), Flexbox & Grid, centralized media queries.
+* [EmailJS](https://www.emailjs.com/) (Contact Form) and the [Google Translate API](https://cloud.google.com/translate) (Localization).
+* [Font Awesome](https://fontawesome.com/) (Icons).
+* GitHub Actions builds and deploys the whole site automatically on every push to `main`.
 
 ---
 
 ## 📂 Project Structure
 
+Each project below is an **independent mini-app** (its own `package.json`, its own Vite build), linked from the
+Projects section — the same pattern the site already used for Ramo de flores and Sushi Tracker.
+
 ```text
-/
-├── assets/          # Images, icons, and static assets
-├── css/             # Stylesheets (Modularized & Optimized)
-│   ├── base.css     # Reset, global styles, and utility classes
-│   ├── variables.css # Color palette, fonts, and 3D effects
-│   ├── responsive.css # Centralized media queries for all devices
-│   └── [sections].css # Specific styles (home, about, skills...)
-├── js/              # JavaScript files
-│   ├── emailJS-contact.js # Contact form logic and API integration
-│   ├── nav.js             # Sticky header & scroll logic
-│   └── translate.js       # Google Translate API configuration & cookies handling
-├── ducati/          # Sub-project: Ducati History Landing Page
-├── todoApp/         # Sub-project: JS Todo Application
-└── index.html       # Main entry point
+/                        # Main site (this React app: Home, About, Skills, Projects, Contact)
+  src/
+    components/          # Header, Home, About, Skills, Projects, Contact, Footer
+    styles/              # One .css file per section (same design as before)
+  public/assets/          # Images and audio
+
+/ramo-flores-amarillas/  # "Ramo de flores": a random bouquet of flowers, in the color you choose (React + Vite)
+/todoApp/                # "TODO APP": task list with filters and localStorage (React + Vite)
+/sushi-tracker/          # "Sushi Tracker": sushi-eating counter with history (React + Vite + Tailwind)
+/snake/                  # "Snake": the classic game, rebuilt with React state instead of manual DOM (React + Vite)
+
+/.github/workflows/deploy.yml   # Builds all 5 apps and publishes them together to GitHub Pages
+```
+
+## 🖥️ Verlo en local: dos formas distintas
+
+**A. Trabajar en el diseño de un proyecto concreto** — `npm run dev` en la carpeta de ese proyecto. Esto
+levanta solo ese proyecto; los enlaces a los *otros* proyectos **no van a funcionar** en este modo, porque
+cada uno es un proyecto Vite aparte y el servidor de desarrollo de uno no conoce a los demás:
+
+```bash
+npm install && npm run dev        # sitio principal -> http://localhost:5173
+cd todoApp && npm install && npm run dev
+cd snake && npm install && npm run dev
+cd ramo-flores-amarillas && npm install && npm run dev
+cd sushi-tracker && npm install --legacy-peer-deps && npm run dev
+```
+
+**B. Ver el sitio completo, tal como quedará publicado** — con los 5 proyectos enlazados entre sí de verdad.
+Para esto no sirve `npm run dev`: hace falta compilar los 5 y servirlos juntos, que es justo lo que hace:
+
+```bash
+npm run build:sitio
+```
+
+Instala y compila los 5 proyectos, monta el resultado en `_site/` (igual que lo hará GitHub Pages),
+comprueba automáticamente que las 5 rutas cargan de verdad, y si todo va bien **deja el sitio servido en
+local** con la URL en la terminal para que lo abras en el navegador y pinches por los proyectos tú mismo.
+Tarda un par de minutos la primera vez (instala cada `node_modules`); las siguientes veces es mucho más
+rápido. `Ctrl+C` para pararlo.
+
+Es el mismo script que ejecuta GitHub Actions (`scripts/build-sitio.mjs`) — si funciona aquí, funciona en
+producción; si algo falla, falla igual de claro en tu terminal que en el *log* de Actions.
+
+## 🚢 Despliegue
+
+Al hacer *push* a `main`, GitHub Actions ejecuta `node scripts/build-sitio.mjs` (lo mismo que harías tú a
+mano con `npm run build:sitio`) y, si las 5 rutas verifican correctamente, publica el resultado en GitHub
+Pages: el sitio principal en la raíz, y cada proyecto en su propia carpeta (`/ramo-flores-amarillas/`,
+`/todoApp/`, `/sushi-tracker/`, `/snake/`). Si algún proyecto falla al compilar o alguna ruta no carga, el
+*workflow* falla ahí mismo y no se publica nada — nunca queda el sitio a medias. No hace falta compilar nada
+a mano ni commitear ninguna carpeta `dist/`.

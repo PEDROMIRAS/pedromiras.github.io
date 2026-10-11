@@ -1,0 +1,58 @@
+name: Publicar en GitHub Pages
+
+# Se ejecuta en cada push a main, o manualmente desde la pestaña "Actions"
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Si este repo se llama "usuario.github.io" se publica en la raíz del dominio;
+      # cualquier otro nombre (por ejemplo, un repo de prueba) se publica en
+      # "usuario.github.io/nombre-del-repo/". Lo necesita Sushi Tracker para sus rutas
+      # absolutas (los demás proyectos usan rutas relativas y no les afecta).
+      - name: Calcular la ruta base del sitio
+        id: rutas
+        run: |
+          if [[ "${{ github.event.repository.name }}" == *.github.io ]]; then
+            echo "raiz=" >> "$GITHUB_OUTPUT"
+          else
+            echo "raiz=/${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Compila los 5 proyectos, monta _site/ y comprueba que las 5 rutas cargan de verdad
+      # — el mismo script que puedes ejecutar tú en local con "npm run build:sitio".
+      - name: Construir y verificar el sitio
+        run: node scripts/build-sitio.mjs --base=${{ steps.rutas.outputs.raiz }} --sin-servir
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

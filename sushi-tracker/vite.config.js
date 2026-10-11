@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ command }) => {
   // Configuración dinámica para que funcione tanto en local como en GitHub Pages
   const isProduction = command === 'build'
-  const basePath = isProduction ? '/sushi-tracker/dist/' : '/'
+  const basePath = process.env.BASE_PATH || (isProduction ? '/sushi-tracker/' : '/')
 
   return {
     base: basePath, 
