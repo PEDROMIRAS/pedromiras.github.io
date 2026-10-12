@@ -14,7 +14,7 @@
 }
 
 .contact-info h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--color-text-light);
 }
 
@@ -96,7 +96,7 @@
     border: 1px solid rgba(255, 255, 255, 0.45); /* visible sobre la tarjeta */
     border-radius: 8px;
     color: white;
-    font-family: var(--font-primary);
+    font-size: 1rem; /* por debajo de 16px, iOS amplía la página al tocar el campo */
     margin-bottom: 15px;
 }
 

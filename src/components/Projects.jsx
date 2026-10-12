@@ -5,10 +5,10 @@ const REPO = 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main';
 
 const PROYECTOS = [
   {
-    nombre: 'Ramo de flores',
+    nombre: 'Flower Bouquet',
     descripcion: `A different bouquet of flowers every time. Choose a color, tap, and it blooms: each bouquet
       is drawn at random as an SVG, so no two are alike. Installable, and it works offline.`,
-    etiquetas: ['React', 'SVG', 'PWA'],
+    etiquetas: ['React', 'SVG', 'PWA', 'UI in Spanish'],
     carpeta: 'ramo-flores-amarillas',
     imagen: { src: './assets/img/ramo-flores.webp', ancho: 1280, alto: 720 },
     alt: 'Bouquet of flowers in every color',
@@ -17,7 +17,7 @@ const PROYECTOS = [
     nombre: 'Todo App',
     descripcion: `A task manager: add, complete and delete tasks, filter them and see live statistics.
       Everything is saved in the browser.`,
-    etiquetas: ['React', 'localStorage'],
+    etiquetas: ['React', 'localStorage', 'UI in Spanish'],
     carpeta: 'todoApp',
     imagen: { src: './assets/img/todo-app.webp', ancho: 1280, alto: 720 },
     alt: 'Task list application',
@@ -26,7 +26,7 @@ const PROYECTOS = [
     nombre: 'Sushi Tracker',
     descripcion: `A mobile-first counter for sushi nights, with a single-player mode, a two-player duel on a
       split screen and a history of past sessions. Installable, and it works offline.`,
-    etiquetas: ['React', 'Tailwind CSS', 'PWA'],
+    etiquetas: ['React', 'Tailwind CSS', 'PWA', 'UI in Spanish'],
     carpeta: 'sushi-tracker',
     imagen: { src: './assets/img/sushi-tracker.webp', ancho: 1280, alto: 720 },
     alt: 'Sushi counter application',
@@ -48,6 +48,10 @@ export default function Projects() {
       <h2 id="projects-title" className="section-title">
         PROJECTS
       </h2>
+      <p className="projects-intro">
+        Small apps I build in my own time to try ideas out. My day-to-day work is back end and data, and it stays
+        private.
+      </p>
 
       <div className="projects-container">
         {PROYECTOS.map((p) => (

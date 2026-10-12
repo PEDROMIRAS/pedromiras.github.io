@@ -4,7 +4,6 @@
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![EmailJS](https://img.shields.io/badge/EmailJS-%23F7DF1E.svg?style=for-the-badge&logo=gmail&logoColor=black)
-![Google Translate](https://img.shields.io/badge/Google_Translate-4285F4?style=for-the-badge&logo=google-translate&logoColor=white)
 
 Welcome to my personal portfolio repository. This project showcases my skills, projects, and experience as a Web
 Developer. It is built with a focus on modern UI/UX trends, performance, and clean code.
@@ -15,10 +14,9 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 
 ## 🚀 Key Features
 
-* **Modern Design:** Dark theme with Neon accents and **Glassmorphism** effects using CSS backdrop-filters.
-* **Clear Navigation:** Fixed header that highlights the section you are in, with smooth scrolling between full-screen sections.
+* **Modern Design:** Dark theme with a single purple accent.
+* **Clear Navigation:** Fixed header that highlights the section you are in, with smooth scrolling between sections.
 * **Responsive & Adaptive:** Fully responsive layout with a dropdown navigation menu on small screens.
-* **Multi-language Support:** Integrated **Google Translate API** for automatic English/Spanish translation.
 * **Working Contact Form:** Fully functional form integrated with **EmailJS**.
 * **Project Showcase:** Every project below is its own React app, linked from the Projects section.
 
@@ -30,8 +28,8 @@ Every project in this repository is now built with **React** (Vite):
 
 * **React 18 + Vite** for the main site and every sub-project.
 * CSS Variables (Custom Properties), Flexbox & Grid, centralized media queries.
-* [EmailJS](https://www.emailjs.com/) (Contact Form) and the [Google Translate API](https://cloud.google.com/translate) (Localization).
-* [Font Awesome](https://fontawesome.com/) (Icons).
+* [EmailJS](https://www.emailjs.com/) (Contact Form).
+* Icons from [Font Awesome Free](https://fontawesome.com/), served as a local SVG sprite.
 * GitHub Actions builds and deploys the whole site automatically on every push to `main`.
 
 ---

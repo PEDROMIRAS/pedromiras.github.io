@@ -20,8 +20,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      {/* Punto de anclaje que usa el widget de Google Translate (ver Header.jsx) */}
-      <div id="google_translate_element" style={{ display: 'none' }} />
     </>
   );
 }

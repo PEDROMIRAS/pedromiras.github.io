@@ -27,6 +27,15 @@
     min-width: 300px;
 }
 
+/* Junto a la foto el título va a la izquierda; en una columna, centrado (ver responsive.css) */
+.about-title {
+    text-align: left;
+    margin-bottom: 20px;
+}
+.about-title::after {
+    margin-left: 0;
+}
+
 .about-text p {
     font-size: 1.1rem;
     line-height: 1.8;

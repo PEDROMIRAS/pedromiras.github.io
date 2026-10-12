@@ -1,7 +1,8 @@
 /* FOOTER */
 footer {
     width: 100%;
-    padding: 30px 40px;
+    /* mismos bordes laterales que el contenido de las secciones */
+    padding: 30px max(20px, calc((100% - 68.75rem) / 2));
 
     /* Copyright a un lado y enlaces al otro; en pantallas estrechas se apilan centrados */
     display: flex;

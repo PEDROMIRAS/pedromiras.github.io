@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <p>&copy; {new Date().getFullYear()} Pedro Miras.</p>
+      <p>&copy; {new Date().getFullYear()} Pedro Miras</p>
       <ul className="footer-links">
         <li>
           <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer">
@@ -14,7 +14,7 @@ export default function Footer() {
           </a>
         </li>
         <li>
-          <a href="#home">Back to top ↑</a>
+          <a href="#home">Back to top</a>
         </li>
       </ul>
     </footer>

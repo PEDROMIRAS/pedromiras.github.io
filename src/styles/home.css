@@ -22,38 +22,18 @@
     color: var(--color-text-light);
     
     /* La magia del 3D: Capas de sombra sólida */
-    text-shadow: 
-        1px 1px 0px #8e44ad,
-        2px 2px 0px #8e44ad,
-        3px 3px 0px #6f2d91,
-        4px 4px 0px #6f2d91,
-        5px 5px 0px #4a1c61,
-        6px 6px 0px #4a1c61,
-        8px 8px 15px rgba(0, 0, 0, 0.6); /* Sombra final suave */
-        
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Animación opcional: El texto "salta" al pasar el mouse */
-.home h1 span:hover {
-    transform: translateY(-5px) scale(1.03);
-    text-shadow: /*Capas de sombra haciendo un degradado*/
-        1px 1px 0px #8e44ad,
-        2px 2px 0px #8e44ad,
-        3px 3px 0px #6f2d91,
-        4px 4px 0px #6f2d91,
-        5px 5px 0px #4a1c61,
-        6px 6px 0px #4a1c61,
-        7px 7px 0px #4a1c61,
-        8px 8px 0px #300b40,
-        9px 9px 0px #300b40,
-        10px 10px 0px #300b40,
-        15px 15px 30px rgba(0, 0, 0, 0.8);
+    text-shadow:
+        1px 1px 0 #8e44ad,
+        2px 2px 0 #6f2d91,
+        3px 3px 0 #4a1c61,
+        6px 6px 14px rgba(0, 0, 0, 0.5);
 }
 
 .home h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--color-text-secondary);
     margin-bottom: 20px;
 }
@@ -63,6 +43,7 @@
     line-height: 1.8;
     max-width: 700px;
     margin: 0 auto 40px;
+    color: var(--color-text-secondary);
 }
 
 .home-actions {

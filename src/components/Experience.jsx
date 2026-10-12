@@ -5,11 +5,17 @@ const ETAPAS = [
     titulo: 'Rising Software Engineer',
     lugar: 'NTT DATA · Logistics industry',
     descripcion:
-      'Part of the customer technology team, maintaining and improving the software behind a parcel delivery service.',
+      'I maintain and improve the software behind a parcel delivery service: resolving incidents with the code, the database and shipments, building and changing components, and developing ETL processes and PL/SQL.',
     etiquetas: ['Spring Boot', 'PL/SQL', 'Talend', 'Jira'],
   },
   {
-    periodo: 'Education · 2 years',
+    periodo: '2026 · 3.5 months',
+    titulo: 'Internship',
+    lugar: 'NTT DATA · Logistics industry',
+    descripcion: 'Work placement for my degree, on the same project I work on today.',
+  },
+  {
+    periodo: '2024 – 2026',
     titulo: 'Higher Degree in Web Application Development',
     lugar: 'IES Miguel Hernández · Alhama de Murcia',
     descripcion:

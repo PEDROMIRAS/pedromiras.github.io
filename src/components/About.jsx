@@ -1,10 +1,3 @@
-// Edad calculada a partir de la fecha de nacimiento: se actualiza sola cada 22 de septiembre.
-function edad() {
-  const hoy = new Date();
-  const yaCumplio = hoy >= new Date(hoy.getFullYear(), 8, 22); // mes 8 = septiembre
-  return hoy.getFullYear() - 2000 - (yaCumplio ? 0 : 1);
-}
-
 export default function About() {
   return (
     <section id="about" className="about">
@@ -13,15 +6,15 @@ export default function About() {
           <img src="./assets/img/portfolio-image.webp" alt="Pedro Miras, Web Developer" width="560" height="560" loading="lazy" />
         </figure>
         <div className="about-text">
-          <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '20px' }}>
+          <h2 className="section-title about-title">
             ABOUT ME
           </h2>
           <p>
-            I’m Pedro Miras, a {edad()}-year-old Web Developer from Lorca, Spain. I enjoy building software that is
-            simple to use and easy to maintain, from the database to what people see on screen.
+            I’m Pedro Miras, a Web Developer from Lorca, Spain. I work at NTT DATA on the software behind a parcel
+            delivery service, mostly with Spring Boot, PL/SQL and Talend.
           </p>
           <p>
-            I’m curious by nature and always keen to learn new technologies and solve real problems. Away from the
+            In my own time I build small web apps like the ones below, mostly to try ideas out. Away from the
             keyboard, you’ll probably find me riding my motorbike.
           </p>
         </div>

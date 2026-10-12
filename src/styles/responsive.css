@@ -1,16 +1,10 @@
 /* --- MÓVILES Y TABLETS ( < 1024px ) --- */
 @media (max-width: 1024px) {
-    /* Ajustes generales */
-    .home, .about, .experience, .skills, .projects, .contact {
-        /* En móviles, reducimos el padding superior porque el header ocupa menos */
-        padding-top: 100px; 
-    }
+    .section-title { font-size: 1.5rem; margin-bottom: 30px; }
+    .about-title { text-align: center; }
+    .about-title::after { margin-left: auto; }
 
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.8rem; }
-    .section-title { font-size: 2rem; margin-bottom: 30px; }
-    
-    header { width: 95%; padding: 15px; }
+    header { padding: 10px 10px 10px 20px; }
     
     .about-content {
         flex-direction: column;
@@ -22,7 +16,7 @@
     .about-text { min-width: 0; width: 100%; }
     
     .skills-container { grid-template-columns: repeat(2, 1fr); }
-    .projects-container { grid-template-columns: 1fr; }
+    .project-links .btn { padding-inline: 10px; } /* que "Source Code" quepa en una línea */
     
     .contact-container {
         grid-template-columns: 1fr;
@@ -39,9 +33,8 @@
     .home-sep { display: none; }
     .home-empresa { display: block; }
     
-    .skills-container { grid-template-columns: 1fr; }
+    .skills-container, .projects-container { grid-template-columns: 1fr; }
     .project-body, .contact-form { padding: 20px; }
-    .project-links .btn { padding-inline: 10px; } /* que "Source Code" quepa en una línea */
     
 }
 
@@ -76,7 +69,6 @@
     .menu a {
         display: block;
         padding: 12px 16px;
-        border-radius: 12px;
     }
     .menu a::after { display: none; }
     .menu a.activo { background: var(--bg-alpha-2); }

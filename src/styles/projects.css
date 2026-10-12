@@ -1,3 +1,11 @@
+.projects-intro {
+    max-width: 60ch;
+    margin: -20px auto 40px; /* pegado al título, no a las tarjetas */
+    text-align: center;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
 .projects-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -40,10 +48,8 @@
 }
 
 .project h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--color-text-light);
-    padding-left: 15px;
-    border-left: 4px solid var(--color-primary);
 }
 
 .project-body p {

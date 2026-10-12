@@ -23,10 +23,6 @@ body {
     scroll-margin-top: 0; /* Reseteamos esto para que el fondo cubra todo */
 }
 
-/* Ocultar elementos de Google Translate */
-.goog-te-banner-frame, .skiptranslate { display: none !important; }
-body { top: 0 !important; }
-
 /* Quien pide menos movimiento en su sistema: sin scroll animado ni transiciones */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -75,11 +71,6 @@ h3 {
     letter-spacing: 0.5px;
 }
 
-/* Relieve solo en los títulos grandes: en los de las tarjetas emborrona el texto */
-h1, h2 {
-    text-shadow: var(--text-shadow-3d);
-}
-
 /* --- ESTRUCTURA DE SECCIONES (Full Screen) --- */
 .home, .about, .experience, .skills, .projects, .contact {
     width: 100%;
@@ -91,10 +82,8 @@ h1, h2 {
     justify-content: center; /* Centrado vertical */
     align-items: center;     /* Centrado horizontal */
 
-    /* ESPACIADO INTERNO (La solución al menú fijo) */
-    /* 120px asegura que el contenido empiece debajo del menú */
-    padding-top: 130px; 
-    padding-bottom: 60px;
+    padding-top: var(--gap-main);
+    padding-bottom: 48px;
     padding-inline: 20px; /* Margen lateral de seguridad */
 }
 
@@ -120,10 +109,22 @@ h1, h2 {
 /* Títulos de Sección */
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    color: var(--color-primary-light);
-    margin-bottom: 50px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-text-light);
+    margin-bottom: 40px;
     text-transform: uppercase;
+}
+/* El morado va en la raya, no en el texto: queda reservado para lo que se puede pulsar */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin: 14px auto 0;
+    border-radius: 2px;
+    background: var(--color-primary);
 }
 
 /* Efecto Cristal (Glassmorphism) */
@@ -134,17 +135,6 @@ h1, h2 {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius);
     transition: all 0.35s ease;
-}
-
-/* Interacción Hover para tarjetas */
-.glass-card-interactive {
-    cursor: pointer;
-}
-.glass-card-interactive:hover {
-    transform: translateY(-8px);
-    background: var(--bg-alpha-2);
-    border-color: var(--color-primary);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* Etiquetas de tecnologías (Experience y Projects) */
@@ -158,21 +148,21 @@ h1, h2 {
     padding: 5px 14px;
     font-size: 0.85rem;
     border-radius: 20px;
-    background: var(--bg-alpha-1);
-    border: 1px solid var(--border-alpha-1);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-border);
 }
 
 /* Botones */
 .btn {
     display: inline-block;
     padding: 12px 28px;
-    border-radius: 12px;
+    border: 2px solid transparent; /* mismo alto que el botón con borde */
+    border-radius: var(--radius-sm);
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
     cursor: pointer;
     text-align: center;
-    border: none;
 }
 
 .btn-primary {
@@ -181,19 +171,16 @@ h1, h2 {
 }
 .btn-primary:hover {
     background-color: var(--color-primary);
-    box-shadow: 0 0 15px var(--color-primary-dark);
 }
 
 .btn-outline {
     background: transparent;
-    border: 2px solid var(--color-primary);
+    border-color: var(--color-primary);
     color: var(--color-text-light);
 }
 .btn-outline:hover {
-    background: var(--color-primary);
-    color: white;
-    box-shadow: 0 0 15px var(--color-primary-dark);
-    transform: translateY(-2px);
+    background: var(--bg-alpha-2);
+    border-color: var(--color-primary-light);
 }
 
 /* Foco de teclado: visible y con el morado de marca, en cualquier enlace o botón

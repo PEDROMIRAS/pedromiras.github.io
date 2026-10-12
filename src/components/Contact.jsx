@@ -62,15 +62,16 @@ export default function Contact() {
         <div className="contact-info">
           <h3>Let’s talk</h3>
           <p>
-            I’m not looking for a new job right now, but I’m always happy to connect and talk about technology.
+            I’m always happy to talk about technology or compare notes with other developers. I’m not looking for a
+            new job right now.
           </p>
 
           <div className="contact-email glass-card">
             <Icono nombre="envelope" />
-            <a href={`mailto:${EMAIL}`} className="notranslate" translate="no">
+            <a href={`mailto:${EMAIL}`} >
               {EMAIL}
             </a>
-            <button type="button" className="btn btn-outline notranslate" translate="no" onClick={copiarEmail}>
+            <button type="button" className="btn btn-outline" onClick={copiarEmail}>
               {copiado ? 'Copied!' : 'Copy'}
             </button>
             <span role="status" className="sr-only">
@@ -98,22 +99,22 @@ export default function Contact() {
           <form aria-label="Contact Form" ref={formRef} onSubmit={enviar}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your Name" autoComplete="name" required />
+              <input type="text" id="name" name="name" autoComplete="name" required />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="Your Email" autoComplete="email" required />
+              <input type="email" id="email" name="email" autoComplete="email" required />
             </div>
             <div className="form-group full-width">
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" placeholder="Your Message" required />
+              <textarea id="message" name="message" required />
             </div>
             {/* role="status": los lectores de pantalla anuncian el resultado del envío */}
             <div role="status">
               {mensaje && <p className={`form-message form-message-${mensaje.tipo}`}>{mensaje.texto}</p>}
             </div>
             <button type="submit" className="btn btn-primary" disabled={enviando}>
-              {enviando ? 'Sending...' : 'Send Message'}
+              {enviando ? 'Sending…' : 'Send Message'}
             </button>
           </form>
         </div>

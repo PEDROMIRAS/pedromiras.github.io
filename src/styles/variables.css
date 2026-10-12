@@ -3,23 +3,15 @@
 
 :root {
 /* Variables generales de estilo */
---radius: 16px;                    /* Radio de bordes global */
+--radius: 12px;                    /* Radio de tarjetas y cabecera */
+--radius-sm: 8px;                  /* Radio de botones, campos y etiquetas con icono */
 --transition: 0.3s ease;           /* Transición global */
---gap-main: 130px;                  /* Espacio vertical entre secciones */
---header-offset: 90px;              /* Altura del header */
+--gap-main: 112px;                 /* Aire sobre cada sección: deja el título por debajo de la cabecera fija */
 
 
 /* Fuentes */
 --font-primary: 'Roboto', sans-serif;
 --font-heading: 'Orbitron', sans-serif;
-
-/* Efecto 3D para texto */
---text-shadow-3d: 
-        1px 1px 0 #6f2d91,
-        2px 2px 0 #5a2476,
-        3px 3px 0 #461c5c,
-        4px 4px 0 #311341,
-        6px 6px 10px rgba(0,0,0,0.6); /* Sombra final suave */
 
 /* COLORES */
 /* --- Fondo degradado --- */
