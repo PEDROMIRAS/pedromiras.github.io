@@ -194,6 +194,7 @@ button {
 }
 
 .volver {
+  text-decoration: none; /* en la pantalla inicial es un enlace al portfolio */
   left: max(0.75rem, env(safe-area-inset-left));
   padding: 0 1.1rem 0 0.6rem;
 }

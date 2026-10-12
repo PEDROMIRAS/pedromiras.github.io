@@ -6,6 +6,7 @@ import Brote from './Brote.jsx';
 import Colores from './Colores.jsx';
 import Volver from './Volver.jsx';
 import Instalar from './Instalar.jsx';
+import { enModoApp } from './instalacion.js';
 
 const SALIDA_MS = 450;
 const TEMA_INICIAL = PALETAS.amarillas.tema;
@@ -93,6 +94,12 @@ export default function App() {
 
       {pantalla === 'color' && (
         <>
+          {/* Instalada como app no hay portfolio al que volver: el enlace saldría de la app */}
+          {!enModoApp() && (
+            <a href="../" className="volver">
+              ← Portfolio
+            </a>
+          )}
           <Instalar />
           <Colores onElegir={setColor} foco={ultimoColor.current} />
         </>

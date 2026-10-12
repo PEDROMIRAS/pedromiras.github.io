@@ -7,7 +7,7 @@ const CATEGORIAS = [
     titulo: 'Backend',
     items: [
       { icono: 'java', nombre: 'Java' },
-      { icono: 'leaf', nombre: 'Spring Boot' },
+      { icono: 'springboot', nombre: 'Spring Boot' },
       { icono: 'php', nombre: 'PHP' },
       { icono: 'symfony', nombre: 'Symfony' },
     ],
@@ -16,10 +16,10 @@ const CATEGORIAS = [
     titulo: 'Data',
     items: [
       { icono: 'table', nombre: 'PL/SQL' },
-      { icono: 'diagram-project', nombre: 'Talend' },
-      { icono: 'database', nombre: 'MySQL' },
-      { icono: 'server', nombre: 'MariaDB' },
-      { icono: 'envira', nombre: 'MongoDB' },
+      { icono: 'talend', nombre: 'Talend' },
+      { icono: 'mysql', nombre: 'MySQL' },
+      { icono: 'mariadb', nombre: 'MariaDB' },
+      { icono: 'mongodb', nombre: 'MongoDB' },
     ],
   },
   {
@@ -41,7 +41,7 @@ const CATEGORIAS = [
       { icono: 'microsoft', nombre: 'Teams' },
       { icono: 'code', nombre: 'VS Code' },
       { icono: 'terminal', nombre: 'PL/SQL Developer' },
-      { icono: 'robot', nombre: 'Claude' },
+      { icono: 'claude', nombre: 'Claude' },
       { icono: 'brain', nombre: 'AI-assisted development' },
     ],
   },

@@ -59,8 +59,6 @@ export default function Projects() {
             <a
               className="project-image"
               href={`./${p.carpeta}/`}
-              target="_blank"
-              rel="noopener noreferrer"
               tabIndex={-1}
               aria-hidden="true"
             >
@@ -77,8 +75,6 @@ export default function Projects() {
               <div className="project-links">
                 <a
                   href={`./${p.carpeta}/`}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="btn btn-primary"
                   aria-label={`Live Demo: ${p.nombre}`}
                 >
