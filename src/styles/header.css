@@ -36,6 +36,7 @@ header {
 }
 
 .header-actions {
+    order: 1; /* en el HTML van antes del menú (orden de tabulación); en pantalla, al final */
     flex-shrink: 0; /* el idioma y el botón de menú nunca se salen de la barra */
     display: flex;
     align-items: center;

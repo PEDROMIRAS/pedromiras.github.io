@@ -27,6 +27,26 @@ body {
 .goog-te-banner-frame, .skiptranslate { display: none !important; }
 body { top: 0 !important; }
 
+/* Quien pide menos movimiento en su sistema: sin scroll animado ni transiciones */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* Texto que solo leen los lectores de pantalla */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
 /* Los controles de formulario no heredan la fuente por defecto: usarían la del sistema */
 button, input, textarea {
     font-family: inherit;

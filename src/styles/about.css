@@ -38,6 +38,7 @@
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--color-text-secondary);
+    text-align: left; /* también en móvil, donde el bloque va centrado */
 }
 .about-text p + p {
     margin-top: 1em;

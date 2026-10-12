@@ -72,6 +72,9 @@ export default function Contact() {
             <button type="button" className="notranslate" translate="no" onClick={copiarEmail}>
               {copiado ? 'Copied!' : 'Copy'}
             </button>
+            <span role="status" className="sr-only">
+              {copiado ? 'Email address copied' : ''}
+            </span>
           </div>
 
           <ul className="contact-social">

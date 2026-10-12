@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const SECCIONES = [
   { id: 'about', nombre: 'About' },
@@ -18,6 +18,7 @@ function limpiarCookiesTraduccion() {
 // botón de idioma (Google Translate) y botón de menú en pantallas estrechas.
 export default function Header() {
   const [abierto, setAbierto] = useState(false);
+  const botonMenu = useRef(null);
   const [activa, setActiva] = useState(null);
   // La etiqueta muestra el idioma actual desde el primer momento, cargue o no el traductor
   const [etiquetaIdioma, setEtiquetaIdioma] = useState(() =>
@@ -73,11 +74,36 @@ export default function Header() {
     window.location.reload();
   };
 
+  // Al cerrar con Escape el foco vuelve al botón: si no, se queda en un enlace que ya no se ve
+  const cerrarConEscape = (e) => {
+    if (e.key !== 'Escape' || !abierto) return;
+    setAbierto(false);
+    botonMenu.current.focus();
+  };
+
   return (
-    <header onKeyDown={(e) => e.key === 'Escape' && setAbierto(false)}>
+    <header onKeyDown={cerrarConEscape}>
       <a href="#home" className="brand notranslate" translate="no" onClick={() => setAbierto(false)}>
         Pedro Miras
       </a>
+
+      <div className="header-actions">
+        <button id="lang-toggle-btn" className="translate-btn" onClick={cambiarIdioma} aria-label={`${etiquetaIdioma}, change language`}>
+          {etiquetaIdioma}
+        </button>
+        <button
+          type="button"
+          ref={botonMenu}
+          className="menu-toggle notranslate"
+          translate="no"
+          aria-label={abierto ? 'Close menu' : 'Open menu'}
+          aria-expanded={abierto}
+          aria-controls="menu"
+          onClick={() => setAbierto(!abierto)}
+        >
+          {abierto ? '✕' : '☰'}
+        </button>
+      </div>
 
       <nav id="menu" className={`menu${abierto ? ' abierto' : ''}`} aria-label="Main Navigation">
         <ul>
@@ -95,23 +121,6 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-
-      <div className="header-actions">
-        <button id="lang-toggle-btn" className="translate-btn" onClick={cambiarIdioma} aria-label="Cambiar idioma">
-          {etiquetaIdioma}
-        </button>
-        <button
-          type="button"
-          className="menu-toggle notranslate"
-          translate="no"
-          aria-label={abierto ? 'Close menu' : 'Open menu'}
-          aria-expanded={abierto}
-          aria-controls="menu"
-          onClick={() => setAbierto(!abierto)}
-        >
-          {abierto ? '✕' : '☰'}
-        </button>
-      </div>
     </header>
   );
 }

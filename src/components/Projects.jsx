@@ -52,7 +52,14 @@ export default function Projects() {
       <div className="projects-container">
         {PROYECTOS.map((p) => (
           <article key={p.nombre} className="project glass-card">
-            <a className="project-image" href={`./${p.carpeta}/`} target="_blank" rel="noopener noreferrer">
+            <a
+              className="project-image"
+              href={`./${p.carpeta}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={-1}
+              aria-hidden="true"
+            >
               <img src={p.imagen.src} alt={p.alt} width={p.imagen.ancho} height={p.imagen.alto} loading="lazy" />
             </a>
             <div className="project-body">
@@ -64,10 +71,22 @@ export default function Projects() {
                 ))}
               </ul>
               <div className="project-links">
-                <a href={`./${p.carpeta}/`} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                <a
+                  href={`./${p.carpeta}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  aria-label={`Live Demo: ${p.nombre}`}
+                >
                   Live Demo
                 </a>
-                <a href={`${REPO}/${p.carpeta}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                <a
+                  href={`${REPO}/${p.carpeta}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline"
+                  aria-label={`Source Code: ${p.nombre}`}
+                >
                   Source Code
                 </a>
               </div>

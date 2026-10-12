@@ -25,6 +25,44 @@
     <meta name="twitter:description" content="Portfolio of Pedro Miras, a Web Developer from Spain working at NTT DATA. Explore his projects, skills and experience.">
     <meta name="twitter:image" content="https://pedromiras.github.io/assets/img/og-image.webp">
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://pedromiras.github.io/#website",
+          "url": "https://pedromiras.github.io/",
+          "name": "Pedro Miras",
+          "inLanguage": "en"
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://pedromiras.github.io/#profilepage",
+          "url": "https://pedromiras.github.io/",
+          "isPartOf": { "@id": "https://pedromiras.github.io/#website" },
+          "mainEntity": { "@id": "https://pedromiras.github.io/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://pedromiras.github.io/#person",
+          "name": "Pedro Miras",
+          "url": "https://pedromiras.github.io/",
+          "image": "https://pedromiras.github.io/assets/img/portfolio-image.webp",
+          "jobTitle": "Web Developer",
+          "worksFor": { "@type": "Organization", "name": "NTT DATA" },
+          "homeLocation": {
+            "@type": "Place",
+            "address": { "@type": "PostalAddress", "addressLocality": "Lorca", "addressRegion": "Murcia", "addressCountry": "ES" }
+          },
+          "alumniOf": { "@type": "EducationalOrganization", "name": "IES Miguel Hernández" },
+          "knowsAbout": ["Java", "Spring Boot", "PHP", "Symfony", "JavaScript", "PL/SQL"],
+          "sameAs": ["https://github.com/PEDROMIRAS", "https://www.linkedin.com/in/pedro-miras/"]
+        }
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Orbitron:wght@700;800;900&display=swap">
