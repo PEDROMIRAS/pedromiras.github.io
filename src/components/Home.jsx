@@ -5,7 +5,10 @@ export default function Home() {
         <h1>
           Hello, I'm <span>Pedro Miras</span>
         </h1>
-        <h2>Web Developer · NTT DATA</h2>
+        <h2>
+          Web Developer<span className="home-sep"> · </span>
+          <span className="home-empresa">NTT DATA</span>
+        </h2>
         <p>I build and maintain web applications, from the database to the interface.</p>
 
         <div className="home-actions">

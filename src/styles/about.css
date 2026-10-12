@@ -5,6 +5,7 @@
 }
 
 .about-content {
+    max-width: 1000px; /* líneas de texto de longitud cómoda en pantallas anchas */
     display: flex;
     gap: 60px;
     align-items: center;

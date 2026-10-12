@@ -18,6 +18,10 @@
         gap: 30px;
     }
     .about-img { width: 250px; height: 250px; }
+    /* En una columna el texto ocupa el ancho disponible: su mínimo de 300px se salía por la derecha
+       en pantallas estrechas. Justificado deja huecos en líneas tan cortas. */
+    .about-text { min-width: 0; width: 100%; }
+    .about-text p { text-align: left; }
     
     .skills-container { grid-template-columns: repeat(2, 1fr); }
     .projects-container { grid-template-columns: 1fr; }
@@ -33,9 +37,13 @@
     
     /* --- AJUSTES DE CONTENIDO --- */
     .home h2 { font-size: 1.8rem; }
+    /* Puesto y empresa en dos líneas limpias, sin el punto colgando */
+    .home-sep { display: none; }
+    .home-empresa { display: block; }
     
     .skills-container { grid-template-columns: 1fr; }
     .project-body, .contact-form { padding: 20px; }
+    .project-links .btn { padding-inline: 10px; } /* que "Source Code" quepa en una línea */
     
 }
 

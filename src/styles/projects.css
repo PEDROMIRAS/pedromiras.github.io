@@ -66,4 +66,8 @@
 
 .project-links a {
     flex: 1;
+    /* texto centrado aunque el otro botón ocupe dos líneas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

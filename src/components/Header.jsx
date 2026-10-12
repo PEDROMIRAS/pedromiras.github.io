@@ -19,7 +19,10 @@ function limpiarCookiesTraduccion() {
 export default function Header() {
   const [abierto, setAbierto] = useState(false);
   const [activa, setActiva] = useState(null);
-  const [etiquetaIdioma, setEtiquetaIdioma] = useState('ES');
+  // La etiqueta muestra el idioma actual desde el primer momento, cargue o no el traductor
+  const [etiquetaIdioma, setEtiquetaIdioma] = useState(() =>
+    localStorage.getItem('userLang') === 'es' ? 'ES' : 'EN'
+  );
 
   // Sección actual: la que cruza la mitad de la pantalla
   useEffect(() => {
