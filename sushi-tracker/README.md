@@ -10,6 +10,7 @@
 
 - **Experiencia Mobile-First & Dark Mode:** UI/UX cuidadosamente diseñada con Tailwind CSS, optimizada para interacciones táctiles y renderizada bajo un tema "Dark Premium".
 - **Gestión de Estado Persistente:** Uso intensivo de `localStorage` para garantizar que las sesiones activas y el historial de consumo sobrevivan a recargas accidentales o cierres del navegador.
+- **Cuenta opcional e historial en la nube:** Con una cuenta (correo y contraseña, con Supabase) el historial se guarda en la nube y se ve en cualquier dispositivo; cada usuario solo puede leer y borrar sus propias sesiones (reglas de acceso por fila). Sin cuenta, o sin conexión, la app sigue funcionando y sube lo pendiente cuando puede.
 - **Modales Customizados:** Reemplazo de las alertas nativas (síncronas y bloqueantes) del navegador por modales construidos desde cero en React, gestionando la superposición de capas (Z-Index) y fondos desenfocados (backdrop-blur).
 
 ## Stack Tecnológico

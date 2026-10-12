@@ -20,6 +20,7 @@ export default function HistoryDrawer({ history, totalSushi, onClose, onDeleteRe
                 <h3 className="text-2xl font-black text-white">Tu Historial</h3>
                 <button
                     onClick={onClose}
+                    aria-label="Cerrar historial"
                     className="text-gray-400 hover:text-white hover:bg-gray-800 w-12 h-12 flex items-center justify-center rounded-full font-bold transition-all cursor-pointer text-xl"
                 >
                     ✕
@@ -43,6 +44,7 @@ export default function HistoryDrawer({ history, totalSushi, onClose, onDeleteRe
                                     </div>
                                     <button
                                         onClick={() => onDeleteRecord(record.id)}
+                                        aria-label={`Borrar la sesión del ${record.date} a las ${record.time}`}
                                         className="text-gray-600 hover:text-red-500 p-2 transition-colors cursor-pointer active:scale-90"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">

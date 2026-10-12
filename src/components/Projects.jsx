@@ -25,8 +25,9 @@ const PROYECTOS = [
   {
     nombre: 'Sushi Tracker',
     descripcion: `A mobile-first counter for sushi nights, with a single-player mode, a two-player duel on a
-      split screen and a history of past sessions. Installable, and it works offline.`,
-    etiquetas: ['React', 'Tailwind CSS', 'PWA', 'UI in Spanish'],
+      split screen and a history of past sessions that an optional account keeps in the cloud.
+      Installable, and it works offline.`,
+    etiquetas: ['React', 'Tailwind CSS', 'Supabase', 'PWA', 'UI in Spanish'],
     carpeta: 'sushi-tracker',
     imagen: { src: './assets/img/sushi-tracker.webp', ancho: 1280, alto: 720 },
     alt: 'Sushi counter application',

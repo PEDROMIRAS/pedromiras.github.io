@@ -58,9 +58,9 @@ export default function MainCounter({
 
                     {/* Controles numéricos inferiores. shrink-0 asegura que siempre mantengan su forma. */}
                     <div className="flex items-center bg-black/50 rounded-full border border-gray-800 p-1 shrink-0">
-                        <motion.button onClick={() => onUpdateSushi2(-1)} disabled={player2Count === 0} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-gray-600 hover:text-white rounded-full disabled:opacity-30 cursor-pointer active:scale-95">-</motion.button>
+                        <motion.button onClick={() => onUpdateSushi2(-1)} disabled={player2Count === 0} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-gray-600 hover:text-white rounded-full disabled:opacity-30 cursor-pointer active:scale-95" aria-label="Quitar una pieza">-</motion.button>
                         <span className="px-4 text-gray-600 font-bold uppercase tracking-widest text-[10px]">Piezas</span>
-                        <motion.button onClick={() => onUpdateSushi2(1)} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-blue-500 hover:text-blue-400 rounded-full cursor-pointer active:scale-95">+</motion.button>
+                        <motion.button onClick={() => onUpdateSushi2(1)} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-blue-500 hover:text-blue-400 rounded-full cursor-pointer active:scale-95" aria-label="Añadir una pieza">+</motion.button>
                     </div>
                 </div>
 
@@ -104,9 +104,9 @@ export default function MainCounter({
 
                     {/* Controles numéricos inferiores. */}
                     <div className="flex items-center bg-gray-900 rounded-full border border-gray-800 p-1 shrink-0">
-                        <motion.button onClick={() => onUpdateSushi(-1)} disabled={currentCount === 0} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-gray-500 hover:text-white rounded-full disabled:opacity-30 cursor-pointer active:scale-95">-</motion.button>
+                        <motion.button onClick={() => onUpdateSushi(-1)} disabled={currentCount === 0} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-gray-500 hover:text-white rounded-full disabled:opacity-30 cursor-pointer active:scale-95" aria-label="Quitar una pieza">-</motion.button>
                         <span className="px-4 text-gray-500 font-bold uppercase tracking-widest text-[10px]">Piezas</span>
-                        <motion.button onClick={() => onUpdateSushi(1)} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-purple-500 hover:text-purple-400 rounded-full cursor-pointer active:scale-95">+</motion.button>
+                        <motion.button onClick={() => onUpdateSushi(1)} className="w-12 h-12 flex items-center justify-center text-3xl font-black text-purple-500 hover:text-purple-400 rounded-full cursor-pointer active:scale-95" aria-label="Añadir una pieza">+</motion.button>
                     </div>
                 </div>
 
@@ -135,9 +135,9 @@ export default function MainCounter({
                 style={{ WebkitTapHighlightColor: 'transparent' }}
             />
             <div className="mt-12 flex items-center bg-gray-900 rounded-full border border-gray-800 p-1 shadow-inner">
-                <motion.button onClick={() => onUpdateSushi(-1)} disabled={currentCount === 0} className="w-14 h-14 flex items-center justify-center text-3xl font-black text-gray-400 hover:text-white hover:bg-gray-800 rounded-full disabled:opacity-30 transition-all active:scale-95 cursor-pointer">-</motion.button>
+                <motion.button onClick={() => onUpdateSushi(-1)} disabled={currentCount === 0} className="w-14 h-14 flex items-center justify-center text-3xl font-black text-gray-400 hover:text-white hover:bg-gray-800 rounded-full disabled:opacity-30 transition-all active:scale-95 cursor-pointer" aria-label="Quitar una pieza">-</motion.button>
                 <span className="px-6 text-gray-400 font-bold uppercase tracking-widest text-xs">Piezas</span>
-                <motion.button onClick={() => onUpdateSushi(1)} className="w-14 h-14 flex items-center justify-center text-3xl font-black text-purple-500 hover:text-purple-400 hover:bg-gray-800 rounded-full transition-all active:scale-95 cursor-pointer">+</motion.button>
+                <motion.button onClick={() => onUpdateSushi(1)} className="w-14 h-14 flex items-center justify-center text-3xl font-black text-purple-500 hover:text-purple-400 hover:bg-gray-800 rounded-full transition-all active:scale-95 cursor-pointer" aria-label="Añadir una pieza">+</motion.button>
             </div>
             {currentCount > 0 && (
                 <motion.button

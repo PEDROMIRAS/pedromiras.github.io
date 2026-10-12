@@ -6,7 +6,7 @@ import Header from './Header';
 import MainCounter from './MainCounter';
 import HistoryDrawer from './HistoryDrawer';
 import SettingsView from './SettingsView';
-import { supabase } from '../supabase';
+import { supabase, vieneDeRecuperar } from '../supabase';
 import { aFila, aRegistro } from '../historialNube';
 
 const leerLocales = () => JSON.parse(localStorage.getItem('sushiHistory')) || [];
@@ -40,7 +40,9 @@ export default function SushiCounter() {
     /* -------------------------------------------------------------------------- */
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    // Desde el correo de "he olvidado la contraseña" se abre Ajustes, que es donde se pone la nueva
+    const [recuperando, setRecuperando] = useState(vieneDeRecuperar);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(vieneDeRecuperar);
 
     /* -------------------------------------------------------------------------- */
     /* EFECTOS                                      */
@@ -90,8 +92,11 @@ export default function SushiCounter() {
 
     const idUsuario = usuario?.id;
     useEffect(() => {
-        if (idUsuario) sincronizar();
-        else setNube([]);
+        if (!idUsuario) return setNube([]);
+        sincronizar();
+        // Lo que se guardó sin conexión se sube al recuperarla
+        window.addEventListener('online', sincronizar);
+        return () => window.removeEventListener('online', sincronizar);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [idUsuario]);
 
@@ -218,6 +223,9 @@ export default function SushiCounter() {
                                 <SettingsView
                                     playerName={playerName}
                                     usuario={usuario}
+                                    pendientes={locales.length}
+                                    recuperando={recuperando}
+                                    onRecuperada={() => setRecuperando(false)}
                                     onUpdateName={setPlayerName}
                                     onClearHistory={confirmClearHistory}
                                     onClose={() => setIsSettingsOpen(false)}
@@ -246,8 +254,9 @@ export default function SushiCounter() {
 
                                                 <div className="w-full max-w-sm space-y-4">
                                                     <div>
-                                                        <label className="text-xs font-bold text-gray-500 uppercase mb-2 block">Jugador Principal</label>
+                                                        <label htmlFor="jugador" className="text-xs font-bold text-gray-500 uppercase mb-2 block">Jugador Principal</label>
                                                         <input
+                                                            id="jugador"
                                                             value={playerName}
                                                             onChange={e => setPlayerName(e.target.value)}
                                                             className="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-white focus:border-purple-500 outline-none"
@@ -258,6 +267,9 @@ export default function SushiCounter() {
                                                         <div className="flex justify-between items-center">
                                                             <span className="text-sm font-bold text-gray-300">MODO DUELO</span>
                                                             <button
+                                                                role="switch"
+                                                                aria-checked={isMultiplayer}
+                                                                aria-label="Modo duelo"
                                                                 onClick={() => setIsMultiplayer(!isMultiplayer)}
                                                                 className={`w-12 h-6 rounded-full p-1 transition-colors ${isMultiplayer ? 'bg-blue-600' : 'bg-gray-700'}`}
                                                             >
@@ -267,8 +279,9 @@ export default function SushiCounter() {
 
                                                         {isMultiplayer && (
                                                             <div className="mt-4 pt-4 border-t border-gray-800">
-                                                                <label className="text-xs font-bold text-blue-500 uppercase mb-2 block">Rival</label>
+                                                                <label htmlFor="rival" className="text-xs font-bold text-blue-500 uppercase mb-2 block">Rival</label>
                                                                 <input
+                                                                    id="rival"
                                                                     value={player2Name}
                                                                     onChange={e => setPlayer2Name(e.target.value)}
                                                                     className="w-full bg-gray-900 border border-blue-900/30 rounded-xl p-3 text-white focus:border-blue-500 outline-none"
