@@ -27,6 +27,7 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
     const [clave, setClave] = useState('');
     const [ocupado, setOcupado] = useState(false);
     const [mensaje, setMensaje] = useState('');
+    const [confirmando, setConfirmando] = useState(false);
 
     /** Lanza una petición de la cuenta y deja en pantalla el error o el mensaje de que ha ido bien. */
     const pedir = async (peticion, siVaBien) => {
@@ -66,6 +67,13 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
         });
     };
 
+    // La función de la base de datos borra al usuario que la llama, y con él sus sesiones
+    const borrarCuenta = () => pedir(() => supabase.rpc('delete_own_account'), () => {
+        setConfirmando(false);
+        supabase.auth.signOut({ scope: 'local' });
+        return 'Cuenta borrada.';
+    });
+
     if (usuario && recuperando) {
         return (
             <form onSubmit={cambiarClave} className="flex flex-col gap-3">
@@ -90,6 +98,17 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
                     </p>
                 )}
                 <button onClick={() => supabase.auth.signOut()} className={`w-full bg-gray-800 hover:bg-gray-700 ${BOTON}`}>Cerrar sesión</button>
+                {confirmando ? (
+                    <div className="flex flex-col gap-3 border border-red-900/50 rounded-xl p-4">
+                        <p className="text-sm text-gray-300">Se borrarán tu cuenta y el historial guardado en ella. No se puede deshacer.</p>
+                        <div className="flex gap-3">
+                            <button onClick={() => setConfirmando(false)} className={`flex-1 bg-gray-800 hover:bg-gray-700 ${BOTON}`}>Cancelar</button>
+                            <button disabled={ocupado} onClick={borrarCuenta} className={`flex-1 bg-red-600 hover:bg-red-500 ${BOTON}`}>Borrar</button>
+                        </div>
+                    </div>
+                ) : (
+                    <button onClick={() => setConfirmando(true)} className="self-start text-sm text-red-400 hover:text-red-300 underline cursor-pointer">Borrar mi cuenta</button>
+                )}
                 <p role="status" className="text-sm text-gray-300 min-h-5">{mensaje}</p>
             </div>
         );
