@@ -120,3 +120,15 @@ body{
     color: white;
     cursor: pointer;
 }
+
+.volver-portfolio {
+    position: fixed;
+    top: 12px;
+    left: 16px;
+    color: #bbb;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.volver-portfolio:hover {
+    color: #fff;
+}

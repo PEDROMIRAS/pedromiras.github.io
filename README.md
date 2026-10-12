@@ -46,7 +46,7 @@ Projects section — the same pattern the site already used for Ramo de flores a
   src/
     components/          # Header, Home, About, Experience, Skills, Projects, Contact, Footer
     styles/              # One .css file per section (same design as before)
-  public/assets/          # Images and audio
+  public/assets/          # Images
 
 /ramo-flores-amarillas/  # "Ramo de flores": a random bouquet of flowers, in the color you choose (React + Vite)
 /todoApp/                # "TODO APP": task list with filters and localStorage (React + Vite)

@@ -17,13 +17,12 @@ export default function About() {
             ABOUT ME
           </h2>
           <p>
-            I’m Pedro Miras, a {edad()}-year-old Web Developer from Lorca, Spain. I currently work at NTT DATA as
-            a Rising Software Engineer in the logistics industry area, where I’m part of a customer technology team
-            that maintains and improves the software behind a parcel delivery service.
+            I’m Pedro Miras, a {edad()}-year-old Web Developer from Lorca, Spain. I enjoy building software that is
+            simple to use and easy to maintain, from the database to what people see on screen.
           </p>
           <p>
-            I graduated in Web Application Development and enjoy building efficient, user-friendly solutions. I’m
-            always keen to learn new technologies, solve real problems and keep growing as a developer.
+            I’m curious by nature and always keen to learn new technologies and solve real problems. Away from the
+            keyboard, you’ll probably find me riding my motorbike.
           </p>
         </div>
       </div>

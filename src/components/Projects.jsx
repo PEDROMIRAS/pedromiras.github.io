@@ -10,7 +10,7 @@ const PROYECTOS = [
       is drawn at random as an SVG, so no two are alike. Installable, and it works offline.`,
     etiquetas: ['React', 'SVG', 'PWA'],
     carpeta: 'ramo-flores-amarillas',
-    imagen: { src: './assets/img/ramo-flores.png', ancho: 2226, alto: 1464 },
+    imagen: { src: './assets/img/ramo-flores.png', ancho: 1280, alto: 720 },
     alt: 'Bouquet of flowers in every color',
   },
   {
@@ -19,7 +19,7 @@ const PROYECTOS = [
       Everything is saved in the browser.`,
     etiquetas: ['React', 'localStorage'],
     carpeta: 'todoApp',
-    imagen: { src: './assets/img/todoApp.png.png', ancho: 1483, alto: 778 },
+    imagen: { src: './assets/img/todo-app.png', ancho: 1280, alto: 720 },
     alt: 'Task list application',
   },
   {
@@ -28,7 +28,7 @@ const PROYECTOS = [
       split screen and a history of past sessions. Installable, and it works offline.`,
     etiquetas: ['React', 'Tailwind CSS', 'PWA'],
     carpeta: 'sushi-tracker',
-    imagen: { src: './assets/img/sushi-tracker.png', ancho: 2940, alto: 1646 },
+    imagen: { src: './assets/img/sushi-tracker.png', ancho: 1280, alto: 720 },
     alt: 'Sushi counter application',
   },
   {
@@ -37,7 +37,7 @@ const PROYECTOS = [
       cross the edges of the board. It keeps your score and your best result.`,
     etiquetas: ['React', 'JavaScript'],
     carpeta: 'snake',
-    imagen: { src: './assets/img/snake.png', ancho: 1400, alto: 824 },
+    imagen: { src: './assets/img/snake.png', ancho: 1280, alto: 720 },
     alt: 'Snake game board',
   },
 ];

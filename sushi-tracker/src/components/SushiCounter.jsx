@@ -229,6 +229,10 @@ export default function SushiCounter() {
                                                     >
                                                         ¡A Comer!
                                                     </button>
+
+                                                    <a href="../" className="block text-center text-sm text-gray-500 hover:text-white pt-2">
+                                                        ← Portfolio
+                                                    </a>
                                                 </div>
                                             </div>
                                         ) : (

@@ -51,6 +51,9 @@ export default function App() {
 
   return (
     <div className="container">
+      <a href="../" className="volver-portfolio">
+        ← Portfolio
+      </a>
       <h1>Lista de Tareas</h1>
 
       <div className="input-container">

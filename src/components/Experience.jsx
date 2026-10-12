@@ -9,8 +9,9 @@ const ETAPAS = [
     etiquetas: ['Spring Boot', 'PL/SQL', 'Talend', 'Jira'],
   },
   {
-    periodo: 'Education',
+    periodo: 'Education · 2 years',
     titulo: 'Higher Degree in Web Application Development',
+    lugar: 'IES Miguel Hernández · Alhama de Murcia',
     descripcion:
       'Front-end and back-end web development: HTML, CSS, JavaScript, PHP, Java and relational databases.',
   },

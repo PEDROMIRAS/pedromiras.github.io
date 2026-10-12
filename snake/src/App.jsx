@@ -81,6 +81,9 @@ export default function App() {
 
   return (
     <div className="juego">
+      <a href="../" className="volver-portfolio">
+        ← Portfolio
+      </a>
       <p className="marcador">
         Score: {puntos} · Best: {Math.max(record, puntos)}
       </p>
