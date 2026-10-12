@@ -18,10 +18,8 @@
         gap: 30px;
     }
     .about-img { width: 250px; height: 250px; }
-    /* En una columna el texto ocupa el ancho disponible: su mínimo de 300px se salía por la derecha
-       en pantallas estrechas. Justificado deja huecos en líneas tan cortas. */
+    /* En una columna el texto ocupa el ancho disponible: su mínimo de 300px se salía por la derecha */
     .about-text { min-width: 0; width: 100%; }
-    .about-text p { text-align: left; }
     
     .skills-container { grid-template-columns: repeat(2, 1fr); }
     .projects-container { grid-template-columns: 1fr; }
@@ -68,7 +66,7 @@
         left: 0;
         right: 0;
         padding: 10px;
-        background-color: rgba(10, 10, 10, 0.95);
+        background-color: #0a0a0a;
         border: 1px solid var(--color-border);
         border-radius: var(--radius);
     }

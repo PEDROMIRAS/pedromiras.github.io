@@ -27,6 +27,11 @@ body {
 .goog-te-banner-frame, .skiptranslate { display: none !important; }
 body { top: 0 !important; }
 
+/* Los controles de formulario no heredan la fuente por defecto: usarían la del sistema */
+button, input, textarea {
+    font-family: inherit;
+}
+
 /* Tipografía */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
@@ -71,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    color: var(--color-primary);
+    color: var(--color-primary-light);
     margin-bottom: 50px;
     text-transform: uppercase;
 }
@@ -150,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
    (el formulario de contacto ya tiene el suyo propio, más abajo, y tiene prioridad) */
 a:focus-visible,
 button:focus-visible {
-    outline: 3px solid var(--color-primary);
+    outline: 3px solid var(--color-primary-light);
     outline-offset: 3px;
     border-radius: 4px;
 }

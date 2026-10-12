@@ -1,6 +1,4 @@
-/* IMPORTAR FUENTES */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&display=swap');
+/* Las fuentes (Roboto y Orbitron) se cargan desde index.html */
 /* VARIABLES GLOBALES */
 
 :root {
@@ -32,6 +30,7 @@
 /* --- Colores principales / detalles --- */
 --color-primary: #8e44ad;         /* Violeta / púrpura principal */
 --color-primary-dark: #6f2d91;    /* Violeta oscuro para hover */
+--color-primary-light: #a569bd;   /* Violeta claro: títulos y foco, con contraste suficiente sobre los fondos oscuros */
 
 /* --- Texto --- */
 --color-text-light: #ffffff;      /* Texto principal claro */

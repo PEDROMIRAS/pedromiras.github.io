@@ -109,7 +109,7 @@
     width: 100%;
     padding: 15px;
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.45); /* visible sobre la tarjeta */
     border-radius: 8px;
     color: white;
     font-family: var(--font-primary);
@@ -118,10 +118,10 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
+    outline: 3px solid var(--color-primary-light);
+    outline-offset: 2px;
+    border-color: var(--color-primary-light);
     background-color: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 0 4px rgba(142, 68, 173, 0.35);
 }
 
 textarea { min-height: 180px; resize: vertical; }

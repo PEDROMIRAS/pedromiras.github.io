@@ -37,6 +37,8 @@ export default function Header() {
   useEffect(() => {
     limpiarCookiesTraduccion();
     const idiomaGuardado = localStorage.getItem('userLang') || 'en';
+    // La página ya está en inglés: sin esto, cada visita descargaba el traductor para no usarlo
+    if (idiomaGuardado !== 'es') return;
 
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(

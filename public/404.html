@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Page not found - Pedro Miras</title>
+    <!-- Página estática: GitHub Pages la sirve para cualquier ruta que no exista, a cualquier profundidad.
+         Por eso los enlaces son absolutos y los estilos van aquí dentro, sin depender del build de React.
+         shortcut: asume el sitio en la raíz del dominio (pedromiras.github.io); si se publica en una subcarpeta, cambiar "/" -->
+    <link rel="shortcut icon" href="/assets/img/moto.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0a0a0a, #1a051a);
+        }
+
+        .codigo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: clamp(5rem, 22vw, 10rem);
+            line-height: 1;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-shadow:
+                1px 1px 0 #8e44ad,
+                2px 2px 0 #8e44ad,
+                3px 3px 0 #6f2d91,
+                4px 4px 0 #6f2d91,
+                5px 5px 0 #4a1c61,
+                6px 6px 0 #4a1c61,
+                8px 8px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            letter-spacing: 2px;
+            color: #bbbbbb;
+        }
+
+        p {
+            max-width: 480px;
+            line-height: 1.8;
+            color: #bbbbbb;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background-color: #6f2d91;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #8e44ad;
+            box-shadow: 0 0 15px #6f2d91;
+        }
+
+        a:focus-visible {
+            outline: 3px solid #8e44ad;
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body>
+    <p class="codigo" aria-hidden="true">404</p>
+    <h1>Page not found</h1>
+    <p>The page you are looking for doesn’t exist or has been moved.</p>
+    <a href="/">Back to the portfolio</a>
+</body>
+</html>
