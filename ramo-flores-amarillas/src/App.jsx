@@ -96,7 +96,7 @@ export default function App() {
         <>
           {/* Instalada como app no hay portfolio al que volver: el enlace saldría de la app */}
           {!enModoApp() && (
-            <a href="../" className="volver">
+            <a href="../#projects" className="volver">
               ← Portfolio
             </a>
           )}

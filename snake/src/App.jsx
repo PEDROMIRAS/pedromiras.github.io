@@ -81,7 +81,7 @@ export default function App() {
 
   return (
     <div className="juego">
-      <a href="../" className="volver-portfolio">
+      <a href="../#projects" className="volver-portfolio">
         ← Portfolio
       </a>
       <p className="marcador">

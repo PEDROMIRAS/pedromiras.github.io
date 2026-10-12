@@ -60,7 +60,7 @@ Projects section — the same pattern the site already used for Ramo de flores a
   (se mostraban a un tamaño pequeño con un archivo gigante detrás); convertidas a WebP y redimensionadas
   a su tamaño real de uso. En total, unos 9 MB menos que descargar.
 - **SEO**: `robots.txt`, `sitemap.xml` (con los 4 proyectos incluidos), URL canónica, y etiquetas Open
-  Graph / Twitter Card con una imagen propia (`public/assets/img/og-image.webp`) para que el enlace se
+  Graph / Twitter Card con una imagen propia (`public/assets/img/og-image.png`) para que el enlace se
   vea bien al compartirlo en LinkedIn, WhatsApp, etc.
 - **Accesibilidad**: todos los enlaces y botones tienen ahora un foco de teclado visible (antes solo lo
   tenía el formulario de contacto); contrastes de color comprobados con la fórmula WCAG — el sitio ya

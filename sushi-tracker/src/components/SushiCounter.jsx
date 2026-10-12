@@ -230,14 +230,18 @@ export default function SushiCounter() {
                                                         ¡A Comer!
                                                     </button>
 
-                                                    <a href="../" className="block text-center text-sm text-gray-500 hover:text-white pt-2">
+                                                    <a href="../#projects" className="block text-center text-sm text-gray-500 hover:text-white pt-2">
                                                         ← Portfolio
                                                     </a>
                                                 </div>
                                             </div>
                                         ) : (
                                             /* SUBVISTA 3.2: CONTADOR ACTIVO */
-                                            <div className="flex-1 flex flex-col h-full overflow-hidden">
+                                            <div className="relative flex-1 flex flex-col h-full overflow-hidden">
+                                                {/* Sin cabecera durante la sesión: el enlace va en la esquina libre (la cuenta queda guardada) */}
+                                                <a href="../#projects" className="absolute top-3 left-4 z-10 text-xs text-gray-500 hover:text-white">
+                                                    ← Portfolio
+                                                </a>
                                                 <MainCounter
                                                     currentCount={currentCount}
                                                     onUpdateSushi={handleUpdateSushi}
