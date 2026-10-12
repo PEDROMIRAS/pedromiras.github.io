@@ -52,10 +52,7 @@ function App() {
         {!playerName ? (
           <Onboarding onSaveName={handleSaveName} />
         ) : (
-          <SushiCounter 
-            playerName={playerName} 
-            onUpdateName={handleSaveName} 
-          /> 
+          <SushiCounter /> 
         )}
 
       </div>

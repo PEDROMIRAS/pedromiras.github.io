@@ -11,7 +11,6 @@
 - **Experiencia Mobile-First & Dark Mode:** UI/UX cuidadosamente diseñada con Tailwind CSS, optimizada para interacciones táctiles y renderizada bajo un tema "Dark Premium".
 - **Gestión de Estado Persistente:** Uso intensivo de `localStorage` para garantizar que las sesiones activas y el historial de consumo sobrevivan a recargas accidentales o cierres del navegador.
 - **Modales Customizados:** Reemplazo de las alertas nativas (síncronas y bloqueantes) del navegador por modales construidos desde cero en React, gestionando la superposición de capas (Z-Index) y fondos desenfocados (backdrop-blur).
-- **APIs Nativas Web:** Integración de la `Web Share API` del navegador para permitir a los usuarios compartir sus estadísticas de consumo directamente en sus redes sociales o aplicaciones de mensajería.
 
 ## Stack Tecnológico
 

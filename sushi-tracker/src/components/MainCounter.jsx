@@ -2,8 +2,8 @@
 
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import niguiriImage from '../assets/images/niguiri.png';
-import niguiriImage1 from '../assets/images/niguiri1.png';
+import niguiriImage from '../assets/images/niguiri.webp';
+import niguiriImage1 from '../assets/images/niguiri1.webp';
 
 /**
  * Componente responsable de la vista del contador activo.

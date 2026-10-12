@@ -1,14 +1,30 @@
+:root {
+    /* Tamaño de una celda: 20px, o menos si el tablero (30 celdas) no cabe en la pantalla */
+    --celda: min(20px, (100vw - 30px) / 30, (100dvh - 110px) / 30);
+}
 body{
     background-color: #222;
+    color: #eee;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Deslizar el dedo mueve la serpiente, no la página */
+    touch-action: none;
+}
+.marcador {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
 }
 #game-container {
-    width: 600px;
-    height: 600px;
+    width: calc(var(--celda) * 30);
+    height: calc(var(--celda) * 30);
     position: relative;
-    margin: 20px auto;
+    margin: 10px auto;
     border: 5px solid #555;
     overflow: hidden; 
 
@@ -20,15 +36,15 @@ body{
         #2a2a2a 180deg 270deg, 
         transparent 270deg
     );
-    /* El tamaño debe ser el doble del gridSize (20px * 2 = 40px) */
-    background-size: 40px 40px; 
+    /* El tamaño debe ser el doble de una celda */
+    background-size: calc(var(--celda) * 2) calc(var(--celda) * 2);
 }
 
 .snake-head {
-    width: 20px;
-    height: 20px;
+    width: var(--celda);
+    height: var(--celda);
     position: absolute;
-    background-image: url('/img/head.png'); 
+    background-image: url('/img/head.webp'); 
     /* Aumentamos el tamaño al 350% para que la cara llene el cuadro de 20px */
     background-size: 350%; 
     background-position: center;
@@ -39,10 +55,10 @@ body{
 }
 
 .snake-body {
-    width: 20px;
-    height: 20px;
+    width: var(--celda);
+    height: var(--celda);
     position: absolute;
-    background-image: url('/img/body.png'); 
+    background-image: url('/img/body.webp'); 
     /* También hacemos zoom al cuerpo para que las escamas se vean grandes */
     background-size: 250%; 
     background-position: center;
@@ -50,27 +66,57 @@ body{
 }
 
 .snake-tail {
-    width: 20px;
-    height: 20px;
+    width: var(--celda);
+    height: var(--celda);
     position: absolute;
-    background-image: url('/img/tail.png'); 
-    /* Usamos 350% para compensar el margen gris de tus imágenes JPG/PNG */
-    background-size: 350%; 
+    /* Sin imagen propia: las mismas escamas del cuerpo, recortadas en punta */
+    background-image: url('/img/body.webp'); 
+    background-size: 250%; 
     background-position: center;
-    background-repeat: no-repeat;
-    z-index: 5;
-    /* Evita que el pixel-art se vea borroso al escalar */
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
     image-rendering: pixelated; 
-    /* Añade una pequeña transición para que el giro no sea tan brusco */
-    transition: transform 0.05s linear;
 }
 
 .fruit {
-    width: 20px;
-    height: 20px;
+    width: var(--celda);
+    height: var(--celda);
     background-color: red;
     position: absolute;
     border-radius: 50%;
     /* Efecto de brillo para la fruta */
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.ayuda {
+    position: absolute;
+    bottom: 8%;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.fin {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.fin h2, .fin p {
+    margin: 0;
+}
+.fin button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
 }

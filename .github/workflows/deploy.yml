@@ -21,9 +21,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # cache: npm reutiliza los paquetes ya descargados entre ejecuciones (en vez de bajarlos
+      # de npm otra vez en cada push), usando los 5 package-lock.json para saber cuándo invalidarla
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            ramo-flores-amarillas/package-lock.json
+            todoApp/package-lock.json
+            snake/package-lock.json
+            sushi-tracker/package-lock.json
 
       # Si este repo se llama "usuario.github.io" se publica en la raíz del dominio;
       # cualquier otro nombre (por ejemplo, un repo de prueba) se publica en

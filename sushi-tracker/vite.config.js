@@ -17,7 +17,7 @@ export default defineConfig(({ command }) => {
         registerType: 'autoUpdate',
         injectRegister: 'auto',
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
           cleanupOutdatedCaches: true,
           // Límite de 5MB para que acepte tus niguiris en alta definición
           maximumFileSizeToCacheInBytes: 5000000

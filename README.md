@@ -56,6 +56,22 @@ Projects section — the same pattern the site already used for Ramo de flores a
 /.github/workflows/deploy.yml   # Builds all 5 apps and publishes them together to GitHub Pages
 ```
 
+## ✅ Rendimiento, SEO y accesibilidad
+
+- **Imágenes optimizadas**: las de Sushi Tracker, Snake y la foto de About pesaban varios MB cada una
+  (se mostraban a un tamaño pequeño con un archivo gigante detrás); convertidas a WebP y redimensionadas
+  a su tamaño real de uso. En total, unos 9 MB menos que descargar.
+- **SEO**: `robots.txt`, `sitemap.xml` (con los 4 proyectos incluidos), URL canónica, y etiquetas Open
+  Graph / Twitter Card con una imagen propia (`public/assets/img/og-image.webp`) para que el enlace se
+  vea bien al compartirlo en LinkedIn, WhatsApp, etc.
+- **Accesibilidad**: todos los enlaces y botones tienen ahora un foco de teclado visible (antes solo lo
+  tenía el formulario de contacto); contrastes de color comprobados con la fórmula WCAG — el sitio ya
+  cumplía el mínimo en los sitios que importan.
+- **CI más rápido**: el *workflow* cachea las dependencias de npm entre ejecuciones.
+- **Una vulnerabilidad real** (en una dependencia de producción de Sushi Tracker) corregida; las que
+  quedan son de una herramienta que solo corre al compilar, nunca llega al navegador de quien visita
+  la web.
+
 ## 🖥️ Verlo en local: dos formas distintas
 
 **A. Trabajar en el diseño de un proyecto concreto** — `npm run dev` en la carpeta de ese proyecto. Esto

@@ -1,112 +1,118 @@
 import { useEffect, useRef, useState } from 'react';
+import { CELDAS, DIRECCIONES, avanzar, estadoInicial, girar } from './juego.js';
 
-const TAMANO_CELDA = 20;
-const TAMANO_TABLERO = 600; // debe coincidir con el ancho/alto de #game-container (styles.css)
+const celdas = (n) => `calc(var(--celda) * ${n})`;
 
-// Estado del juego (misma lógica que snake/js/snake.js): vive en un ref porque
-// cambia en cada "tick" del intervalo, no en cada render de React.
+// Giro de la cola para que su lado ancho mire al segmento anterior (0 = el anterior está arriba).
+// El módulo cubre el caso en que la serpiente está cruzando un borde.
+function giroCola(cola, anterior) {
+  const mx = (anterior.x - cola.x + CELDAS) % CELDAS;
+  const my = (anterior.y - cola.y + CELDAS) % CELDAS;
+  if (mx === 1) return 90;
+  if (mx === CELDAS - 1) return 270;
+  return my === 1 ? 180 : 0;
+}
+
+// Estado del juego: vive en un ref porque cambia en cada "tick" del intervalo,
+// no en cada render de React.
 export default function App() {
-  const estado = useRef({
-    snake: [{ x: 200, y: 200 }],
-    food: { x: 0, y: 0 },
-    dx: 0,
-    dy: 0,
-    rotacion: 0, // 0 = la imagen mira hacia abajo, igual que el original
-  });
+  const estado = useRef(null);
+  estado.current ??= estadoInicial();
   const [, forzarRedibujo] = useState(0);
+  const [fin, setFin] = useState(false);
+  const [record, setRecord] = useState(() => Number(localStorage.getItem('snakeRecord')) || 0);
 
-  const generarFruta = () => {
-    estado.current.food = {
-      x: Math.floor(Math.random() * (TAMANO_TABLERO / TAMANO_CELDA)) * TAMANO_CELDA,
-      y: Math.floor(Math.random() * (TAMANO_TABLERO / TAMANO_CELDA)) * TAMANO_CELDA,
-    };
-  };
-
-  // Bucle del juego: 10 fotogramas por segundo, igual que el setInterval original
   useEffect(() => {
-    generarFruta();
-    forzarRedibujo((n) => n + 1);
+    localStorage.setItem('snakeRecord', record);
+  }, [record]);
 
+  // Bucle del juego: 10 fotogramas por segundo, parado mientras se muestra el Game Over
+  useEffect(() => {
+    if (fin) return;
     const intervalo = setInterval(() => {
       const e = estado.current;
-      const cabezaActual = e.snake[0];
-
-      const chocaConsigoMisma = e.snake.slice(1).some((p) => p.x === cabezaActual.x && p.y === cabezaActual.y);
-      if (chocaConsigoMisma) {
-        clearInterval(intervalo);
-        alert('Game Over!');
-        window.location.reload();
-        return;
+      if (!avanzar(e)) {
+        setRecord((r) => Math.max(r, e.snake.length - 1));
+        setFin(true);
       }
-
-      // Mover la cabeza, atravesando los bordes del tablero (wrapping)
-      let siguienteX = cabezaActual.x + e.dx;
-      let siguienteY = cabezaActual.y + e.dy;
-      if (siguienteX < 0) siguienteX = TAMANO_TABLERO - TAMANO_CELDA;
-      else if (siguienteX >= TAMANO_TABLERO) siguienteX = 0;
-      if (siguienteY < 0) siguienteY = TAMANO_TABLERO - TAMANO_CELDA;
-      else if (siguienteY >= TAMANO_TABLERO) siguienteY = 0;
-
-      const nuevaCabeza = { x: siguienteX, y: siguienteY };
-      e.snake = [nuevaCabeza, ...e.snake];
-
-      if (nuevaCabeza.x === e.food.x && nuevaCabeza.y === e.food.y) {
-        generarFruta(); // ha comido: no quitamos la cola, la serpiente crece
-      } else {
-        e.snake.pop();
-      }
-
       forzarRedibujo((n) => n + 1);
     }, 100);
-
     return () => clearInterval(intervalo);
-  }, []);
+  }, [fin]);
 
-  // Controles: flechas del teclado, sin permitir girar 180° sobre sí misma
+  // Controles: flechas del teclado o deslizar el dedo por la pantalla
   useEffect(() => {
+    let inicio = null;
     const alPulsarTecla = (ev) => {
-      const e = estado.current;
-      if (ev.key === 'ArrowUp' && e.dy === 0) {
-        e.dx = 0;
-        e.dy = -TAMANO_CELDA;
-        e.rotacion = 180;
-      }
-      if (ev.key === 'ArrowDown' && e.dy === 0) {
-        e.dx = 0;
-        e.dy = TAMANO_CELDA;
-        e.rotacion = 0;
-      }
-      if (ev.key === 'ArrowLeft' && e.dx === 0) {
-        e.dx = -TAMANO_CELDA;
-        e.dy = 0;
-        e.rotacion = 90;
-      }
-      if (ev.key === 'ArrowRight' && e.dx === 0) {
-        e.dx = TAMANO_CELDA;
-        e.dy = 0;
-        e.rotacion = 270;
-      }
+      const d = DIRECCIONES[ev.key];
+      if (!d) return;
+      ev.preventDefault(); // que las flechas no muevan la página
+      girar(estado.current, d);
+    };
+    const alTocar = (ev) => (inicio = { x: ev.clientX, y: ev.clientY });
+    const alSoltar = (ev) => {
+      if (!inicio) return;
+      const mx = ev.clientX - inicio.x;
+      const my = ev.clientY - inicio.y;
+      inicio = null;
+      if (Math.max(Math.abs(mx), Math.abs(my)) < 20) return; // un toque, no un deslizamiento
+      const tecla = Math.abs(mx) > Math.abs(my) ? (mx > 0 ? 'ArrowRight' : 'ArrowLeft') : my > 0 ? 'ArrowDown' : 'ArrowUp';
+      girar(estado.current, DIRECCIONES[tecla]);
     };
     window.addEventListener('keydown', alPulsarTecla);
-    return () => window.removeEventListener('keydown', alPulsarTecla);
+    window.addEventListener('pointerdown', alTocar);
+    window.addEventListener('pointerup', alSoltar);
+    return () => {
+      window.removeEventListener('keydown', alPulsarTecla);
+      window.removeEventListener('pointerdown', alTocar);
+      window.removeEventListener('pointerup', alSoltar);
+    };
   }, []);
 
-  const { snake, food, rotacion } = estado.current;
+  const reiniciar = () => {
+    estado.current = estadoInicial();
+    setFin(false);
+  };
+
+  const { snake, food, rotacion, dx, dy, siguiente } = estado.current;
+  const puntos = snake.length - 1;
+  const ultimo = snake.length - 1;
+  const parado = dx === 0 && dy === 0 && !siguiente;
 
   return (
-    <div id="game-container">
-      {snake.map((segmento, indice) => (
-        <div
-          key={indice}
-          className={indice === 0 ? 'snake-head' : 'snake-body'}
-          style={{
-            left: `${segmento.x}px`,
-            top: `${segmento.y}px`,
-            transform: indice === 0 ? `rotate(${rotacion}deg)` : undefined,
-          }}
-        />
-      ))}
-      <div className="fruit" style={{ left: `${food.x}px`, top: `${food.y}px` }} />
+    <div className="juego">
+      <p className="marcador">
+        Score: {puntos} · Best: {Math.max(record, puntos)}
+      </p>
+      <div id="game-container">
+        {snake.map((segmento, indice) => (
+          <div
+            key={indice}
+            className={indice === 0 ? 'snake-head' : indice === ultimo ? 'snake-tail' : 'snake-body'}
+            style={{
+              left: celdas(segmento.x),
+              top: celdas(segmento.y),
+              transform:
+                indice === 0
+                  ? `rotate(${rotacion}deg)`
+                  : indice === ultimo
+                    ? `rotate(${giroCola(segmento, snake[ultimo - 1])}deg)`
+                    : undefined,
+            }}
+          />
+        ))}
+        <div className="fruit" style={{ left: celdas(food.x), top: celdas(food.y) }} />
+        {parado && !fin && <p className="ayuda">Use the arrow keys or swipe to move</p>}
+        {fin && (
+          <div className="fin">
+            <h2>Game Over</h2>
+            <p>Score: {puntos}</p>
+            <button type="button" autoFocus onClick={reiniciar}>
+              Play again
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

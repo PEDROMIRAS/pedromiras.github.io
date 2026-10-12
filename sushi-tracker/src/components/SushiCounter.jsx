@@ -45,7 +45,9 @@ export default function SushiCounter() {
         localStorage.setItem('sushiCurrentCount', currentCount);
         localStorage.setItem('sushiPlayer2Count', player2Count);
         localStorage.setItem('sushiIsMultiplayer', JSON.stringify(isMultiplayer));
-    }, [currentCount, player2Count, isMultiplayer]);
+        // Un nombre vacío no se guarda: al recargar, App volvería a mostrar la bienvenida
+        if (playerName.trim()) localStorage.setItem('sushiPlayerName', playerName);
+    }, [currentCount, player2Count, isMultiplayer, playerName]);
 
     /* -------------------------------------------------------------------------- */
     /* CONTROLADORES                                  */
@@ -78,8 +80,6 @@ export default function SushiCounter() {
         setIsSessionActive(true);
         setCurrentCount(0);
         setPlayer2Count(0);
-
-        localStorage.setItem('sushiPlayerName', playerName);
         if (multiplayer) {
             localStorage.setItem('sushiPlayer2Name', player2Name);
         }
@@ -119,7 +119,8 @@ export default function SushiCounter() {
      * Borra permanentemente el historial y reinicia el estado de la aplicación.
      */
     const confirmClearHistory = () => {
-        localStorage.clear();
+        // Solo nuestra clave: el dominio se comparte con las otras apps del portfolio
+        localStorage.removeItem('sushiHistory');
         setHistory([]);
         setCurrentCount(0);
         setPlayer2Count(0);
@@ -164,7 +165,6 @@ export default function SushiCounter() {
                                 <SettingsView
                                     playerName={playerName}
                                     onUpdateName={setPlayerName}
-                                    onShare={() => { }}
                                     onClearHistory={confirmClearHistory}
                                     onClose={() => setIsSettingsOpen(false)}
                                 />

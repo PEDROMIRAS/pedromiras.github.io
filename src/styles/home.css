@@ -18,7 +18,7 @@
     -webkit-background-clip: border-box;
     
     /* Color base */
-    color: var(--color-text-ligth);
+    color: var(--color-text-light);
     
     /* La magia del 3D: Capas de sombra sólida */
     text-shadow: 

@@ -3,7 +3,7 @@ export default function About() {
     <section id="about" className="about">
       <div className="about-content">
         <figure className="about-img">
-          <img src="./assets/img/portfolio-image.JPG" alt="Pedro Miras, Web Developer" loading="lazy" />
+          <img src="./assets/img/portfolio-image.webp" alt="Pedro Miras, Web Developer" loading="lazy" />
         </figure>
         <div className="about-text">
           <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '20px' }}>

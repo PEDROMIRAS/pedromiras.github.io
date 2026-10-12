@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import niguiriImage from '../assets/images/niguiri.png';
-import niguiri1Image from '../assets/images/niguiri1.png';
+import niguiriImage from '../assets/images/niguiri.webp';
+import niguiri1Image from '../assets/images/niguiri1.webp';
 
 /* Recibimos 'onSaveName' por destructuración de los props. 
     Es la función que nos mandó App.jsx.

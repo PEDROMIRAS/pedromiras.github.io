@@ -3,7 +3,7 @@ import { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function SettingsView({ playerName, onUpdateName, onShare, onClearHistory, onClose }) {
+export default function SettingsView({ playerName, onUpdateName, onClearHistory, onClose }) {
     const [newNameInput, setNewNameInput] = useState(playerName);
     const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false);
 
@@ -30,11 +30,6 @@ export default function SettingsView({ playerName, onUpdateName, onShare, onClea
                         <button type="submit" className="w-full bg-purple-600 hover:bg-purple-500 text-white py-4 rounded-xl font-bold transition-colors cursor-pointer text-lg">Guardar</button>
                     </div>
                 </form>
-
-                <button onClick={onShare} className="w-full flex items-center justify-center gap-3 bg-blue-900/30 text-blue-300 hover:bg-blue-900/50 font-bold py-4 rounded-xl transition-colors border border-blue-900/50 cursor-pointer text-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" /></svg>
-                    Compartir estadísticas
-                </button>
             </div>
 
             <div className="border-t border-gray-800 pt-8 mt-auto">
