@@ -14,7 +14,7 @@ const TEMA_INICIAL = PALETAS.amarillas.tema;
 // (salta la pantalla de elegir color; sigue pudiéndose volver a ella).
 function colorInicial() {
   const c = new URLSearchParams(window.location.search).get('color');
-  return c && PALETAS[c] ? c : null;
+  return c && Object.hasOwn(PALETAS, c) ? c : null;
 }
 
 export default function App() {

@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <p>&copy; 2025 Pedro Miras.</p>
+      <p>&copy; {new Date().getFullYear()} Pedro Miras.</p>
     </footer>
   );
 }

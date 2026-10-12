@@ -30,12 +30,12 @@ export default function Contact() {
     emailjs
       .send(EMAIL_CONFIG.serviceID, EMAIL_CONFIG.templateID, datos, { publicKey: EMAIL_CONFIG.publicKey })
       .then(() => {
-        setMensaje({ texto: 'Mensaje enviado correctamente. Te responderé pronto.', tipo: 'success' });
+        setMensaje({ texto: 'Message sent successfully. I will get back to you soon.', tipo: 'success' });
         form.reset();
       })
       .catch((error) => {
         console.error('Error al enviar el email', error);
-        setMensaje({ texto: 'Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.', tipo: 'error' });
+        setMensaje({ texto: 'There was an error sending the message. Please try again.', tipo: 'error' });
       })
       .finally(() => setEnviando(false));
   };
@@ -91,7 +91,7 @@ export default function Contact() {
             </div>
             {mensaje && <div className={`form-message form-message-${mensaje.tipo}`}>{mensaje.texto}</div>}
             <button type="submit" disabled={enviando}>
-              {enviando ? 'Enviando...' : 'Send Message'}
+              {enviando ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>

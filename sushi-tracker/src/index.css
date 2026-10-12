@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Los toques rápidos sobre el sushi no hacen zoom de doble toque; el zoom con dos dedos sigue disponible */
+body {
+  touch-action: manipulation;
+}

@@ -4,7 +4,7 @@
 
 **Sushi Tracker** es una Single Page Application (SPA) construida con React, enfocada en ofrecer una experiencia de usuario fluida y nativa (mobile-first) para registrar el consumo de sushi en tiempo real.
 
-**[Prueba la aplicación en vivo aquí](https://pedromiras.github.io/sushi-tracker/dist/index.html)**
+**[Prueba la aplicación en vivo aquí](https://pedromiras.github.io/sushi-tracker/)**
 
 ## Funcionalidades Destacadas
 
@@ -33,14 +33,14 @@ Este proyecto sirve como demostración práctica de conceptos fundamentales y op
 Si deseas clonar y auditar el código en tu entorno de desarrollo local:
 
 ```bash
-# 1. Clonar el repositorio (Asegúrate de cambiar TU_USUARIO si es necesario)
-git clone [https://github.com/PEDROMIRAS/TU_REPOSITORIO.git](https://github.com/PEDROMIRAS/TU_REPOSITORIO.git)
+# 1. Clonar el repositorio
+git clone https://github.com/PEDROMIRAS/pedromiras.github.io.git
 
 # 2. Navegar al directorio del proyecto
-cd sushi-tracker
+cd pedromiras.github.io/sushi-tracker
 
 # 3. Instalar las dependencias de Node
-npm install
+npm install --legacy-peer-deps   # vite-plugin-pwa aún no declara soporte para Vite 7
 
 # 4. Iniciar el servidor de Vite
 npm run dev
