@@ -1,71 +1,93 @@
 /* HEADER */
 header {
-    width: 96%;                               
-    
-    display: flex;                            /* Flexbox para layout */
-    justify-content: space-between;           /* Separar logo y menú */
-    align-items: center;                      /* Centrado vertical */
-    background-color: var(--color-header-bg); /* Fondo translúcido */
-    color: var(--color-text-light);           /* Color del texto */
-    padding: 20px 40px;                       
+    width: 96%;
+
+    display: flex;
+    justify-content: space-between;           /* Nombre | menú | acciones */
+    align-items: center;
+    gap: 20px;
+    /* Bastante opaco: siempre está visible y el texto debe leerse sobre cualquier sección */
+    background-color: rgba(10, 10, 10, 0.75);
+    color: var(--color-text-light);
+    padding: 12px 30px;
 
     position: fixed;                         /* Fijo al hacer scroll */
-    top: 1.5rem;      
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
 
-    z-index: 1000;                            /* Prioridad de superposición */
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);   
-    transition: opacity var(--transition); /* Suave al cambiar fondo */
-    backdrop-filter: blur(5px);              /* Desenfoque de fondo */
-    -webkit-backdrop-filter: blur(5px);      /* Compatibilidad Safari */
-    border-radius: var(--radius);                      
+    z-index: 1000;
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);      /* Compatibilidad Safari */
+    border-radius: var(--radius);
 }
 
-/* Ocultar header cuando se hace scroll hacia abajo */
-header.nav-hidden {
-    opacity: 0;
-    pointer-events: none;
+/* Nombre: enlaza al inicio */
+.brand {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--color-text-light);
+    text-shadow: var(--text-shadow-3d);
 }
 
-.translate-btn {
+.header-actions {
+    flex-shrink: 0; /* el idioma y el botón de menú nunca se salen de la barra */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.translate-btn,
+.menu-toggle {
     padding: 8px 12px;
     background: transparent;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    margin-left: 12px;
 }
 
-.translate-btn:hover {
+.translate-btn:hover,
+.menu-toggle:hover {
     background: #444;
+}
+
+/* Botón de menú: solo en pantallas estrechas (ver responsive.css) */
+.menu-toggle {
+    display: none;
+    font-size: 1.4rem;
+    line-height: 1;
 }
 
 /* MENÚ PRINCIPAL */
 
 .menu ul {
-    list-style: none;      /* Quitar puntos de lista */
-    display: flex;         /* Mostrar elementos en fila */
-    gap: 20px;             /* Espacio entre enlaces */
+    list-style: none;
+    display: flex;
+    gap: 20px;
     text-shadow: var(--text-shadow-3d);
 }
 
 .menu a {
-    color: var(--color-text-light);  
-    text-decoration: none;    
-    text-transform:uppercase;      
-    font-weight: bold;               
-    padding: 8px 12px;               /* Espaciado interno */
-    border-radius: 50px;            
-    display: inline-block;           /* Evitar que ocupe todo el ancho */
-    cursor: pointer;   
-    position:relative;              
-    transition: color var(--transition); /* Animación hover */
+    color: var(--color-text-light);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 50px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    transition: color var(--transition);
 }
-.menu a:after{
-    content:'';
-    position:absolute;
+.menu a::after {
+    content: '';
+    position: absolute;
     bottom: -5px;
     left: 0;
     width: 0%;
@@ -73,7 +95,9 @@ header.nav-hidden {
     background-color: var(--color-primary);
     transition: width var(--transition);
 }
-    
-.menu a:hover::after{
+
+/* El subrayado marca tanto el enlace bajo el ratón como la sección en la que estás */
+.menu a:hover::after,
+.menu a.activo::after {
     width: 100%;
 }

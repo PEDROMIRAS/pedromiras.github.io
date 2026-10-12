@@ -1,51 +1,44 @@
 // Datos de cada proyecto. Todos son mini-apps aparte (su propia carpeta, su propio
 // build), enlazadas por ruta relativa: el flujo de trabajo de GitHub Actions las
 // compila y las coloca junto a este sitio, cada una en su propia carpeta.
+const REPO = 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main';
+
 const PROYECTOS = [
   {
     nombre: 'Ramo de flores',
-    descripcion: `An interactive page that gives you a different bouquet of flowers every time. You choose a
-      color (yellow, orange, red, pink, purple, blue, white or a mix), tap, and the bouquet
-      blooms. Each one is generated at random as an SVG, so the flower types, shades, positions
-      and leaves are never the same. Built with React and Vite, fully responsive, and installable
-      as an app that also works offline.`,
-    url: './ramo-flores-amarillas/',
-    imagen: './assets/img/ramo-flores.png',
-    alt: 'Página del ramo de flores con un ramo de todos los colores',
-    codigo: 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main/ramo-flores-amarillas',
+    descripcion: `A different bouquet of flowers every time. Choose a color, tap, and it blooms: each bouquet
+      is drawn at random as an SVG, so no two are alike. Installable, and it works offline.`,
+    etiquetas: ['React', 'SVG', 'PWA'],
+    carpeta: 'ramo-flores-amarillas',
+    imagen: { src: './assets/img/ramo-flores.png', ancho: 2226, alto: 1464 },
+    alt: 'Bouquet of flowers in every color',
   },
   {
-    nombre: 'TODO APP',
-    descripcion: `A task management application built with React. This project demonstrates my skills in
-      component-based UI, state management with hooks, and localStorage for data persistence.
-      Features include task filtering (all, active, completed), real-time statistics, smooth
-      animations, and a responsive design that adapts to any device.`,
-    url: './todoApp/',
-    imagen: './assets/img/todoApp.png.png',
-    alt: 'Aplicacion lista de tareas',
-    codigo: 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main/todoApp',
+    nombre: 'Todo App',
+    descripcion: `A task manager: add, complete and delete tasks, filter them and see live statistics.
+      Everything is saved in the browser.`,
+    etiquetas: ['React', 'localStorage'],
+    carpeta: 'todoApp',
+    imagen: { src: './assets/img/todoApp.png.png', ancho: 1483, alto: 778 },
+    alt: 'Task list application',
   },
   {
-    nombre: 'SUSHI TRACKER',
-    descripcion: `A mobile-first web application designed to track sushi consumption, built with React (Vite) and Tailwind CSS.
-      This project demonstrates my proficiency in modern React hooks, specifically utilizing lazy initialization for
-      optimized rendering performance, and implementing localStorage for persistent historical data. Key features
-      include a premium dark mode UI, interactive micro-animations, an off-canvas history drawer, and a fully
-      responsive design tailored for touch interactions.`,
-    url: './sushi-tracker/',
-    imagen: './assets/img/sushi-tracker.png',
-    alt: 'Aplicacion contador de sushi',
-    codigo: 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main/sushi-tracker',
+    nombre: 'Sushi Tracker',
+    descripcion: `A mobile-first counter for sushi nights, with a single-player mode, a two-player duel on a
+      split screen and a history of past sessions. Installable, and it works offline.`,
+    etiquetas: ['React', 'Tailwind CSS', 'PWA'],
+    carpeta: 'sushi-tracker',
+    imagen: { src: './assets/img/sushi-tracker.png', ancho: 2940, alto: 1646 },
+    alt: 'Sushi counter application',
   },
   {
-    nombre: 'SNAKE',
-    descripcion: `A classic Snake game rebuilt with React. The board, the snake and the fruit are driven entirely by
-      component state and a game loop running on hooks, instead of direct DOM manipulation. Move with the arrow
-      keys, eat fruit to grow, and cross an edge of the board to appear on the opposite side.`,
-    url: './snake/',
-    imagen: './assets/img/snake.png',
-    alt: 'Juego de la serpiente',
-    codigo: 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main/snake',
+    nombre: 'Snake',
+    descripcion: `The classic game. Move with the arrow keys or by swiping on a phone, eat fruit to grow and
+      cross the edges of the board. It keeps your score and your best result.`,
+    etiquetas: ['React', 'JavaScript'],
+    carpeta: 'snake',
+    imagen: { src: './assets/img/snake.png', ancho: 1400, alto: 824 },
+    alt: 'Snake game board',
   },
 ];
 
@@ -58,21 +51,26 @@ export default function Projects() {
 
       <div className="projects-container">
         {PROYECTOS.map((p) => (
-          <article key={p.nombre} className="project glass-card glass-card-interactive">
-            <h3 className="project-name">{p.nombre}</h3>
-            <div className="project-info">
+          <article key={p.nombre} className="project glass-card">
+            <a className="project-image" href={`./${p.carpeta}/`} target="_blank" rel="noopener noreferrer">
+              <img src={p.imagen.src} alt={p.alt} width={p.imagen.ancho} height={p.imagen.alto} loading="lazy" />
+            </a>
+            <div className="project-body">
+              <h3 className="project-name">{p.nombre}</h3>
               <p>{p.descripcion}</p>
-              <a href={p.url} target="_blank" rel="noopener noreferrer">
-                <img src={p.imagen} alt={p.alt} />
-              </a>
-            </div>
-            <div className="project-links">
-              <a href={p.url} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-                View Project
-              </a>
-              <a href={p.codigo} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-                View Code
-              </a>
+              <ul className="tags" aria-label="Technologies">
+                {p.etiquetas.map((etiqueta) => (
+                  <li key={etiqueta}>{etiqueta}</li>
+                ))}
+              </ul>
+              <div className="project-links">
+                <a href={`./${p.carpeta}/`} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                  Live Demo
+                </a>
+                <a href={`${REPO}/${p.carpeta}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                  Source Code
+                </a>
+              </div>
             </div>
           </article>
         ))}

@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 
+const EMAIL = 'p.miraspc35@gmail.com';
+
 const EMAIL_CONFIG = {
   serviceID: 'service_ntefp7r',
   templateID: 'template_sn1p69p',
@@ -10,17 +12,29 @@ const EMAIL_CONFIG = {
 export default function Contact() {
   const formRef = useRef(null);
   const [enviando, setEnviando] = useState(false);
-  // { texto, tipo: 'success' | 'error' } — igual que el form-message del sitio original
+  // { texto, tipo: 'success' | 'error' }
   const [mensaje, setMensaje] = useState(null);
+  const [copiado, setCopiado] = useState(false);
+
+  const copiarEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2000);
+    } catch {
+      /* sin permiso para el portapapeles: el enlace mailto sigue funcionando */
+    }
+  };
 
   const enviar = (e) => {
     e.preventDefault();
     const form = formRef.current;
+    const email = form.email.value.trim();
     const datos = {
       from_name: 'Mi Portfolio Contact Form', // aparecerá como remitente
-      reply_to: form.email.value,
+      reply_to: email,
       name: form.name.value.trim(),
-      email: form.email.value.trim(),
+      email,
       message: form.message.value.trim(),
     };
 
@@ -44,52 +58,56 @@ export default function Contact() {
     <section id="contact" className="contact">
       <h2 className="section-title">CONTACT</h2>
       <div className="contact-container">
-        <div className="contact-links">
-          <div className="link">
-            <a
-              href="https://github.com/PEDROMIRAS"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-card glass-card-interactive"
-            >
-              <i className="fa-brands fa-github" />
-              GitHub
+        <div className="contact-info">
+          <h3>Let’s talk</h3>
+          <p>
+            I’m not looking for a new job right now, but I’m always happy to connect and talk about technology.
+          </p>
+
+          <div className="contact-email glass-card">
+            <i className="fa-regular fa-envelope" aria-hidden="true" />
+            <a href={`mailto:${EMAIL}`} className="notranslate" translate="no">
+              {EMAIL}
             </a>
+            <button type="button" className="notranslate" translate="no" onClick={copiarEmail}>
+              {copiado ? 'Copied!' : 'Copy'}
+            </button>
           </div>
-          <div className="link">
-            <a
-              href="https://www.linkedin.com/in/pedro-miras/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-card glass-card-interactive"
-            >
-              <i className="fa-brands fa-linkedin" />
-              LinkedIn
-            </a>
-          </div>
-          <div className="link">
-            <a href="mailto:p.miraspc35@gmail.com" className="glass-card glass-card-interactive">
-              <i className="fa-regular fa-envelope" />
-              Gmail
-            </a>
-          </div>
+
+          <ul className="contact-social">
+            <li>
+              <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands fa-github" aria-hidden="true" />
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/pedro-miras/" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands fa-linkedin" aria-hidden="true" />
+                LinkedIn
+              </a>
+            </li>
+          </ul>
         </div>
 
         <div className="contact-form glass-card">
           <form aria-label="Contact Form" ref={formRef} onSubmit={enviar}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true" />
+              <input type="text" id="name" name="name" placeholder="Your Name" autoComplete="name" required />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true" />
+              <input type="email" id="email" name="email" placeholder="Your Email" autoComplete="email" required />
             </div>
             <div className="form-group full-width">
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" placeholder="Your Message" required aria-required="true" />
+              <textarea id="message" name="message" placeholder="Your Message" required />
             </div>
-            {mensaje && <div className={`form-message form-message-${mensaje.tipo}`}>{mensaje.texto}</div>}
+            {/* role="status": los lectores de pantalla anuncian el resultado del envío */}
+            <div role="status">
+              {mensaje && <p className={`form-message form-message-${mensaje.tipo}`}>{mensaje.texto}</p>}
+            </div>
             <button type="submit" disabled={enviando}>
               {enviando ? 'Sending...' : 'Send Message'}
             </button>

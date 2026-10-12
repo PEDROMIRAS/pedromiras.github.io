@@ -16,8 +16,8 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 ## 🚀 Key Features
 
 * **Modern Design:** Dark theme with Neon accents and **Glassmorphism** effects using CSS backdrop-filters.
-* **Immersive Navigation:** Full-screen sectioning with **CSS Scroll Snap** for a smooth browsing experience.
-* **Responsive & Adaptive:** Fully responsive layout with a custom mobile navigation menu (horizontal scroll/multiline).
+* **Clear Navigation:** Fixed header that highlights the section you are in, with smooth scrolling between full-screen sections.
+* **Responsive & Adaptive:** Fully responsive layout with a dropdown navigation menu on small screens.
 * **Multi-language Support:** Integrated **Google Translate API** for automatic English/Spanish translation.
 * **Working Contact Form:** Fully functional form integrated with **EmailJS**.
 * **Project Showcase:** Every project below is its own React app, linked from the Projects section.
@@ -42,9 +42,9 @@ Each project below is an **independent mini-app** (its own `package.json`, its o
 Projects section — the same pattern the site already used for Ramo de flores and Sushi Tracker.
 
 ```text
-/                        # Main site (this React app: Home, About, Skills, Projects, Contact)
+/                        # Main site (this React app: Home, About, Experience, Skills, Projects, Contact)
   src/
-    components/          # Header, Home, About, Skills, Projects, Contact, Footer
+    components/          # Header, Home, About, Experience, Skills, Projects, Contact, Footer
     styles/              # One .css file per section (same design as before)
   public/assets/          # Images and audio
 

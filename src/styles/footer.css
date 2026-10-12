@@ -1,22 +1,42 @@
 /* FOOTER */
 footer {
-    width: 100%;                              
-    padding: 30px 20px;
-    text-align: center;                        
-    
+    width: 100%;
+    padding: 30px 40px;
+
+    /* Copyright a un lado y enlaces al otro; en pantallas estrechas se apilan centrados */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px 30px;
+
     /* Estilo visual acorde al tema oscuro */
-    background-color: #000000; 
-    color: var(--color-text-secondary);           
+    background-color: #000000;
+    color: var(--color-text-secondary);
     border-top: 1px solid var(--color-border);
-    font-size: 0.9rem;                        
-    
+    font-size: 0.9rem;
+
     position: relative;
     z-index: 10;
-
-    /* Le dice al navegador que es válido detener el scroll aquí abajo */
-    scroll-snap-align: end; 
 }
 
 footer p {
     margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    list-style: none;
+}
+
+.footer-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--color-text-light);
 }

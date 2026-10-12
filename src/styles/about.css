@@ -39,3 +39,6 @@
     color: var(--color-text-secondary);
     text-align: justify;
 }
+.about-text p + p {
+    margin-top: 1em;
+}

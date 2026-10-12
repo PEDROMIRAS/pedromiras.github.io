@@ -1,7 +1,7 @@
 /* --- MÓVILES Y TABLETS ( < 1024px ) --- */
 @media (max-width: 1024px) {
     /* Ajustes generales */
-    .home, .about, .skills, .projects, .contact {
+    .home, .about, .experience, .skills, .projects, .contact {
         /* En móviles, reducimos el padding superior porque el header ocupa menos */
         padding-top: 100px; 
     }
@@ -31,54 +31,12 @@
 /* --- MÓVILES PEQUEÑOS ( < 600px ) --- */
 @media (max-width: 600px) {
     
-    /* --- MENÚ MULTILÍNEA --- */
-    header {
-        width: 100%;
-        padding: 15px 10px;
-        height: auto;       /* Permite que crezca si hay 2 líneas */
-        flex-wrap: wrap;    /* Permite saltos de línea */
-        justify-content: center; 
-        gap: 15px;
-    }
-
-    .menu {
-        width: 100%;
-        overflow: visible; /* Mostramos todo, nada oculto */
-        flex: none;
-    }
-    
-    .menu ul {
-        display: flex;
-        flex-wrap: wrap;    /* CLAVE: Los items bajan si no caben */
-        justify-content: center;
-        gap: 8px 12px;      /* Espacio entre botones (Vertical Horizontal) */
-        width: 100%;
-        padding: 0;
-    }
-    
-    .menu a {
-        font-size: 0.85rem;
-        padding: 6px 12px;
-        border-radius: 20px;
-        display: inline-block;
-    }
-
-    .translate-btn {
-        font-size: 0.8rem;
-        padding: 5px 10px;
-        margin-top: 5px; 
-    }
-
     /* --- AJUSTES DE CONTENIDO --- */
     .home h2 { font-size: 1.8rem; }
     
     .skills-container { grid-template-columns: 1fr; }
-    .project, .contact-form { padding: 20px; }
+    .project-body, .contact-form { padding: 20px; }
     
-    /* Aumentamos espacio superior porque el header ahora puede tener 2 líneas */
-    .home, .about, .skills, .projects, .contact {
-        padding-top: 200px; 
-    }
 }
 
 /* --- PANTALLAS GRANDES ( > 1920px ) --- */
@@ -88,4 +46,36 @@
         max-width: 1600px;
     }
     html { font-size: 18px; }
+}
+
+/* --- MENÚ DESPLEGABLE ( < 1024px ) --- */
+/* Los enlaces no caben en una fila: se abren bajo la cabecera con el botón de menú */
+@media (max-width: 1024px) {
+    .menu-toggle { display: block; }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background-color: rgba(10, 10, 10, 0.95);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+    }
+    .menu.abierto { display: block; }
+
+    .menu ul {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .menu a {
+        display: block;
+        padding: 12px 16px;
+        border-radius: 12px;
+    }
+    .menu a::after { display: none; }
+    .menu a.activo { background: var(--bg-alpha-2); }
 }

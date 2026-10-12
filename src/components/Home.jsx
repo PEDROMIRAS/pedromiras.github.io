@@ -5,16 +5,40 @@ export default function Home() {
         <h1>
           Hello, I'm <span>Pedro Miras</span>
         </h1>
-        <h2>Web Developer</h2>
-        <p>
-          I am a passionate Web Developer who creates modern, responsive, and high-performance websites. I focus on
-          clean design, intuitive user experiences, and efficient, maintainable code. Welcome to my portfolio—explore
-          and get to know my work!
-        </p>
-        <a href="#about" className="btn btn-primary">
-          Learn More About Me
-        </a>
+        <h2>Web Developer · NTT DATA</h2>
+        <p>I build and maintain web applications, from the database to the interface.</p>
+
+        <div className="home-actions">
+          <a href="#projects" className="btn btn-primary">
+            View My Projects
+          </a>
+          <a href="#contact" className="btn btn-outline">
+            Contact Me
+          </a>
+        </div>
+
+        <ul className="home-social">
+          <li>
+            <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i className="fa-brands fa-github" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/pedro-miras/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <i className="fa-brands fa-linkedin" aria-hidden="true" />
+            </a>
+          </li>
+        </ul>
       </div>
+
+      <a href="#about" className="home-scroll" aria-label="Scroll to About">
+        <i className="fa-solid fa-chevron-down" aria-hidden="true" />
+      </a>
     </section>
   );
 }

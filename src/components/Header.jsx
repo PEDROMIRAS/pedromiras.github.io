@@ -1,4 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const SECCIONES = [
+  { id: 'about', nombre: 'About' },
+  { id: 'experience', nombre: 'Experience' },
+  { id: 'skills', nombre: 'Skills' },
+  { id: 'projects', nombre: 'Projects' },
+  { id: 'contact', nombre: 'Contact' },
+];
 
 function limpiarCookiesTraduccion() {
   document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
@@ -6,25 +14,21 @@ function limpiarCookiesTraduccion() {
   document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
 }
 
-// Cabecera fija: menú, botón de idioma (Google Translate) y ocultarse al bajar
-// (mismo comportamiento que antes tenían js/nav.js y js/translate.js).
+// Cabecera fija: nombre (vuelve arriba), menú con la sección actual resaltada,
+// botón de idioma (Google Translate) y botón de menú en pantallas estrechas.
 export default function Header() {
-  const [oculto, setOculto] = useState(false);
+  const [abierto, setAbierto] = useState(false);
+  const [activa, setActiva] = useState(null);
   const [etiquetaIdioma, setEtiquetaIdioma] = useState('ES');
-  const ultimoScroll = useRef(0);
 
+  // Sección actual: la que cruza la mitad de la pantalla
   useEffect(() => {
-    const alHacerScroll = () => {
-      const actual = window.scrollY;
-      if (actual <= 0) {
-        setOculto(false);
-      } else {
-        setOculto(actual > ultimoScroll.current);
-      }
-      ultimoScroll.current = actual;
-    };
-    window.addEventListener('scroll', alHacerScroll);
-    return () => window.removeEventListener('scroll', alHacerScroll);
+    const observador = new IntersectionObserver(
+      (entradas) => entradas.forEach((e) => e.isIntersecting && setActiva(e.target.id)),
+      { rootMargin: '-50% 0px -50% 0px' }
+    );
+    document.querySelectorAll('main section[id]').forEach((s) => observador.observe(s));
+    return () => observador.disconnect();
   }, []);
 
   useEffect(() => {
@@ -65,29 +69,42 @@ export default function Header() {
   };
 
   return (
-    <header className={oculto ? 'nav-hidden' : ''}>
-      <nav className="menu" aria-label="Main Navigation">
+    <header onKeyDown={(e) => e.key === 'Escape' && setAbierto(false)}>
+      <a href="#home" className="brand notranslate" translate="no" onClick={() => setAbierto(false)}>
+        Pedro Miras
+      </a>
+
+      <nav id="menu" className={`menu${abierto ? ' abierto' : ''}`} aria-label="Main Navigation">
         <ul>
-          <li>
-            <a href="#home">Home</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#skills">Skills</a>
-          </li>
-          <li>
-            <a href="#projects">Projects</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+          {SECCIONES.map((s) => (
+            <li key={s.id}>
+              <a
+                href={`#${s.id}`}
+                className={activa === s.id ? 'activo' : undefined}
+                aria-current={activa === s.id ? 'location' : undefined}
+                onClick={() => setAbierto(false)}
+              >
+                {s.nombre}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
-      <div>
+
+      <div className="header-actions">
         <button id="lang-toggle-btn" className="translate-btn" onClick={cambiarIdioma} aria-label="Cambiar idioma">
           {etiquetaIdioma}
+        </button>
+        <button
+          type="button"
+          className="menu-toggle notranslate"
+          translate="no"
+          aria-label={abierto ? 'Close menu' : 'Open menu'}
+          aria-expanded={abierto}
+          aria-controls="menu"
+          onClick={() => setAbierto(!abierto)}
+        >
+          {abierto ? '✕' : '☰'}
         </button>
       </div>
     </header>

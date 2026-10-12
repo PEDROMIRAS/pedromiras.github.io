@@ -8,7 +8,6 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
 }
 
 body {
@@ -37,7 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- ESTRUCTURA DE SECCIONES (Full Screen) --- */
-.home, .about, .skills, .projects, .contact {
+.home, .about, .experience, .skills, .projects, .contact {
     width: 100%;
     min-height: 100vh; /* Ocupa siempre toda la pantalla */
     position: relative;
@@ -47,10 +46,6 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     justify-content: center; /* Centrado vertical */
     align-items: center;     /* Centrado horizontal */
-    
-    /* Scroll Snap */
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 
     /* ESPACIADO INTERNO (La solución al menú fijo) */
     /* 120px asegura que el contenido empiece debajo del menú */
@@ -100,6 +95,21 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--bg-alpha-2);
     border-color: var(--color-primary);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Etiquetas de tecnologías (Experience y Projects) */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+}
+.tags li {
+    padding: 5px 14px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    background: var(--bg-alpha-1);
+    border: 1px solid var(--border-alpha-1);
 }
 
 /* Botones */
