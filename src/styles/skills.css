@@ -24,6 +24,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
+    align-items: start;
     position: relative;
     z-index: 1;
     max-width: 1100px;
@@ -68,9 +69,7 @@
     border-color: var(--color-primary);
 }
 
-.skills-item i {
-    width: 1.3em;
+.skills-item .icono {
     font-size: 1.3rem;
-    text-align: center;
     color: var(--color-text-secondary);
 }

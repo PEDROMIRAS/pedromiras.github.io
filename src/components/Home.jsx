@@ -1,3 +1,5 @@
+import Icono from './Icono.jsx';
+
 export default function Home() {
   return (
     <section id="home" className="home">
@@ -23,7 +25,7 @@ export default function Home() {
         <ul className="home-social">
           <li>
             <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <i className="fa-brands fa-github" aria-hidden="true" />
+              <Icono nombre="github" />
             </a>
           </li>
           <li>
@@ -33,14 +35,14 @@ export default function Home() {
               rel="noopener noreferrer"
               aria-label="LinkedIn"
             >
-              <i className="fa-brands fa-linkedin" aria-hidden="true" />
+              <Icono nombre="linkedin" />
             </a>
           </li>
         </ul>
       </div>
 
       <a href="#about" className="home-scroll" aria-label="Scroll to About">
-        <i className="fa-solid fa-chevron-down" aria-hidden="true" />
+        <Icono nombre="chevron-down" />
       </a>
     </section>
   );

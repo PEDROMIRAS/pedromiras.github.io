@@ -1,46 +1,48 @@
+import Icono from './Icono.jsx';
+
 // Datos de la sección Skills: una tarjeta por categoría, ordenadas por lo que más uso en el trabajo.
-// Iconos de Font Awesome (cargado en index.html).
+// Los iconos son los <symbol> de public/assets/img/iconos.svg.
 const CATEGORIAS = [
   {
     titulo: 'Backend',
     items: [
-      { icono: 'fa-brands fa-java', nombre: 'Java' },
-      { icono: 'fa-solid fa-leaf', nombre: 'Spring Boot' },
-      { icono: 'fa-brands fa-php', nombre: 'PHP' },
-      { icono: 'fa-brands fa-symfony', nombre: 'Symfony' },
+      { icono: 'java', nombre: 'Java' },
+      { icono: 'leaf', nombre: 'Spring Boot' },
+      { icono: 'php', nombre: 'PHP' },
+      { icono: 'symfony', nombre: 'Symfony' },
     ],
   },
   {
     titulo: 'Data',
     items: [
-      { icono: 'fa-solid fa-table', nombre: 'PL/SQL' },
-      { icono: 'fa-solid fa-diagram-project', nombre: 'Talend' },
-      { icono: 'fa-solid fa-database', nombre: 'MySQL' },
-      { icono: 'fa-solid fa-server', nombre: 'MariaDB' },
-      { icono: 'fa-brands fa-envira', nombre: 'MongoDB' },
+      { icono: 'table', nombre: 'PL/SQL' },
+      { icono: 'diagram-project', nombre: 'Talend' },
+      { icono: 'database', nombre: 'MySQL' },
+      { icono: 'server', nombre: 'MariaDB' },
+      { icono: 'envira', nombre: 'MongoDB' },
     ],
   },
   {
     titulo: 'Frontend',
     items: [
-      { icono: 'fa-brands fa-html5', nombre: 'HTML5' },
-      { icono: 'fa-brands fa-css3-alt', nombre: 'CSS3' },
-      { icono: 'fa-brands fa-js', nombre: 'JS ES6+' },
-      { icono: 'fa-brands fa-bootstrap', nombre: 'Bootstrap' },
+      { icono: 'html5', nombre: 'HTML5' },
+      { icono: 'css3-alt', nombre: 'CSS3' },
+      { icono: 'js', nombre: 'JS ES6+' },
+      { icono: 'bootstrap', nombre: 'Bootstrap' },
     ],
   },
   {
     titulo: 'Tools',
     items: [
-      { icono: 'fa-brands fa-git-alt', nombre: 'Git' },
-      { icono: 'fa-brands fa-github', nombre: 'GitHub' },
-      { icono: 'fa-brands fa-gitlab', nombre: 'GitLab' },
-      { icono: 'fa-brands fa-jira', nombre: 'Jira' },
-      { icono: 'fa-brands fa-microsoft', nombre: 'Teams' },
-      { icono: 'fa-solid fa-code', nombre: 'VS Code' },
-      { icono: 'fa-solid fa-terminal', nombre: 'PL/SQL Developer' },
-      { icono: 'fa-solid fa-robot', nombre: 'Claude' },
-      { icono: 'fa-solid fa-brain', nombre: 'AI-assisted development' },
+      { icono: 'git-alt', nombre: 'Git' },
+      { icono: 'github', nombre: 'GitHub' },
+      { icono: 'gitlab', nombre: 'GitLab' },
+      { icono: 'jira', nombre: 'Jira' },
+      { icono: 'microsoft', nombre: 'Teams' },
+      { icono: 'code', nombre: 'VS Code' },
+      { icono: 'terminal', nombre: 'PL/SQL Developer' },
+      { icono: 'robot', nombre: 'Claude' },
+      { icono: 'brain', nombre: 'AI-assisted development' },
     ],
   },
 ];
@@ -57,7 +59,7 @@ export default function Skills() {
             <ul className="skills-list">
               {categoria.items.map((item) => (
                 <li key={item.nombre} className="skills-item">
-                  <i className={item.icono} aria-hidden="true" />
+                  <Icono nombre={item.icono} />
                   <span>{item.nombre}</span>
                 </li>
               ))}

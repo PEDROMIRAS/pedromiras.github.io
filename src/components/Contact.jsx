@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import Icono from './Icono.jsx';
 
 const EMAIL = 'p.miraspc35@gmail.com';
 
@@ -65,7 +66,7 @@ export default function Contact() {
           </p>
 
           <div className="contact-email glass-card">
-            <i className="fa-regular fa-envelope" aria-hidden="true" />
+            <Icono nombre="envelope" />
             <a href={`mailto:${EMAIL}`} className="notranslate" translate="no">
               {EMAIL}
             </a>
@@ -80,13 +81,13 @@ export default function Contact() {
           <ul className="contact-social">
             <li>
               <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer">
-                <i className="fa-brands fa-github" aria-hidden="true" />
+                <Icono nombre="github" />
                 GitHub
               </a>
             </li>
             <li>
               <a href="https://www.linkedin.com/in/pedro-miras/" target="_blank" rel="noopener noreferrer">
-                <i className="fa-brands fa-linkedin" aria-hidden="true" />
+                <Icono nombre="linkedin" />
                 LinkedIn
               </a>
             </li>

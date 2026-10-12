@@ -37,6 +37,15 @@ body { top: 0 !important; }
     }
 }
 
+/* Iconos SVG: toman el tamaño y el color del texto que los rodea */
+.icono {
+    width: 1.25em; /* caja fija: los iconos anchos y los estrechos ocupan lo mismo */
+    height: 1em;
+    fill: currentColor;
+    flex-shrink: 0;
+    vertical-align: -0.125em;
+}
+
 /* Texto que solo leen los lectores de pantalla */
 .sr-only {
     position: absolute;
@@ -57,13 +66,16 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 800;
     letter-spacing: 2px;
+}
+
+/* Relieve solo en los títulos grandes: en los de las tarjetas emborrona el texto */
+h1, h2 {
     text-shadow: var(--text-shadow-3d);
 }
 
 /* --- ESTRUCTURA DE SECCIONES (Full Screen) --- */
 .home, .about, .experience, .skills, .projects, .contact {
     width: 100%;
-    min-height: 100vh; /* Ocupa siempre toda la pantalla */
     position: relative;
     
     /* Flexbox para centrar contenido */
@@ -77,6 +89,11 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 130px; 
     padding-bottom: 60px;
     padding-inline: 20px; /* Margen lateral de seguridad */
+}
+
+/* Solo la portada ocupa la pantalla entera: el resto mide lo que su contenido */
+.home {
+    min-height: 100vh;
 }
 
 /* Contenedores de contenido */

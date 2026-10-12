@@ -36,7 +36,7 @@
     padding: 16px 20px;
 }
 
-.contact-email i {
+.contact-email .icono {
     font-size: 1.5rem;
     color: var(--color-primary);
 }
@@ -84,7 +84,7 @@
     color: var(--color-text-light);
 }
 
-.contact-social i {
+.contact-social .icono {
     font-size: 1.3rem;
 }
 

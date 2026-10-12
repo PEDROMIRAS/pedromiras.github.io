@@ -34,7 +34,7 @@
 @media (max-width: 600px) {
     
     /* --- AJUSTES DE CONTENIDO --- */
-    .home h2 { font-size: 1.8rem; }
+    .home h2 { font-size: 1.2rem; }
     /* Puesto y empresa en dos líneas limpias, sin el punto colgando */
     .home-sep { display: none; }
     .home-empresa { display: block; }

@@ -115,6 +115,16 @@ for (const p of PROYECTOS) {
     const esHtmlDeLaApp = respuesta.ok && cuerpo.includes('<div id="root">');
     console.log(`  ${esHtmlDeLaApp ? '✓' : '✗'} ${p.nombre.padEnd(16)} ${url} -> HTTP ${respuesta.status}`);
     if (!esHtmlDeLaApp) huboFallos = true;
+    // Un index.html que carga puede apuntar a un JS o CSS que no existe (ruta base mal puesta): la página saldría en blanco
+    // (el Ramo lleva todo dentro del propio index.html: ahí no hay nada que pedir)
+    const recursos = [...cuerpo.matchAll(/(?:src|href)="([^"]+\.(?:js|css))"/g)].map((m) => new URL(m[1], url));
+    for (const recurso of recursos.filter((r) => r.origin === new URL(url).origin)) {
+      const estado = (await fetch(recurso)).status;
+      if (estado !== 200) {
+        console.log(`    ✗ ${recurso.pathname} -> HTTP ${estado}`);
+        huboFallos = true;
+      }
+    }
   } catch (e) {
     console.log(`  ✗ ${p.nombre.padEnd(16)} ${url} -> ${e.message}`);
     huboFallos = true;
@@ -127,7 +137,7 @@ if (huboFallos) {
   process.exit(1);
 }
 
-console.log('\n✓ Los 5 enlaces cargan correctamente.\n');
+console.log('\n✓ Los 5 enlaces cargan correctamente, con su JS y su CSS.\n');
 
 if (dejarServido) {
   console.log(`Sitio servido en ${raizSitio} — ábrelo en el navegador y pulsa por los proyectos.`);
