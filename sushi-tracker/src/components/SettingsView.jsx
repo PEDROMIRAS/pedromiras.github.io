@@ -2,8 +2,9 @@
 import { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
+import Cuenta from './Cuenta';
 
-export default function SettingsView({ playerName, onUpdateName, onClearHistory, onClose }) {
+export default function SettingsView({ playerName, usuario, onUpdateName, onClearHistory, onClose }) {
     const [newNameInput, setNewNameInput] = useState(playerName);
     const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false);
 
@@ -22,7 +23,7 @@ export default function SettingsView({ playerName, onUpdateName, onClearHistory,
                 <button onClick={onClose} className="text-gray-400 hover:text-white font-bold p-3 rounded-full hover:bg-gray-800 transition-colors cursor-pointer text-xl">✕</button>
             </div>
 
-            <div className="flex-1 flex flex-col gap-8">
+            <div className="flex-1 flex flex-col gap-8 overflow-y-auto">
                 <form onSubmit={handleNameSubmit} className="flex flex-col gap-3">
                     <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">Cambiar nombre</label>
                     <div className="flex flex-col gap-3">
@@ -30,6 +31,8 @@ export default function SettingsView({ playerName, onUpdateName, onClearHistory,
                         <button type="submit" className="w-full bg-purple-600 hover:bg-purple-500 text-white py-4 rounded-xl font-bold transition-colors cursor-pointer text-lg">Guardar</button>
                     </div>
                 </form>
+
+                <Cuenta usuario={usuario} />
             </div>
 
             <div className="border-t border-gray-800 pt-8 mt-auto">
@@ -45,7 +48,7 @@ export default function SettingsView({ playerName, onUpdateName, onClearHistory,
                     <div className="absolute inset-0 z-50 flex items-center justify-center p-6 bg-black/90">
                         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="bg-gray-900 border border-red-900/50 p-8 rounded-3xl shadow-2xl w-[96%] max-w-sm flex flex-col gap-6 text-center">
                             <h3 className="text-2xl font-black text-white">¡Atención!</h3>
-                            <p className="text-gray-400 font-medium">Estás a punto de borrar todo tu historial. Esta acción no se puede deshacer.</p>
+                            <p className="text-gray-400 font-medium">Estás a punto de borrar todo tu historial{usuario ? ', también el guardado en tu cuenta' : ''}. Esta acción no se puede deshacer.</p>
                             <div className="flex gap-3 mt-2">
                                 <button onClick={() => setIsClearConfirmOpen(false)} className="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-bold py-4 rounded-xl cursor-pointer">Cancelar</button>
                                 <button onClick={() => { onClearHistory(); setIsClearConfirmOpen(false); onClose(); }} className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-4 rounded-xl cursor-pointer">Borrar</button>

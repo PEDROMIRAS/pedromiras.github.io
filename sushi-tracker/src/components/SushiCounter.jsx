@@ -1,11 +1,15 @@
 // src/components/SushiCounter.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from 'framer-motion';
 import Header from './Header';
 import MainCounter from './MainCounter';
 import HistoryDrawer from './HistoryDrawer';
 import SettingsView from './SettingsView';
+import { supabase } from '../supabase';
+import { aFila, aRegistro } from '../historialNube';
+
+const leerLocales = () => JSON.parse(localStorage.getItem('sushiHistory')) || [];
 
 /**
  * Componente principal que gestiona el estado global de la aplicación.
@@ -17,7 +21,12 @@ export default function SushiCounter() {
     /* -------------------------------------------------------------------------- */
 
     const [currentCount, setCurrentCount] = useState(() => parseInt(localStorage.getItem('sushiCurrentCount')) || 0);
-    const [history, setHistory] = useState(() => JSON.parse(localStorage.getItem('sushiHistory')) || []);
+    // Historial: lo guardado en el dispositivo y, con cuenta, lo guardado en la nube.
+    // Con sesión iniciada lo local es solo lo que aún no se ha podido subir (p. ej. sin conexión).
+    const [locales, setLocales] = useState(leerLocales);
+    const [nube, setNube] = useState([]);
+    const [usuario, setUsuario] = useState(null);
+    const history = [...locales, ...nube];
     const [playerName, setPlayerName] = useState(() => localStorage.getItem('sushiPlayerName') || 'Pedro');
 
     const [isSessionActive, setIsSessionActive] = useState(() => currentCount > 0);
@@ -48,6 +57,43 @@ export default function SushiCounter() {
         // Un nombre vacío no se guarda: al recargar, App volvería a mostrar la bienvenida
         if (playerName.trim()) localStorage.setItem('sushiPlayerName', playerName);
     }, [currentCount, player2Count, isMultiplayer, playerName]);
+
+    const guardarLocales = (lista) => {
+        setLocales(lista);
+        localStorage.setItem('sushiHistory', JSON.stringify(lista));
+    };
+
+    // Sesión de la cuenta: también avisa al cargar la página si ya había una iniciada
+    useEffect(() => {
+        const { data } = supabase.auth.onAuthStateChange((_evento, sesion) => setUsuario(sesion?.user ?? null));
+        return () => data.subscription.unsubscribe();
+    }, []);
+
+    /**
+     * Sube a la cuenta lo que haya pendiente en el dispositivo y recarga el historial de la nube.
+     * Las llamadas van en cola: dos a la vez subirían dos veces los mismos registros.
+     * Si algo falla (sin conexión), lo pendiente se queda en el dispositivo para el siguiente intento.
+     */
+    const cola = useRef(Promise.resolve());
+    const sincronizar = () => {
+        cola.current = cola.current.then(async () => {
+            const pendientes = leerLocales();
+            if (pendientes.length > 0) {
+                const { error } = await supabase.from('sessions').insert(pendientes.map(aFila));
+                if (error) return;
+                guardarLocales([]);
+            }
+            const { data, error } = await supabase.from('sessions').select('*').order('played_at', { ascending: false });
+            if (!error) setNube(data.map(aRegistro));
+        });
+    };
+
+    const idUsuario = usuario?.id;
+    useEffect(() => {
+        if (idUsuario) sincronizar();
+        else setNube([]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [idUsuario]);
 
     /* -------------------------------------------------------------------------- */
     /* CONTROLADORES                                  */
@@ -105,10 +151,8 @@ export default function SushiCounter() {
             player2Name
         };
 
-        const updatedHistory = [newRecord, ...history];
-
-        setHistory(updatedHistory);
-        localStorage.setItem('sushiHistory', JSON.stringify(updatedHistory));
+        guardarLocales([newRecord, ...locales]);
+        if (usuario) sincronizar();
 
         setCurrentCount(0);
         setPlayer2Count(0);
@@ -121,7 +165,12 @@ export default function SushiCounter() {
     const confirmClearHistory = () => {
         // Solo nuestra clave: el dominio se comparte con las otras apps del portfolio
         localStorage.removeItem('sushiHistory');
-        setHistory([]);
+        setLocales([]);
+        if (usuario) {
+            supabase.from('sessions').delete().eq('user_id', usuario.id).then(({ error }) => {
+                if (!error) setNube([]);
+            });
+        }
         setCurrentCount(0);
         setPlayer2Count(0);
         setIsSessionActive(false);
@@ -129,12 +178,16 @@ export default function SushiCounter() {
 
     /**
      * Elimina un registro específico del historial mediante su ID.
-     * @param {number} idToRemove - Identificador único del registro.
+     * @param {number|string} idToRemove - Identificador único del registro.
      */
-    const deleteHistoryRecord = (idToRemove) => {
-        const updatedHistory = history.filter(record => record.id !== idToRemove);
-        setHistory(updatedHistory);
-        localStorage.setItem('sushiHistory', JSON.stringify(updatedHistory));
+    const deleteHistoryRecord = async (idToRemove) => {
+        if (locales.some(record => record.id === idToRemove)) {
+            guardarLocales(locales.filter(record => record.id !== idToRemove));
+            return;
+        }
+        // En la nube: solo desaparece de la lista si de verdad se ha borrado
+        const { error } = await supabase.from('sessions').delete().eq('id', idToRemove);
+        if (!error) setNube(actuales => actuales.filter(record => record.id !== idToRemove));
     };
 
     const totalSushi = history.reduce((acc, record) => acc + record.cantidad + (record.isMultiplayer ? record.player2Count : 0), 0);
@@ -164,6 +217,7 @@ export default function SushiCounter() {
                             <motion.div key="settings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col w-full h-full overflow-hidden">
                                 <SettingsView
                                     playerName={playerName}
+                                    usuario={usuario}
                                     onUpdateName={setPlayerName}
                                     onClearHistory={confirmClearHistory}
                                     onClose={() => setIsSettingsOpen(false)}
