@@ -1,8 +1,8 @@
 // Traducción entre un registro del historial de la app y una fila de la tabla `sessions`.
 // La tabla rechaza nombres vacíos o de más de 40 caracteres y cuentas fuera de 0-10000.
 
-const cuenta = (n) => Math.min(10000, Math.max(0, Math.trunc(Number(n)) || 0));
-const nombre = (texto, porDefecto) => (String(texto ?? '').trim() || porDefecto).slice(0, 40);
+export const cuenta = (n) => Math.min(10000, Math.max(0, Math.trunc(Number(n)) || 0));
+export const nombre =(texto, porDefecto) => (String(texto ?? '').trim() || porDefecto).slice(0, 40);
 
 /** Registro guardado en el dispositivo -> fila para insertar (su `id` es el instante en que se terminó). */
 export function aFila(registro) {

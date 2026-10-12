@@ -7,7 +7,20 @@ import MainCounter from './MainCounter';
 import HistoryDrawer from './HistoryDrawer';
 import SettingsView from './SettingsView';
 import { supabase, vieneDeRecuperar } from '../supabase';
-import { aFila, aRegistro } from '../historialNube';
+import { aFila, aRegistro, cuenta, nombre } from '../historialNube';
+import { useSala, nuevaSala } from '../useSala';
+
+const Interruptor = ({ activo, alCambiar, etiqueta }) => (
+    <button
+        role="switch"
+        aria-checked={activo}
+        aria-label={etiqueta}
+        onClick={() => alCambiar(!activo)}
+        className={`w-12 h-6 rounded-full p-1 transition-colors ${activo ? 'bg-blue-600' : 'bg-gray-700'}`}
+    >
+        <div className={`w-4 h-4 bg-white rounded-full transform transition-transform ${activo ? 'translate-x-6' : ''}`} />
+    </button>
+);
 
 const leerLocales = () => JSON.parse(localStorage.getItem('sushiHistory')) || [];
 
@@ -29,11 +42,18 @@ export default function SushiCounter() {
     const history = [...locales, ...nube];
     const [playerName, setPlayerName] = useState(() => localStorage.getItem('sushiPlayerName') || 'Pedro');
 
-    const [isSessionActive, setIsSessionActive] = useState(() => currentCount > 0);
+    // Duelo en dos móviles: código de la sala en la que se está, o null
+    const [sala, setSala] = useState(() => localStorage.getItem('sushiSala'));
+    const [dosMoviles, setDosMoviles] = useState(false);
+    const [codigo, setCodigo] = useState('');
+    const [miId] = useState(() => crypto.randomUUID());
+    const [rivalId, setRivalId] = useState(null);
+
+    const [isSessionActive, setIsSessionActive] = useState(() => currentCount > 0 || Boolean(sala));
 
     const [isMultiplayer, setIsMultiplayer] = useState(() => JSON.parse(localStorage.getItem('sushiIsMultiplayer')) || false);
-    const [player2Name, setPlayer2Name] = useState(() => localStorage.getItem('sushiPlayer2Name') || 'Rival');
-    const [player2Count, setPlayer2Count] = useState(() => parseInt(localStorage.getItem('sushiPlayer2Count')) || 0);
+    const [nombreRival, setPlayer2Name] = useState(() => localStorage.getItem('sushiPlayer2Name') || 'Rival');
+    const [piezasRival, setPlayer2Count] = useState(() => parseInt(localStorage.getItem('sushiPlayer2Count')) || 0);
 
     /* -------------------------------------------------------------------------- */
     /* ESTADOS DE VISTA                              */
@@ -54,11 +74,13 @@ export default function SushiCounter() {
      */
     useEffect(() => {
         localStorage.setItem('sushiCurrentCount', currentCount);
-        localStorage.setItem('sushiPlayer2Count', player2Count);
+        localStorage.setItem('sushiPlayer2Count', piezasRival);
         localStorage.setItem('sushiIsMultiplayer', JSON.stringify(isMultiplayer));
         // Un nombre vacío no se guarda: al recargar, App volvería a mostrar la bienvenida
         if (playerName.trim()) localStorage.setItem('sushiPlayerName', playerName);
-    }, [currentCount, player2Count, isMultiplayer, playerName]);
+        if (sala) localStorage.setItem('sushiSala', sala);
+        else localStorage.removeItem('sushiSala');
+    }, [currentCount, piezasRival, isMultiplayer, playerName, sala]);
 
     const guardarLocales = (lista) => {
         setLocales(lista);
@@ -131,15 +153,22 @@ export default function SushiCounter() {
         setIsSessionActive(true);
         setCurrentCount(0);
         setPlayer2Count(0);
-        if (multiplayer) {
-            localStorage.setItem('sushiPlayer2Name', player2Name);
+        setRivalId(null);
+        if (multiplayer && dosMoviles) setSala(codigo || nuevaSala());
+        else if (multiplayer) {
+            localStorage.setItem('sushiPlayer2Name', nombreRival);
         }
     };
 
     /**
      * Finaliza la sesión actual y guarda los datos en el historial si procede.
+     * @param {Object} [rival] - Último mensaje del rival, si es él quien ha terminado el duelo en línea.
      */
-    const handleFinishSession = () => {
+    const handleFinishSession = (rival) => {
+        if (sala && !rival) avisarSala({ fin: true });
+        setSala(null);
+        const player2Count = rival ? rival.cuenta : piezasRival;
+        const player2Name = rival ? rival.nombre : nombreRival;
         if (currentCount === 0 && (!isMultiplayer || player2Count === 0)) {
             setIsSessionActive(false);
             return;
@@ -150,7 +179,8 @@ export default function SushiCounter() {
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             cantidad: currentCount,
-            isMultiplayer,
+            // Una sala en la que no entró nadie se guarda como comilona en solitario
+            isMultiplayer: isMultiplayer && (!sala || Boolean(rival || rivalId)),
             player2Count,
             player1Name: playerName,
             player2Name
@@ -163,6 +193,16 @@ export default function SushiCounter() {
         setPlayer2Count(0);
         setIsSessionActive(false);
     };
+
+    const avisarSala = useSala(sala, { id: miId, nombre: playerName, cuenta: currentCount }, (mensaje) => {
+        // Sala de dos: manda el primero que llega, un tercero no cuenta
+        if (rivalId && rivalId !== mensaje.id) return;
+        const rival = { nombre: nombre(mensaje.nombre, 'Rival'), cuenta: cuenta(mensaje.cuenta) };
+        setRivalId(mensaje.id);
+        setPlayer2Name(rival.nombre);
+        setPlayer2Count(rival.cuenta);
+        if (mensaje.fin) handleFinishSession(rival);
+    });
 
     /**
      * Borra permanentemente el historial y reinicia el estado de la aplicación.
@@ -266,23 +306,38 @@ export default function SushiCounter() {
                                                     <div className="bg-gray-900/40 p-4 rounded-xl border border-gray-800">
                                                         <div className="flex justify-between items-center">
                                                             <span className="text-sm font-bold text-gray-300">MODO DUELO</span>
-                                                            <button
-                                                                role="switch"
-                                                                aria-checked={isMultiplayer}
-                                                                aria-label="Modo duelo"
-                                                                onClick={() => setIsMultiplayer(!isMultiplayer)}
-                                                                className={`w-12 h-6 rounded-full p-1 transition-colors ${isMultiplayer ? 'bg-blue-600' : 'bg-gray-700'}`}
-                                                            >
-                                                                <div className={`w-4 h-4 bg-white rounded-full transform transition-transform ${isMultiplayer ? 'translate-x-6' : ''}`} />
-                                                            </button>
+                                                            <Interruptor activo={isMultiplayer} alCambiar={setIsMultiplayer} etiqueta="Modo duelo" />
                                                         </div>
 
                                                         {isMultiplayer && (
-                                                            <div className="mt-4 pt-4 border-t border-gray-800">
+                                                            <div className="mt-4 pt-4 border-t border-gray-800 flex justify-between items-center">
+                                                                <span className="text-sm font-bold text-gray-300">EN DOS MÓVILES</span>
+                                                                <Interruptor activo={dosMoviles} alCambiar={setDosMoviles} etiqueta="En dos móviles" />
+                                                            </div>
+                                                        )}
+
+                                                        {isMultiplayer && dosMoviles && (
+                                                            <div className="mt-4">
+                                                                <label htmlFor="sala" className="text-xs font-bold text-blue-500 uppercase mb-2 block">Código de sala</label>
+                                                                <input
+                                                                    id="sala"
+                                                                    value={codigo}
+                                                                    onChange={e => setCodigo(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8))}
+                                                                    placeholder="Vacío = sala nueva"
+                                                                    autoComplete="off"
+                                                                    autoCapitalize="characters"
+                                                                    className="w-full bg-gray-900 border border-blue-900/30 rounded-xl p-3 text-white tracking-widest focus:border-blue-500 outline-none"
+                                                                />
+                                                                <p className="text-xs text-gray-500 mt-2">Uno crea la sala y le dice el código al otro. Cada uno cuenta en su móvil.</p>
+                                                            </div>
+                                                        )}
+
+                                                        {isMultiplayer && !dosMoviles && (
+                                                            <div className="mt-4">
                                                                 <label htmlFor="rival" className="text-xs font-bold text-blue-500 uppercase mb-2 block">Rival</label>
                                                                 <input
                                                                     id="rival"
-                                                                    value={player2Name}
+                                                                    value={nombreRival}
                                                                     onChange={e => setPlayer2Name(e.target.value)}
                                                                     className="w-full bg-gray-900 border border-blue-900/30 rounded-xl p-3 text-white focus:border-blue-500 outline-none"
                                                                 />
@@ -309,15 +364,24 @@ export default function SushiCounter() {
                                                 <a href="../#projects" className="absolute top-3 left-4 z-10 text-xs text-gray-500 hover:text-white">
                                                     ← Portfolio
                                                 </a>
+                                                {sala && (
+                                                    <p role="status" className="shrink-0 text-center text-sm text-gray-300 pt-10 px-4">
+                                                        Sala <strong className="text-white tracking-widest">{sala}</strong>
+                                                        {' · '}
+                                                        {rivalId ? <>{nombreRival}: <strong className="text-blue-400">{piezasRival}</strong></> : 'esperando al rival…'}
+                                                        {/* Sin piezas no aparece el botón de terminar: hace falta otra salida */}
+                                                        {currentCount === 0 && <button onClick={() => handleFinishSession()} className="ml-3 underline text-gray-400 hover:text-white cursor-pointer">Salir</button>}
+                                                    </p>
+                                                )}
                                                 <MainCounter
                                                     currentCount={currentCount}
                                                     onUpdateSushi={handleUpdateSushi}
-                                                    onFinishSession={handleFinishSession}
-                                                    player2Count={player2Count}
+                                                    onFinishSession={() => handleFinishSession()}
+                                                    player2Count={piezasRival}
                                                     onUpdateSushi2={handleUpdateSushi2}
                                                     player1Name={playerName}
-                                                    player2Name={player2Name}
-                                                    isMultiplayer={isMultiplayer}
+                                                    player2Name={nombreRival}
+                                                    isMultiplayer={isMultiplayer && !sala}
                                                 />
                                             </div>
                                         )}
