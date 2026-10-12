@@ -1,11 +1,5 @@
 /* EXPERIENCE */
-.experience {
-    background-color: #101010;
-}
-
 .experience-container {
-    width: 100%;
-    max-width: 900px;
     display: flex;
     flex-direction: column;
     gap: 30px;

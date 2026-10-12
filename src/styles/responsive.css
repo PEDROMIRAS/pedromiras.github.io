@@ -47,10 +47,6 @@
 
 /* --- PANTALLAS GRANDES ( > 1920px ) --- */
 @media (min-width: 1921px) {
-    .home-content, .about-content, .skills-container, 
-    .projects-container, .contact-container {
-        max-width: 1600px;
-    }
     html { font-size: 18px; }
 }
 

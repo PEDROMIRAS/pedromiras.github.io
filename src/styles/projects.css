@@ -1,12 +1,7 @@
-.projects {
-    background-color: #161616;
-}
-
 .projects-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
-    max-width: 1200px;
 }
 
 /* Tarjeta: captura arriba, texto debajo */

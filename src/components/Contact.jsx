@@ -70,7 +70,7 @@ export default function Contact() {
             <a href={`mailto:${EMAIL}`} className="notranslate" translate="no">
               {EMAIL}
             </a>
-            <button type="button" className="notranslate" translate="no" onClick={copiarEmail}>
+            <button type="button" className="btn btn-outline notranslate" translate="no" onClick={copiarEmail}>
               {copiado ? 'Copied!' : 'Copy'}
             </button>
             <span role="status" className="sr-only">
@@ -112,7 +112,7 @@ export default function Contact() {
             <div role="status">
               {mensaje && <p className={`form-message form-message-${mensaje.tipo}`}>{mensaje.texto}</p>}
             </div>
-            <button type="submit" disabled={enviando}>
+            <button type="submit" className="btn btn-primary" disabled={enviando}>
               {enviando ? 'Sending...' : 'Send Message'}
             </button>
           </form>

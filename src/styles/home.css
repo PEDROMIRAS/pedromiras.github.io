@@ -1,5 +1,6 @@
 .home {
-    background: linear-gradient(135deg, var(--color-bg-start), #1a051a);
+    /* El tinte se apaga antes del borde inferior: la portada no hace corte con la sección siguiente */
+    background: radial-gradient(ellipse at top right, #1a051a, transparent 70%);
     z-index: 1;
     text-align: center;
 }

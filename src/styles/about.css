@@ -1,11 +1,4 @@
-.about {
-    background-color: #121212;
-    background-image: radial-gradient(#8e44ad 1px, transparent 1px);
-    background-size: 40px 40px;
-}
-
 .about-content {
-    max-width: 1000px; /* líneas de texto de longitud cómoda en pantallas anchas */
     display: flex;
     gap: 60px;
     align-items: center;

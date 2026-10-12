@@ -68,6 +68,13 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 2px;
 }
 
+/* Títulos de tarjeta en la letra de lectura: Orbitron cuesta de leer en frases largas */
+h3 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
 /* Relieve solo en los títulos grandes: en los de las tarjetas emborrona el texto */
 h1, h2 {
     text-shadow: var(--text-shadow-3d);
@@ -101,9 +108,10 @@ h1, h2 {
 .about-content, 
 .skills-container, 
 .projects-container, 
+.experience-container, 
 .contact-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 68.75rem; /* 1100px */
     margin-inline: auto;
 }
 
