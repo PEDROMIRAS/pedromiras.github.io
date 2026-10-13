@@ -7,6 +7,14 @@ import Cuenta from './Cuenta';
 export default function SettingsView({ playerName, usuario, pendientes, recuperando, onRecuperada, onUpdateName, onClearHistory, onClose }) {
     const [newNameInput, setNewNameInput] = useState(playerName);
     const [isClearConfirmOpen, setIsClearConfirmOpen] = useState(false);
+    const [errorBorrado, setErrorBorrado] = useState('');
+
+    const borrarHistorial = async () => {
+        setIsClearConfirmOpen(false);
+        // Si la nube falla hay que decirlo: sin aviso parecería borrado y volvería a aparecer
+        if (await onClearHistory()) onClose();
+        else setErrorBorrado('El historial de este dispositivo se ha borrado, pero el de tu cuenta no. Comprueba la conexión y vuelve a intentarlo.');
+    };
 
     const handleNameSubmit = (e) => {
         e.preventDefault();
@@ -36,6 +44,7 @@ export default function SettingsView({ playerName, usuario, pendientes, recupera
             </div>
 
             <div className="border-t border-gray-800 pt-8 mt-auto">
+                <p role="alert" className="text-sm text-red-400 mb-3 empty:hidden">{errorBorrado}</p>
                 <button onClick={() => setIsClearConfirmOpen(true)} className="w-full flex items-center justify-center gap-3 bg-red-900/30 text-red-400 hover:bg-red-900/50 font-bold py-4 rounded-xl transition-colors border border-red-900/50 cursor-pointer text-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
                     Borrar historial completo
@@ -51,7 +60,7 @@ export default function SettingsView({ playerName, usuario, pendientes, recupera
                             <p className="text-gray-400 font-medium">Estás a punto de borrar todo tu historial{usuario ? ', también el guardado en tu cuenta' : ''}. Esta acción no se puede deshacer.</p>
                             <div className="flex gap-3 mt-2">
                                 <button onClick={() => setIsClearConfirmOpen(false)} className="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-bold py-4 rounded-xl cursor-pointer">Cancelar</button>
-                                <button onClick={() => { onClearHistory(); setIsClearConfirmOpen(false); onClose(); }} className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-4 rounded-xl cursor-pointer">Borrar</button>
+                                <button onClick={borrarHistorial} className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-4 rounded-xl cursor-pointer">Borrar</button>
                             </div>
                         </motion.div>
                     </div>

@@ -6,7 +6,7 @@ import Header from './Header';
 import MainCounter from './MainCounter';
 import HistoryDrawer from './HistoryDrawer';
 import SettingsView from './SettingsView';
-import { supabase, vieneDeRecuperar } from '../supabase';
+import { cargarSupabase, haySesion, vieneDeRecuperar } from '../supabase';
 import { aFila, aRegistro, cuenta, nombre } from '../historialNube';
 import { useSala, nuevaSala } from '../useSala';
 
@@ -22,7 +22,18 @@ const Interruptor = ({ activo, alCambiar, etiqueta }) => (
     </button>
 );
 
-const leerLocales = () => JSON.parse(localStorage.getItem('sushiHistory')) || [];
+// Un dato guardado que no se puede leer cuenta como si no hubiera nada: la app tiene que arrancar igual
+const leerGuardado = (clave, porDefecto) => {
+    try {
+        return JSON.parse(localStorage.getItem(clave)) ?? porDefecto;
+    } catch {
+        return porDefecto;
+    }
+};
+const leerLocales = () => {
+    const lista = leerGuardado('sushiHistory', []);
+    return Array.isArray(lista) ? lista : [];
+};
 
 /**
  * Componente principal que gestiona el estado global de la aplicación.
@@ -39,6 +50,8 @@ export default function SushiCounter() {
     const [locales, setLocales] = useState(leerLocales);
     const [nube, setNube] = useState([]);
     const [usuario, setUsuario] = useState(null);
+    // Sin sesión guardada no se conecta con la cuenta hasta que se abren los Ajustes, que es donde se entra
+    const [conCuenta, setConCuenta] = useState(haySesion);
     const history = [...locales, ...nube];
     const [playerName, setPlayerName] = useState(() => localStorage.getItem('sushiPlayerName') || 'Pedro');
 
@@ -51,7 +64,7 @@ export default function SushiCounter() {
 
     const [isSessionActive, setIsSessionActive] = useState(() => currentCount > 0 || Boolean(sala));
 
-    const [isMultiplayer, setIsMultiplayer] = useState(() => JSON.parse(localStorage.getItem('sushiIsMultiplayer')) || false);
+    const [isMultiplayer, setIsMultiplayer] = useState(() => leerGuardado('sushiIsMultiplayer', false) === true);
     const [nombreRival, setPlayer2Name] = useState(() => localStorage.getItem('sushiPlayer2Name') || 'Rival');
     const [piezasRival, setPlayer2Count] = useState(() => parseInt(localStorage.getItem('sushiPlayer2Count')) || 0);
 
@@ -89,9 +102,17 @@ export default function SushiCounter() {
 
     // Sesión de la cuenta: también avisa al cargar la página si ya había una iniciada
     useEffect(() => {
-        const { data } = supabase.auth.onAuthStateChange((_evento, sesion) => setUsuario(sesion?.user ?? null));
-        return () => data.subscription.unsubscribe();
-    }, []);
+        if (!conCuenta) return;
+        let suscripcion, cancelado = false;
+        cargarSupabase().then((supabase) => {
+            if (cancelado) return;
+            suscripcion = supabase.auth.onAuthStateChange((_evento, sesion) => setUsuario(sesion?.user ?? null)).data.subscription;
+        });
+        return () => {
+            cancelado = true;
+            suscripcion?.unsubscribe();
+        };
+    }, [conCuenta]);
 
     /**
      * Sube a la cuenta lo que haya pendiente en el dispositivo y recarga el historial de la nube.
@@ -101,11 +122,14 @@ export default function SushiCounter() {
     const cola = useRef(Promise.resolve());
     const sincronizar = () => {
         cola.current = cola.current.then(async () => {
+            const supabase = await cargarSupabase();
             const pendientes = leerLocales();
             if (pendientes.length > 0) {
                 const { error } = await supabase.from('sessions').insert(pendientes.map(aFila));
                 if (error) return;
-                guardarLocales([]);
+                // Solo lo subido: mientras tanto se puede haber terminado otra sesión, que sigue pendiente
+                const subidos = new Set(pendientes.map((registro) => registro.id));
+                guardarLocales(leerLocales().filter((registro) => !subidos.has(registro.id)));
             }
             const { data, error } = await supabase.from('sessions').select('*').order('played_at', { ascending: false });
             if (!error) setNube(data.map(aRegistro));
@@ -206,19 +230,19 @@ export default function SushiCounter() {
 
     /**
      * Borra permanentemente el historial y reinicia el estado de la aplicación.
+     * @returns {Promise<boolean>} false si el historial de la cuenta no se ha podido borrar.
      */
-    const confirmClearHistory = () => {
+    const confirmClearHistory = async () => {
         // Solo nuestra clave: el dominio se comparte con las otras apps del portfolio
         localStorage.removeItem('sushiHistory');
         setLocales([]);
-        if (usuario) {
-            supabase.from('sessions').delete().eq('user_id', usuario.id).then(({ error }) => {
-                if (!error) setNube([]);
-            });
-        }
         setCurrentCount(0);
         setPlayer2Count(0);
         setIsSessionActive(false);
+        if (!usuario) return true;
+        const { error } = await (await cargarSupabase()).from('sessions').delete().eq('user_id', usuario.id);
+        if (!error) setNube([]);
+        return !error;
     };
 
     /**
@@ -231,7 +255,7 @@ export default function SushiCounter() {
             return;
         }
         // En la nube: solo desaparece de la lista si de verdad se ha borrado
-        const { error } = await supabase.from('sessions').delete().eq('id', idToRemove);
+        const { error } = await (await cargarSupabase()).from('sessions').delete().eq('id', idToRemove);
         if (!error) setNube(actuales => actuales.filter(record => record.id !== idToRemove));
     };
 
@@ -281,7 +305,7 @@ export default function SushiCounter() {
                                     {!isSessionActive && (
                                         <Header
                                             playerName={playerName}
-                                            onOpenSettings={() => setIsSettingsOpen(true)}
+                                            onOpenSettings={() => { setIsSettingsOpen(true); setConCuenta(true); }}
                                             onOpenHistory={() => setIsMenuOpen(true)}
                                         />
                                     )}

@@ -1,6 +1,6 @@
 // src/components/Cuenta.jsx
 import { useState } from 'react';
-import { supabase } from '../supabase';
+import { cargarSupabase } from '../supabase';
 
 const ERRORES = {
     'Invalid login credentials': 'Correo o contraseña incorrectos.',
@@ -33,7 +33,7 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
     const pedir = async (peticion, siVaBien) => {
         setOcupado(true);
         setMensaje('');
-        const { data, error } = await peticion();
+        const { data, error } = await peticion(await cargarSupabase());
         setOcupado(false);
         if (error) setMensaje(ERRORES[error.message] || 'No se ha podido completar. Inténtalo de nuevo.');
         else setMensaje(siVaBien(data));
@@ -42,7 +42,7 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
     const enviar = (crear) => {
         const credenciales = { email: correo.trim(), password: clave };
         pedir(
-            () => crear
+            (supabase) => crear
                 ? supabase.auth.signUp({ ...credenciales, options: { emailRedirectTo: VUELTA } })
                 : supabase.auth.signInWithPassword(credenciales),
             (data) => data.session ? '' : 'Te hemos enviado un correo para confirmar la cuenta.'
@@ -52,7 +52,7 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
     const olvidada = () => {
         if (!correo.trim()) return setMensaje('Escribe tu correo arriba y vuelve a pulsar.');
         pedir(
-            () => supabase.auth.resetPasswordForEmail(correo.trim(), { redirectTo: VUELTA }),
+            (supabase) => supabase.auth.resetPasswordForEmail(correo.trim(), { redirectTo: VUELTA }),
             // El mismo mensaje exista o no la cuenta: no se revela qué correos están registrados
             () => 'Si hay una cuenta con ese correo, te hemos enviado un enlace para cambiar la contraseña.'
         );
@@ -60,7 +60,7 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
 
     const cambiarClave = (e) => {
         e.preventDefault();
-        pedir(() => supabase.auth.updateUser({ password: clave }), () => {
+        pedir((supabase) => supabase.auth.updateUser({ password: clave }), () => {
             setClave('');
             onRecuperada();
             return 'Contraseña cambiada.';
@@ -68,9 +68,9 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
     };
 
     // La función de la base de datos borra al usuario que la llama, y con él sus sesiones
-    const borrarCuenta = () => pedir(() => supabase.rpc('delete_own_account'), () => {
+    const borrarCuenta = () => pedir((supabase) => supabase.rpc('delete_own_account'), () => {
         setConfirmando(false);
-        supabase.auth.signOut({ scope: 'local' });
+        cargarSupabase().then((supabase) => supabase.auth.signOut({ scope: 'local' }));
         return 'Cuenta borrada.';
     });
 
@@ -97,7 +97,7 @@ export default function Cuenta({ usuario, pendientes, recuperando, onRecuperada 
                         {pendientes === 1 ? 'Hay 1 sesión guardada' : `Hay ${pendientes} sesiones guardadas`} solo en este dispositivo. Se subirán cuando vuelva la conexión.
                     </p>
                 )}
-                <button onClick={() => supabase.auth.signOut()} className={`w-full bg-gray-800 hover:bg-gray-700 ${BOTON}`}>Cerrar sesión</button>
+                <button onClick={() => cargarSupabase().then((supabase) => supabase.auth.signOut())} className={`w-full bg-gray-800 hover:bg-gray-700 ${BOTON}`}>Cerrar sesión</button>
                 {confirmando ? (
                     <div className="flex flex-col gap-3 border border-red-900/50 rounded-xl p-4">
                         <p className="text-sm text-gray-300">Se borrarán tu cuenta y el historial guardado en ella. No se puede deshacer.</p>

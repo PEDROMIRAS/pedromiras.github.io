@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { supabase } from './supabase';
+import { cargarSupabase } from './supabase';
 
 // Sin letras ni números que se confundan al dictarlo (O/0, I/1)
 const LETRAS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
@@ -22,22 +22,27 @@ export function useSala(sala, yo, alRecibir) {
 
     useEffect(() => {
         if (!sala) return;
-        const canal = supabase.channel(`duelo-${sala}`);
-        const mandar = (extra) => canal.send({ type: 'broadcast', event: 'cuenta', payload: { ...ultimo.current.yo, ...extra } });
-        canal
-            .on('broadcast', { event: 'cuenta' }, ({ payload }) => {
-                // Quien acaba de entrar no sabe cuánto llevo: se lo digo
-                if (payload.hola) mandar();
-                ultimo.current.alRecibir(payload);
-            })
-            .subscribe((estado) => {
-                if (estado !== 'SUBSCRIBED') return;
-                enviar.current = mandar;
-                mandar({ hola: true });
-            });
+        let canal, cancelado = false;
+        cargarSupabase().then((supabase) => {
+            if (cancelado) return;
+            canal = supabase.channel(`duelo-${sala}`);
+            const mandar = (extra) => canal.send({ type: 'broadcast', event: 'cuenta', payload: { ...ultimo.current.yo, ...extra } });
+            canal
+                .on('broadcast', { event: 'cuenta' }, ({ payload }) => {
+                    // Quien acaba de entrar no sabe cuánto llevo: se lo digo
+                    if (payload.hola) mandar();
+                    ultimo.current.alRecibir(payload);
+                })
+                .subscribe((estado) => {
+                    if (estado !== 'SUBSCRIBED') return;
+                    enviar.current = mandar;
+                    mandar({ hola: true });
+                });
+        });
         return () => {
+            cancelado = true;
             enviar.current = null;
-            supabase.removeChannel(canal);
+            if (canal) cargarSupabase().then((supabase) => supabase.removeChannel(canal));
         };
     }, [sala]);
 

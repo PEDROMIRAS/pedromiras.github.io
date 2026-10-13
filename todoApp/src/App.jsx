@@ -8,7 +8,8 @@ const FILTROS = [
 
 function leerTareasGuardadas() {
   try {
-    return JSON.parse(localStorage.getItem('todos')) || [];
+    const tareas = JSON.parse(localStorage.getItem('todos'));
+    return Array.isArray(tareas) ? tareas : [];
   } catch {
     return [];
   }

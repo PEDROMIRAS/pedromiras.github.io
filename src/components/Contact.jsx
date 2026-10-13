@@ -30,6 +30,12 @@ export default function Contact() {
   const enviar = (e) => {
     e.preventDefault();
     const form = formRef.current;
+    // Campo trampa: una persona no lo ve ni lo rellena; un robot sí. Se le dice que ha ido bien y no se envía nada.
+    if (form.website.value) {
+      setMensaje({ texto: 'Message sent successfully. I will get back to you soon.', tipo: 'success' });
+      form.reset();
+      return;
+    }
     const email = form.email.value.trim();
     const datos = {
       from_name: 'Mi Portfolio Contact Form', // aparecerá como remitente
@@ -109,6 +115,7 @@ export default function Contact() {
               <label htmlFor="message">Message</label>
               <textarea id="message" name="message" required />
             </div>
+            <input type="text" name="website" className="sr-only" tabIndex={-1} autoComplete="off" aria-hidden="true" />
             {/* role="status": los lectores de pantalla anuncian el resultado del envío */}
             <div role="status">
               {mensaje && <p className={`form-message form-message-${mensaje.tipo}`}>{mensaje.texto}</p>}
