@@ -125,7 +125,9 @@ export default function SushiCounter() {
             const supabase = await cargarSupabase();
             const pendientes = leerLocales();
             if (pendientes.length > 0) {
-                const { error } = await supabase.from('sessions').insert(pendientes.map(aFila));
+                // La tabla no admite dos sesiones del mismo usuario en el mismo instante: si un envío anterior
+                // llegó pero se perdió su respuesta, el reintento no la duplica
+                const { error } = await supabase.from('sessions').upsert(pendientes.map(aFila), { onConflict: 'user_id,played_at', ignoreDuplicates: true });
                 if (error) return;
                 // Solo lo subido: mientras tanto se puede haber terminado otra sesión, que sigue pendiente
                 const subidos = new Set(pendientes.map((registro) => registro.id));
