@@ -39,6 +39,7 @@
     .home-empresa { display: block; }
     
     .skills-container, .projects-container { grid-template-columns: 1fr; }
+    .projects-container > :last-child:nth-child(odd) { width: auto; } /* en una columna ocupa todo el ancho */
     .project-body, .contact-form { padding: 20px; }
     
 }

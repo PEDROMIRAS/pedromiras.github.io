@@ -12,6 +12,13 @@
     gap: 40px;
 }
 
+/* Con un número impar de proyectos, el último va centrado en vez de solo en la columna izquierda */
+.projects-container > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 20px);
+}
+
 /* Tarjeta: captura arriba, texto debajo */
 .project {
     display: flex;

@@ -3,16 +3,8 @@
 // compila y las coloca junto a este sitio, cada una en su propia carpeta.
 const REPO = 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main';
 
+// Ramo de flores sigue en el repositorio y publicado en su carpeta, pero no se enseña aquí
 const PROYECTOS = [
-  {
-    nombre: 'Flower Bouquet',
-    descripcion: `A different bouquet of flowers every time. Choose a color, tap, and it blooms: each bouquet
-      is drawn at random as an SVG, so no two are alike. Installable, and it works offline.`,
-    etiquetas: ['React', 'SVG', 'PWA', 'UI in Spanish'],
-    carpeta: 'ramo-flores-amarillas',
-    imagen: { src: './assets/img/ramo-flores.webp', ancho: 1280, alto: 720 },
-    alt: 'Bouquet of flowers in every color',
-  },
   {
     nombre: 'Todo App',
     descripcion: `A task manager: add, complete and delete tasks, filter them and see live statistics.
