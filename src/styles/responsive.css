@@ -10,6 +10,9 @@
     .home-content { text-align: center; }
     .home-content > p, .home-content > h1 { margin-inline: auto; }
     .home-actions, .home-social { justify-content: center; }
+    /* Sin sitio al lado: los móviles van debajo del texto, dentro del flujo */
+    .home-3d { position: static; width: 100%; max-width: 30rem; height: 280px; margin-top: 16px; }
+    .home-3d ~ .home-scroll { display: none; } /* los móviles ya ocupan el pie de la portada */
 
     .about-content {
         flex-direction: column;

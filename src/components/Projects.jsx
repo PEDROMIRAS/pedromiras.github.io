@@ -3,6 +3,17 @@
 // compila y las coloca junto a este sitio, cada una en su propia carpeta.
 const REPO = 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main';
 
+// Posición del puntero sobre la tarjeta, de -0.5 a 0.5: el CSS la inclina hacia ahí (solo con ratón)
+const inclinar = (e) => {
+  const caja = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--x', ((e.clientX - caja.left) / caja.width - 0.5).toFixed(3));
+  e.currentTarget.style.setProperty('--y', ((e.clientY - caja.top) / caja.height - 0.5).toFixed(3));
+};
+const enderezar = (e) => {
+  e.currentTarget.style.removeProperty('--x');
+  e.currentTarget.style.removeProperty('--y');
+};
+
 // Ramo de flores sigue en el repositorio y publicado en su carpeta, pero no se enseña aquí
 const PROYECTOS = [
   {
@@ -48,7 +59,7 @@ export default function Projects() {
 
       <div className="projects-container">
         {PROYECTOS.map((p) => (
-          <article key={p.nombre} className="project glass-card">
+          <article key={p.nombre} className="project glass-card" onPointerMove={inclinar} onPointerLeave={enderezar}>
             <a
               className="project-image"
               href={`./${p.carpeta}/`}

@@ -19,6 +19,11 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 * **Responsive & Adaptive:** Fully responsive layout with a dropdown navigation menu on small screens.
 * **Working Contact Form:** Fully functional form integrated with **EmailJS**.
 * **Project Showcase:** Every project below is its own React app, linked from the Projects section.
+  Ramo de flores stays in the repository and online at its own URL, but is not shown on the portfolio.
+* **3D Hero:** three phones float in the hero, each showing one of the apps; drag to turn them, tap one
+  to open it. It is made with three.js in `src/three/moviles.js` and downloaded separately after the page
+  loads, so it never delays the text. It does not load with reduced motion, Save-Data or without WebGL2,
+  and it pauses when off-screen. The project cards also tilt towards the mouse (CSS only).
 
 ---
 
@@ -27,6 +32,7 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 Every project in this repository is now built with **React** (Vite):
 
 * **React 18 + Vite** for the main site and every sub-project.
+* [three.js](https://threejs.org/) for the 3D hero.
 * CSS Variables (Custom Properties), Flexbox & Grid, centralized media queries.
 * [EmailJS](https://www.emailjs.com/) (Contact Form).
 * Icons from [Font Awesome Free](https://fontawesome.com/), served as a local SVG sprite.
@@ -59,7 +65,7 @@ Projects section — the same pattern the site already used for Ramo de flores a
 - **Imágenes optimizadas**: las de Sushi Tracker, Snake y la foto de About pesaban varios MB cada una
   (se mostraban a un tamaño pequeño con un archivo gigante detrás); convertidas a WebP y redimensionadas
   a su tamaño real de uso. En total, unos 9 MB menos que descargar.
-- **SEO**: `robots.txt`, `sitemap.xml` (con los 4 proyectos incluidos), URL canónica, y etiquetas Open
+- **SEO**: `robots.txt`, `sitemap.xml` (con los proyectos que se muestran), URL canónica, y etiquetas Open
   Graph / Twitter Card con una imagen propia (`public/assets/img/og-image.png`) para que el enlace se
   vea bien al compartirlo en LinkedIn, WhatsApp, etc.
 - **Accesibilidad**: todos los enlaces y botones tienen ahora un foco de teclado visible (antes solo lo

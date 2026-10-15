@@ -76,6 +76,23 @@
     color: var(--color-text-light);
 }
 
+/* Móviles 3D con las apps: en pantalla ancha, en la mitad derecha que deja libre el texto */
+.home-3d {
+    position: absolute;
+    top: 14%;
+    height: 74%; /* un lienzo no se estira con top y bottom: necesita su alto */
+    right: max(20px, calc((100% - 68.75rem) / 2));
+    width: min(44%, 32rem);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    cursor: grab;
+    touch-action: pan-y; /* arrastrar en horizontal gira el carrusel; en vertical sigue bajando la página */
+}
+
+.home-3d.listo {
+    opacity: 1;
+}
+
 /* Flecha que invita a seguir bajando */
 .home-scroll {
     position: absolute;
