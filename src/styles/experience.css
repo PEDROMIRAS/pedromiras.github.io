@@ -5,8 +5,21 @@
     gap: 30px;
 }
 
+/* En escritorio, las fechas en su columna y el texto con un largo cómodo de leer (unos 70 caracteres) */
 .experience-item {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 70ch);
+    column-gap: 40px;
     padding: 30px;
+}
+
+.experience-item > :not(.experience-period) {
+    grid-column: 2;
+}
+
+.experience-period {
+    grid-row: 1 / span 4;
+    padding-top: 14px; /* a la altura del puesto, que lleva margen arriba */
 }
 
 .experience-period {

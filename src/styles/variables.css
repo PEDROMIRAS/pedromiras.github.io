@@ -34,8 +34,5 @@
 --color-border: rgba(255,255,255,0.1);     /* Borde suave */
 
 /* --- Fondos y bordes con alpha para tarjetas y detalles --- */
---bg-alpha-1: rgba(142,68,173,0.1);   /* Fondo ligero tarjetas */
 --bg-alpha-2: rgba(142,68,173,0.2);   /* Fondo hover tarjetas */
---border-alpha-1: rgba(142,68,173,0.3); /* Borde tarjeta normal */
---border-alpha-2: rgba(142,68,173,0.5); /* Borde hover */
 }

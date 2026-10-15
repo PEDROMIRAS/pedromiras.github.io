@@ -1,4 +1,7 @@
+import { motion } from 'motion/react';
 import Titulo from './Titulo.jsx';
+import { SUBIDA } from '../movimiento.js';
+
 // Trayectoria: trabajo actual y formación. Los datos van en una lista, igual que en Skills y Projects.
 const ETAPAS = [
   {
@@ -31,7 +34,14 @@ export default function Experience() {
 
       <div className="experience-container">
         {ETAPAS.map((etapa) => (
-          <article key={etapa.titulo} className="experience-item glass-card">
+          <motion.article
+            key={etapa.titulo}
+            className="experience-item glass-card"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={SUBIDA}
+          >
             <span className="experience-period">{etapa.periodo}</span>
             <h3>{etapa.titulo}</h3>
             {etapa.lugar && <p className="experience-place">{etapa.lugar}</p>}
@@ -43,7 +53,7 @@ export default function Experience() {
                 ))}
               </ul>
             )}
-          </article>
+          </motion.article>
         ))}
       </div>
     </section>

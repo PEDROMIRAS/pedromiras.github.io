@@ -8,6 +8,7 @@
     
     /* Sin sitio al lado para la escena: la portada vuelve a centrarse */
     .home-content { text-align: center; }
+    .experience-item { display: block; } /* sin sitio para dos columnas: las fechas vuelven encima */
     .home-content > p { margin-inline: auto; }
     .home-actions, .home-social { justify-content: center; }
 

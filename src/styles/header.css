@@ -35,6 +35,11 @@ header {
     text-shadow: 1px 1px 0 var(--color-primary-dark), 2px 2px 0 #461c5c;
 }
 
+/* Arriba del todo está transparente (Header.jsx), pero con el teclado tiene que verse dónde está el foco */
+.brand:focus-visible {
+    opacity: 1 !important;
+}
+
 /* Botón de menú: solo en pantallas estrechas (ver responsive.css) */
 .menu-toggle {
     display: none;

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 
 const SECCIONES = [
   { id: 'about', nombre: 'About' },
@@ -12,6 +13,9 @@ const SECCIONES = [
 // y botón de menú en pantallas estrechas.
 export default function Header() {
   const [abierto, setAbierto] = useState(false);
+  // Al entrar, el nombre ya está en grande en la portada: el de la cabecera aparece al bajar media pantalla
+  const { scrollY } = useScroll();
+  const nombreVisible = useTransform(scrollY, (y) => Math.min(1, Math.max(0, (y - window.innerHeight * 0.4) / (window.innerHeight * 0.3))));
   const botonMenu = useRef(null);
   const [activa, setActiva] = useState(null);
 
@@ -34,9 +38,9 @@ export default function Header() {
 
   return (
     <header onKeyDown={cerrarConEscape}>
-      <a href="#home" className="brand" onClick={() => setAbierto(false)}>
+      <motion.a href="#home" className="brand" style={{ opacity: nombreVisible }} onClick={() => setAbierto(false)}>
         Pedro Miras
-      </a>
+      </motion.a>
 
       {/* En el HTML va antes del menú (orden de tabulación); en pantalla, al final */}
       <button
