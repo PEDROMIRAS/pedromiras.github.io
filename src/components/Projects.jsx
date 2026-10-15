@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useReducedMotion, useSpring } from 'motion/react';
+import Titulo from './Titulo.jsx';
 
 // Datos de cada proyecto. Todos son mini-apps aparte (su propia carpeta, su propio
 // build), enlazadas por ruta relativa: el flujo de trabajo de GitHub Actions las
@@ -88,9 +89,7 @@ const PROYECTOS = [
 export default function Projects() {
   return (
     <section id="projects" className="projects" aria-labelledby="projects-title">
-      <h2 id="projects-title" className="section-title">
-        PROJECTS
-      </h2>
+      <Titulo id="projects-title">PROJECTS</Titulo>
       <p className="projects-intro">
         Small apps I build in my own time to try ideas out. My day-to-day work is back end and data, and it stays
         private.

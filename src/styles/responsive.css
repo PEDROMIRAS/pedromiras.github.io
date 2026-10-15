@@ -8,7 +8,7 @@
     
     /* Sin sitio al lado para la escena: la portada vuelve a centrarse */
     .home-content { text-align: center; }
-    .home-content > p, .home-content > h1 { margin-inline: auto; }
+    .home-content > p { margin-inline: auto; }
     .home-actions, .home-social { justify-content: center; }
 
     .about-content {
@@ -34,6 +34,7 @@
     
     /* --- AJUSTES DE CONTENIDO --- */
     .home .home-puesto { font-size: 1.2rem; }
+    .home-linea { font-size: 18vw; } /* en el móvil, el nombre llena el ancho */
     /* Puesto y empresa en dos líneas limpias, sin el punto colgando */
     .home-sep { display: none; }
     .home-empresa { display: block; }

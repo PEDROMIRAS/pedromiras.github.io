@@ -2,38 +2,40 @@
     /* El tinte se apaga antes del borde inferior: la portada no hace corte con la sección siguiente */
     background: radial-gradient(ellipse at top right, #1a051a, transparent 70%);
     z-index: 1;
+    overflow-x: clip; /* las líneas del nombre se salen por los lados al bajar: sin barra horizontal */
 }
 
-/* En pantalla ancha el texto va a la izquierda y deja la mitad derecha a la escena 3D */
 .home-content {
     text-align: left;
 }
 
-.home-content > p,
-.home-content > h1 {
+.home-content > p {
     max-width: 36rem;
 }
 
-.home h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    margin-bottom: 10px;
+/* El nombre es la portada: casi todo el ancho, en dos líneas */
+.home-nombre {
+    margin-bottom: 28px;
+    text-transform: uppercase;
 }
 
-/* EFECTO 3D SÓLIDO PARA EL NOMBRE */
-.home h1 span {
-    display: inline-block;
-    background: none;
-    -webkit-text-fill-color: initial;
-    background-clip: border-box;
-    -webkit-background-clip: border-box;
-    
-    /* Color base */
+.home-saludo {
+    display: block;
+    margin-bottom: 12px;
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+}
+
+.home-linea {
+    display: block;
+    font-size: clamp(3.5rem, 14vw, 11.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
     color: var(--color-text-light);
-    
-    /* Relieve discreto: con la escena 3D al lado, más capas serían demasiada profundidad */
-    text-shadow:
-        1px 1px 0 #8e44ad,
-        2px 2px 0 #4a1c61;
+    text-shadow: 2px 2px 0 #4a1c61;
 }
 
 .home .home-puesto {

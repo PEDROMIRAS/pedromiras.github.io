@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Icono from './Icono.jsx';
+import Titulo from './Titulo.jsx';
 
 const EMAIL = 'p.miraspc35@gmail.com';
 
@@ -63,7 +64,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="contact">
-      <h2 className="section-title">CONTACT</h2>
+      <Titulo>CONTACT</Titulo>
       <div className="contact-container">
         <div className="contact-info">
           <h3>Let’s talk</h3>

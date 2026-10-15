@@ -20,7 +20,10 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 * **Working Contact Form:** Fully functional form integrated with **EmailJS**.
 * **Project Showcase:** Every project below is its own React app, linked from the Projects section.
   Ramo de flores stays in the repository and online at its own URL, but is not shown on the portfolio.
-* **Motion:** the project cards tilt towards the mouse with a spring ([Motion](https://motion.dev/), only its springs).
+* **Motion animations** ([Motion](https://motion.dev/)): the name fills the hero and each line rises from behind a
+  mask on load, then the two lines slide apart and fade as you scroll; a band of technologies loops between
+  the hero and About and speeds up while you scroll; section titles rise from behind a mask; project cards
+  tilt towards the mouse with a spring. With reduced motion everything stays still and visible.
 
 ---
 

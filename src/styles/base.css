@@ -107,6 +107,53 @@ h3 {
 
 /* --- CLASES DE UTILIDAD (DRY) --- */
 
+/* Máscara: el texto de dentro empieza por debajo de su borde y sube (Motion). El relleno inferior evita
+   que se corten los trazos que bajan de la línea, y el margen negativo lo compensa */
+.mascara {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.1em;
+    margin-bottom: -0.1em;
+    vertical-align: bottom;
+}
+
+.mascara-texto {
+    display: inline-block;
+}
+
+/* Cinta de tecnologías entre la portada y About */
+.cinta {
+    overflow: hidden;
+    border-block: 1px solid rgba(255, 255, 255, 0.08);
+    padding-block: 22px;
+    white-space: nowrap;
+}
+
+.cinta-pista {
+    display: flex;
+    width: max-content;
+}
+
+.cinta-grupo {
+    display: flex;
+}
+
+/* El separador va detrás de cada palabra, también de la última: así las dos copias miden igual y el bucle no salta */
+.cinta-grupo > span {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+}
+
+.cinta-grupo > span::after {
+    content: '·';
+    margin-inline: 0.6em;
+    color: rgba(255, 255, 255, 0.25);
+}
+
 /* Títulos de Sección */
 .section-title {
     text-align: center;

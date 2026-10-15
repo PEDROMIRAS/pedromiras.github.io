@@ -1,8 +1,9 @@
 import Icono from './Icono.jsx';
+import Titulo from './Titulo.jsx';
 
 // Datos de la sección Skills: una tarjeta por categoría, ordenadas por lo que más uso en el trabajo.
 // Los iconos son los <symbol> de public/assets/img/iconos.svg.
-const CATEGORIAS = [
+export const CATEGORIAS = [
   {
     titulo: 'Backend',
     items: [
@@ -50,7 +51,7 @@ const CATEGORIAS = [
 export default function Skills() {
   return (
     <section id="skills" className="skills" aria-label="Skills">
-      <h2 className="section-title">SKILLS</h2>
+      <Titulo>SKILLS</Titulo>
 
       <div className="skills-container">
         {CATEGORIAS.map((categoria) => (

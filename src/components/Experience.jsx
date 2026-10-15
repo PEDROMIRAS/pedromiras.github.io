@@ -1,3 +1,4 @@
+import Titulo from './Titulo.jsx';
 // Trayectoria: trabajo actual y formación. Los datos van en una lista, igual que en Skills y Projects.
 const ETAPAS = [
   {
@@ -26,9 +27,7 @@ const ETAPAS = [
 export default function Experience() {
   return (
     <section id="experience" className="experience" aria-labelledby="experience-title">
-      <h2 id="experience-title" className="section-title">
-        EXPERIENCE
-      </h2>
+      <Titulo id="experience-title">EXPERIENCE</Titulo>
 
       <div className="experience-container">
         {ETAPAS.map((etapa) => (
