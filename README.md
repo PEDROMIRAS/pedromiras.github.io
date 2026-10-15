@@ -22,8 +22,10 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
   Ramo de flores stays in the repository and online at its own URL, but is not shown on the portfolio.
 * **Motion animations** ([Motion](https://motion.dev/)): the name fills the hero and each line rises from behind a
   mask on load, then the two lines slide apart and fade as you scroll; a band of technologies loops between
-  the hero and About and speeds up while you scroll; section titles rise from behind a mask; project cards
-  tilt towards the mouse with a spring. With reduced motion everything stays still and visible.
+  the hero and About and speeds up while you scroll; section titles rise from behind a mask and then draw
+  their line; the menu line slides to the active section; project cards come in one after another, uncover
+  their screenshot and tilt towards the mouse with a spring; skills fall in like a cascade; "Let’s talk" rises
+  like the name and the send button turns into an animated tick. With reduced motion everything stays still and visible.
 
 ---
 

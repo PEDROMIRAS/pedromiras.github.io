@@ -32,7 +32,7 @@
     text-align: left;
     margin-bottom: 20px;
 }
-.about-title::after {
+.about-title .titulo-raya {
     margin-left: 0;
 }
 

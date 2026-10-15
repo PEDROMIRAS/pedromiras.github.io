@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { motion } from 'motion/react';
+import { TEXTO } from '../movimiento.js';
 import Icono from './Icono.jsx';
 import Titulo from './Titulo.jsx';
 
@@ -14,6 +16,12 @@ const EMAIL_CONFIG = {
 export default function Contact() {
   const formRef = useRef(null);
   const [enviando, setEnviando] = useState(false);
+  // Unos segundos después de enviar, el botón muestra una marca de confirmación en vez de su texto
+  const [enviado, setEnviado] = useState(false);
+  const confirmar = () => {
+    setEnviado(true);
+    setTimeout(() => setEnviado(false), 3000);
+  };
   // { texto, tipo: 'success' | 'error' }
   const [mensaje, setMensaje] = useState(null);
   const [copiado, setCopiado] = useState(false);
@@ -35,6 +43,7 @@ export default function Contact() {
     if (form.website.value) {
       setMensaje({ texto: 'Message sent successfully. I will get back to you soon.', tipo: 'success' });
       form.reset();
+      confirmar();
       return;
     }
     const email = form.email.value.trim();
@@ -54,6 +63,7 @@ export default function Contact() {
       .then(() => {
         setMensaje({ texto: 'Message sent successfully. I will get back to you soon.', tipo: 'success' });
         form.reset();
+        confirmar();
       })
       .catch((error) => {
         console.error('Error al enviar el email', error);
@@ -67,7 +77,13 @@ export default function Contact() {
       <Titulo>CONTACT</Titulo>
       <div className="contact-container">
         <div className="contact-info">
-          <h3>Let’s talk</h3>
+          <motion.h3 className="contact-titular" initial="oculto" whileInView="visible" viewport={{ once: true, amount: 0.6 }}>
+            <span className="mascara">
+              <motion.span className="mascara-texto" variants={TEXTO}>
+                Let’s talk
+              </motion.span>
+            </span>
+          </motion.h3>
           <p>
             I’m always happy to talk about technology or compare notes with other developers. I’m not looking for a
             new job right now.
@@ -122,7 +138,18 @@ export default function Contact() {
               {mensaje && <p className={`form-message form-message-${mensaje.tipo}`}>{mensaje.texto}</p>}
             </div>
             <button type="submit" className="btn btn-primary" disabled={enviando}>
-              {enviando ? 'Sending…' : 'Send Message'}
+              {enviado ? (
+                <>
+                  <svg className="btn-check" viewBox="0 0 24 24" aria-hidden="true">
+                    <motion.path d="M5 12.5l4.5 4.5L19 7.5" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.4 }} />
+                  </svg>
+                  Sent
+                </>
+              ) : enviando ? (
+                'Sending…'
+              ) : (
+                'Send Message'
+              )}
             </button>
           </form>
         </div>

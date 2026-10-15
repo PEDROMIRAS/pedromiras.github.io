@@ -2,7 +2,7 @@
 @media (max-width: 1024px) {
     .section-title { font-size: 1.5rem; margin-bottom: 30px; }
     .about-title { text-align: center; }
-    .about-title::after { margin-left: auto; }
+    .about-title .titulo-raya { margin-left: auto; }
 
     header { padding: 10px 10px 10px 20px; }
     
@@ -78,6 +78,6 @@
         display: block;
         padding: 12px 16px;
     }
-    .menu a::after { display: none; }
+    .menu a::after, .menu-indicador { display: none; }
     .menu a.activo { background: var(--bg-alpha-2); }
 }

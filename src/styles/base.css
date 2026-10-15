@@ -165,9 +165,9 @@ h3 {
     text-transform: uppercase;
 }
 /* El morado va en la raya, no en el texto: queda reservado para lo que se puede pulsar */
-.section-title::after {
-    content: '';
+.titulo-raya {
     display: block;
+    transform-origin: left;
     width: 48px;
     height: 3px;
     margin: 14px auto 0;

@@ -98,7 +98,16 @@ header {
 }
 
 /* El subrayado marca tanto el enlace bajo el ratón como la sección en la que estás */
-.menu a:hover::after,
-.menu a.activo::after {
+.menu a:not(.activo):hover::after {
     width: 100%;
+}
+
+/* La línea de la sección activa (Header.jsx), en el mismo sitio que la del hover */
+.menu-indicador {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
 }

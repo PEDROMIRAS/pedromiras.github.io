@@ -66,6 +66,8 @@ export default function Header() {
                 onClick={() => setAbierto(false)}
               >
                 {s.nombre}
+                {/* Un solo indicador compartido (layoutId): Motion lo desliza hasta el enlace activo */}
+                {activa === s.id && <motion.span layoutId="menu-activo" className="menu-indicador" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
               </a>
             </li>
           ))}

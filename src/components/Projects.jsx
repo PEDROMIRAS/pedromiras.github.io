@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useReducedMotion, useSpring } from 'motion/react';
+import { motion, useReducedMotion, useSpring } from 'motion/react';
+import { SUBIDA } from '../movimiento.js';
 import Titulo from './Titulo.jsx';
 
 // Datos de cada proyecto. Todos son mini-apps aparte (su propia carpeta, su propio
@@ -9,11 +10,19 @@ const REPO = 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main';
 
 const MUELLE = { stiffness: 220, damping: 22 };
 
+// Entrada al llegar a Projects: cada tarjeta un poco después de la anterior (i), y su captura se descubre
+// de arriba abajo. Solo opacidad y recorte: la inclinación ya usa transform en la misma tarjeta.
+const TARJETA = { oculto: { opacity: 0 }, visible: (i) => ({ opacity: 1, transition: { duration: 0.6, delay: i * 0.12 } }) };
+const CORTINA = {
+  oculto: { clipPath: 'inset(0 0 100% 0)' },
+  visible: (i) => ({ clipPath: 'inset(0 0 0% 0)', transition: { ...SUBIDA, delay: i * 0.12 + 0.1 } }),
+};
+
 /**
  * Tarjeta que se inclina hacia el ratón con un muelle y vuelve recta al salir. Con el dedo no se inclina
  * (no hay puntero que seguir), ni para quien pide menos movimiento. El brillo lo pinta el CSS con --x e --y.
  */
-function Tarjeta({ children }) {
+function Tarjeta({ indice, children }) {
   const tarjeta = useRef(null);
   const quieta = useReducedMotion();
   const giroX = useSpring(0, MUELLE);
@@ -48,9 +57,19 @@ function Tarjeta({ children }) {
   };
 
   return (
-    <article ref={tarjeta} className="project glass-card" onPointerMove={mover} onPointerLeave={soltar}>
+    <motion.article
+      ref={tarjeta}
+      className="project glass-card"
+      onPointerMove={mover}
+      onPointerLeave={soltar}
+      custom={indice}
+      variants={TARJETA}
+      initial={quieta ? false : 'oculto'}
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.25 }}
+    >
       {children}
-    </article>
+    </motion.article>
   );
 }
 
@@ -96,16 +115,18 @@ export default function Projects() {
       </p>
 
       <div className="projects-container">
-        {PROYECTOS.map((p) => (
-          <Tarjeta key={p.nombre}>
-            <a
+        {PROYECTOS.map((p, i) => (
+          <Tarjeta key={p.nombre} indice={i}>
+            <motion.a
+              custom={i}
+              variants={CORTINA}
               className="project-image"
               href={`./${p.carpeta}/`}
               tabIndex={-1}
               aria-hidden="true"
             >
               <img src={p.imagen.src} alt={p.alt} width={p.imagen.ancho} height={p.imagen.alto} loading="lazy" />
-            </a>
+            </motion.a>
             <div className="project-body">
               <h3 className="project-name">{p.nombre}</h3>
               <p>{p.descripcion}</p>

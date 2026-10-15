@@ -18,6 +18,28 @@
     color: var(--color-text-light);
 }
 
+/* «Let’s talk» como titular, con la letra y la máscara del nombre de la portada */
+.contact-info .contact-titular {
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.btn-check {
+    width: 1.1em;
+    height: 1.1em;
+    margin-right: 8px;
+    vertical-align: -0.2em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
 .contact-info p {
     line-height: 1.8;
     color: var(--color-text-secondary);

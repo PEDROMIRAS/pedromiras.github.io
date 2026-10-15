@@ -1,4 +1,6 @@
+import { motion } from 'motion/react';
 import Icono from './Icono.jsx';
+import { SUBIDA } from '../movimiento.js';
 import Titulo from './Titulo.jsx';
 
 // Datos de la sección Skills: una tarjeta por categoría, ordenadas por lo que más uso en el trabajo.
@@ -48,6 +50,9 @@ export const CATEGORIAS = [
   },
 ];
 
+const LISTA = { visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } } };
+const ETIQUETA = { oculto: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { ...SUBIDA, duration: 0.5 } } };
+
 export default function Skills() {
   return (
     <section id="skills" className="skills" aria-label="Skills">
@@ -55,17 +60,23 @@ export default function Skills() {
 
       <div className="skills-container">
         {CATEGORIAS.map((categoria) => (
-          <article key={categoria.titulo} className="skills-group glass-card">
+          <motion.article
+            key={categoria.titulo}
+            className="skills-group glass-card"
+            initial="oculto"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <h3 className="skill-category-title">{categoria.titulo}</h3>
-            <ul className="skills-list">
+            <motion.ul className="skills-list" variants={LISTA}>
               {categoria.items.map((item) => (
-                <li key={item.nombre} className="skills-item">
+                <motion.li key={item.nombre} className="skills-item" variants={ETIQUETA}>
                   <Icono nombre={item.icono} />
                   <span>{item.nombre}</span>
-                </li>
+                </motion.li>
               ))}
-            </ul>
-          </article>
+            </motion.ul>
+          </motion.article>
         ))}
       </div>
     </section>
