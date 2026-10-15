@@ -20,10 +20,7 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 * **Working Contact Form:** Fully functional form integrated with **EmailJS**.
 * **Project Showcase:** Every project below is its own React app, linked from the Projects section.
   Ramo de flores stays in the repository and online at its own URL, but is not shown on the portfolio.
-* **3D Hero:** three phones float in the hero, each showing one of the apps; drag to turn them, tap one
-  to open it. It is made with three.js in `src/three/moviles.js` and downloaded separately after the page
-  loads, so it never delays the text. It does not load with reduced motion, Save-Data or without WebGL2,
-  and it pauses when off-screen. The project cards tilt towards the mouse with a spring ([Motion](https://motion.dev/), only its springs).
+* **Motion:** the project cards tilt towards the mouse with a spring ([Motion](https://motion.dev/), only its springs).
 
 ---
 
@@ -32,7 +29,6 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 Every project in this repository is now built with **React** (Vite):
 
 * **React 18 + Vite** for the main site and every sub-project.
-* [three.js](https://threejs.org/) for the 3D hero.
 * CSS Variables (Custom Properties), Flexbox & Grid, centralized media queries.
 * [EmailJS](https://www.emailjs.com/) (Contact Form).
 * Icons from [Font Awesome Free](https://fontawesome.com/), served as a local SVG sprite.

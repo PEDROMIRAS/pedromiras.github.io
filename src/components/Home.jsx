@@ -1,5 +1,4 @@
 import Icono from './Icono.jsx';
-import Hero3D from './Hero3D.jsx';
 
 export default function Home() {
   return (
@@ -41,8 +40,6 @@ export default function Home() {
           </li>
         </ul>
       </div>
-
-      <Hero3D />
 
       <a href="#about" className="home-scroll" aria-label="Scroll to About">
         <Icono nombre="chevron-down" />
