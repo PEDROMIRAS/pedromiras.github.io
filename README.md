@@ -23,7 +23,7 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 * **3D Hero:** three phones float in the hero, each showing one of the apps; drag to turn them, tap one
   to open it. It is made with three.js in `src/three/moviles.js` and downloaded separately after the page
   loads, so it never delays the text. It does not load with reduced motion, Save-Data or without WebGL2,
-  and it pauses when off-screen. The project cards also tilt towards the mouse (CSS only).
+  and it pauses when off-screen. The project cards tilt towards the mouse with a spring ([Motion](https://motion.dev/), only its springs).
 
 ---
 
@@ -80,7 +80,9 @@ Projects section — the same pattern the site already used for Ramo de flores a
 
 **A. Trabajar en el diseño de un proyecto concreto** — `npm run dev` en la carpeta de ese proyecto. Esto
 levanta solo ese proyecto; los enlaces a los *otros* proyectos **no van a funcionar** en este modo, porque
-cada uno es un proyecto Vite aparte y el servidor de desarrollo de uno no conoce a los demás:
+cada uno es un proyecto Vite aparte y el servidor de desarrollo de uno no conoce a los demás. La excepción
+es el sitio principal: su `npm run dev` abre cada mini-app desde su última compilación (su carpeta `dist/`),
+así que basta con haber ejecutado `npm run build:sitio` una vez; si no, la ruta lo explica:
 
 ```bash
 npm install && npm run dev        # sitio principal -> http://localhost:5173
