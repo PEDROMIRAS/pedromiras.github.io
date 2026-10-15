@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 const SECCIONES = [
   { id: 'about', nombre: 'About' },
+  { id: 'projects', nombre: 'Projects' },
   { id: 'experience', nombre: 'Experience' },
   { id: 'skills', nombre: 'Skills' },
-  { id: 'projects', nombre: 'Projects' },
   { id: 'contact', nombre: 'Contact' },
 ];
 

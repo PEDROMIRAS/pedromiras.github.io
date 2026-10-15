@@ -2,7 +2,16 @@
     /* El tinte se apaga antes del borde inferior: la portada no hace corte con la sección siguiente */
     background: radial-gradient(ellipse at top right, #1a051a, transparent 70%);
     z-index: 1;
-    text-align: center;
+}
+
+/* En pantalla ancha el texto va a la izquierda y deja la mitad derecha a la escena 3D */
+.home-content {
+    text-align: left;
+}
+
+.home-content > p,
+.home-content > h1 {
+    max-width: 36rem;
 }
 
 .home h1 {
@@ -21,41 +30,37 @@
     /* Color base */
     color: var(--color-text-light);
     
-    /* La magia del 3D: Capas de sombra sólida */
+    /* Relieve discreto: con la escena 3D al lado, más capas serían demasiada profundidad */
     text-shadow:
         1px 1px 0 #8e44ad,
-        2px 2px 0 #6f2d91,
-        3px 3px 0 #4a1c61,
-        6px 6px 14px rgba(0, 0, 0, 0.5);
+        2px 2px 0 #4a1c61;
 }
 
-.home h2 {
+.home .home-puesto {
     font-family: var(--font-primary);
     font-size: 1.25rem;
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--color-text-secondary);
-    margin-bottom: 20px;
+    line-height: 1.5;
+    margin: 0 0 20px;
 }
 
 .home p {
     font-size: 1.1rem;
     line-height: 1.8;
-    max-width: 700px;
-    margin: 0 auto 40px;
+    margin: 0 0 40px;
     color: var(--color-text-secondary);
 }
 
 .home-actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 15px;
 }
 
 .home-social {
     display: flex;
-    justify-content: center;
     gap: 24px;
     margin-top: 30px;
     list-style: none;

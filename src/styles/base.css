@@ -90,6 +90,7 @@ h3 {
 /* Solo la portada ocupa la pantalla entera: el resto mide lo que su contenido */
 .home {
     min-height: 100vh;
+    min-height: 100svh; /* en el móvil, sin contar la barra del navegador: la flecha no queda debajo */
 }
 
 /* Contenedores de contenido */

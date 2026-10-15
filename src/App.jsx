@@ -20,9 +20,9 @@ export default function App() {
       <main>
         <Home />
         <About />
+        <Projects />
         <Experience />
         <Skills />
-        <Projects />
         <Contact />
       </main>
       <Footer />

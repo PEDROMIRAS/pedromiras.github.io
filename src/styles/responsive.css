@@ -6,6 +6,11 @@
 
     header { padding: 10px 10px 10px 20px; }
     
+    /* Sin sitio al lado para la escena: la portada vuelve a centrarse */
+    .home-content { text-align: center; }
+    .home-content > p, .home-content > h1 { margin-inline: auto; }
+    .home-actions, .home-social { justify-content: center; }
+
     .about-content {
         flex-direction: column;
         text-align: center;
@@ -28,7 +33,7 @@
 @media (max-width: 600px) {
     
     /* --- AJUSTES DE CONTENIDO --- */
-    .home h2 { font-size: 1.2rem; }
+    .home .home-puesto { font-size: 1.2rem; }
     /* Puesto y empresa en dos líneas limpias, sin el punto colgando */
     .home-sep { display: none; }
     .home-empresa { display: block; }
