@@ -144,6 +144,8 @@
     100% { transform: translate(-8vw, -5vh) scale(0.92); }
 }
 
+.home-aurora.en-pausa span { animation-play-state: paused; }
+
 /* Con reducir movimiento: la aurora se queda quieta en su sitio de partida */
 @media (prefers-reduced-motion: reduce) {
     .home-aurora span { animation: none; }
