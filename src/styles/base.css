@@ -8,6 +8,8 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    color-scheme: dark; /* barras de desplazamiento y controles nativos en oscuro */
+    scroll-padding-top: var(--cabecera); /* lo que recibe el foco no queda debajo de la cabecera fija */
 }
 
 body {
@@ -16,6 +18,8 @@ body {
     color: var(--color-text-light);
     background-color: var(--color-bg-start);
     overflow-x: hidden;
+    touch-action: manipulation; /* sin la espera del doble toque para hacer zoom */
+    -webkit-tap-highlight-color: rgba(0, 153, 255, 0.15); /* al tocar, el azul del foco en suave */
 }
 
 /* Enlace para saltar la cabecera con el teclado: fuera de la pantalla hasta que recibe el foco */
@@ -37,9 +41,10 @@ body {
     transform: none;
 }
 
-/* Evitar problemas con el ancla y el menú fijo */
-[id] {
-    scroll-margin-top: 0; /* Reseteamos esto para que el fondo cubra todo */
+/* Las secciones ya dejan sitio a la cabecera en su padding: al saltar a una, su fondo empieza arriba del todo
+   (anula el scroll-padding de html, que es para el foco) */
+section[id] {
+    scroll-margin-top: calc(-1 * var(--cabecera));
 }
 
 /* Quien pide menos movimiento en su sistema: sin scroll animado ni transiciones */

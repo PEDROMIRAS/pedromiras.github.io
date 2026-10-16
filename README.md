@@ -25,7 +25,8 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
   behind a mask on load, then the two lines slide apart and fade as you scroll, over a slowly drifting aurora. A band
   of technologies loops below the hero, Skills has a looping video of light waves, the menu line slides to the active
   section and the send button turns into a tick. The other sections are already in place when you reach them.
-  With reduced motion everything stays still and visible.
+  A button in the header pauses everything that loops (aurora, band, videos) and remembers the choice. With
+  reduced motion everything stays still and visible.
 
 ---
 

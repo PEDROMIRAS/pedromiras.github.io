@@ -47,7 +47,7 @@
 /* --- MENÚ DESPLEGABLE ( < 1024px ) --- */
 /* Los enlaces no caben en una fila: se abren bajo la cabecera con el botón de menú */
 @media (max-width: 1024px) {
-    .menu-toggle { display: block; }
+    .menu-toggle { display: block; margin-left: auto; }
 
     .menu {
         display: none;

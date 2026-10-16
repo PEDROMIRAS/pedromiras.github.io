@@ -9,6 +9,7 @@ import {
   useVelocity,
 } from 'motion/react';
 import { CATEGORIAS } from './Skills.jsx';
+import { usePausa } from '../pausa.js';
 
 // Las de Backend, Data y Frontend: las herramientas de trabajo no dicen nada pasando en grande
 const PALABRAS = CATEGORIAS.slice(0, 3).flatMap((categoria) => categoria.items.map((item) => item.nombre));
@@ -21,6 +22,7 @@ const envolver = (min, max, v) => ((((v - min) % (max - min)) + (max - min)) % (
 // tecnologías están en Skills, así que se oculta a los lectores de pantalla.
 export default function Cinta() {
   const quieta = useReducedMotion();
+  const pausado = usePausa();
   const posicion = useMotionValue(0);
   const { scrollY } = useScroll();
   const rapidez = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
@@ -28,14 +30,14 @@ export default function Cinta() {
   const x = useTransform(posicion, (v) => `${v}%`);
 
   useAnimationFrame((_, delta) => {
-    if (quieta) return;
+    if (quieta || pausado) return;
     const segundos = Math.min(delta, 100) / 1000;
     // La pista lleva la lista dos veces: al recorrer la mitad, vuelve al inicio y queda igual
     posicion.set(envolver(-50, 0, posicion.get() - (VELOCIDAD + Math.abs(extra.get())) * segundos));
   });
 
   return (
-    <div className="cinta" aria-hidden="true">
+    <div className="cinta" aria-hidden="true" translate="no">
       <motion.div className="cinta-pista" style={{ x }}>
         {[0, 1].map((copia) => (
           <span key={copia} className="cinta-grupo">

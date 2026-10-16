@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useInView, useReducedMotion } from 'motion/react';
+import { usePausa, useVideoPausado } from '../pausa.js';
 import Titulo from './Titulo.jsx';
 
 // Datos de cada proyecto. Todos son mini-apps aparte (su propia carpeta, su propio
@@ -13,6 +14,8 @@ function Clip({ p }) {
   const clip = useRef(null);
   const cerca = useInView(clip, { once: true, margin: '300px' });
   const quieta = useReducedMotion();
+  const pausado = usePausa();
+  useVideoPausado(clip, pausado);
   if (quieta) return <img src={p.imagen.src} alt={p.alt} width={p.imagen.ancho} height={p.imagen.alto} loading="lazy" />;
   return (
     <video
@@ -21,7 +24,7 @@ function Clip({ p }) {
       poster={p.imagen.src}
       width={p.imagen.ancho}
       height={p.imagen.alto}
-      autoPlay
+      autoPlay={!pausado}
       muted
       loop
       playsInline

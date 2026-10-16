@@ -82,10 +82,10 @@ header {
     border: 1px solid var(--linea);
     border-radius: 10px;
 }
-.form-group input:focus, .form-group textarea:focus {
-    outline: none;
+/* Anillo de foco blanco: el azul apenas se ve sobre el degradado del formulario */
+.form-group input:focus-visible, .form-group textarea:focus-visible {
+    outline-color: #ffffff;
     border-color: var(--linea);
-    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.6);
 }
 .contact-email .icono { color: var(--color-text-secondary); }
 

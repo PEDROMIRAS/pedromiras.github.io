@@ -119,11 +119,11 @@ export default function Contact() {
             </div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" autoComplete="email" required />
+              <input type="email" id="email" name="email" autoComplete="email" spellCheck={false} required />
             </div>
             <div className="form-group full-width">
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" required />
+              <textarea id="message" name="message" autoComplete="off" required />
             </div>
             <input type="text" name="website" className="sr-only" tabIndex={-1} autoComplete="off" aria-hidden="true" />
             {/* role="status": los lectores de pantalla anuncian el resultado del envío */}

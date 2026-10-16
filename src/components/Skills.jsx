@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { useReducedMotion } from 'motion/react';
+import { usePausa, useVideoPausado } from '../pausa.js';
 import Icono from './Icono.jsx';
 import Titulo from './Titulo.jsx';
 
@@ -51,14 +53,18 @@ export const CATEGORIAS = [
 
 export default function Skills() {
   const quieta = useReducedMotion();
+  const pausado = usePausa();
+  const fondo = useRef(null);
+  useVideoPausado(fondo, quieta || pausado);
   return (
     <section id="skills" className="skills" aria-label="Skills">
       {/* Fondo: ondas de la paleta hechas con Remotion (videos/src/Ondas.tsx). Con reducir movimiento, solo el póster */}
       <video
+        ref={fondo}
         className="fondo-video"
         src="./assets/video/ondas.mp4"
         poster="./assets/video/ondas-poster.jpg"
-        autoPlay={!quieta}
+        autoPlay={!quieta && !pausado}
         muted
         loop
         playsInline
@@ -70,7 +76,7 @@ export default function Skills() {
         {CATEGORIAS.map((categoria) => (
           <article key={categoria.titulo} className="skills-group">
             <h3 className="skill-category-title">{categoria.titulo}</h3>
-            <ul className="skills-list">
+            <ul className="skills-list" translate="no">
               {categoria.items.map((item) => (
                 <li key={item.nombre} className="skills-item">
                   <Icono nombre={item.icono} />

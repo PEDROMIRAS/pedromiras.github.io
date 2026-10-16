@@ -2,11 +2,13 @@ import { useRef } from 'react';
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icono from './Icono.jsx';
 import { SUBIDA, aparece } from '../movimiento.js';
+import { usePausa } from '../pausa.js';
 
 export default function Home() {
   const portada = useRef(null);
   const quieta = useReducedMotion();
   const enPantalla = useInView(portada); // fuera de pantalla, la aurora se para y no gasta
+  const pausado = usePausa();
   // 0 con la portada arriba del todo, 1 cuando ya ha salido de pantalla por arriba
   const { scrollYProgress } = useScroll({ target: portada, offset: ['start start', 'end start'] });
   const haciaIzquierda = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
@@ -17,7 +19,7 @@ export default function Home() {
   return (
     <section id="home" className="home" ref={portada}>
       {/* Aurora: tres luces de la paleta que se mueven despacio por detrás de todo (solo CSS, home.css) */}
-      <div className={`home-aurora${enPantalla ? '' : ' en-pausa'}`} aria-hidden="true">
+      <div className={`home-aurora${enPantalla && !pausado ? '' : ' en-pausa'}`} aria-hidden="true">
         <span />
         <span />
         <span />

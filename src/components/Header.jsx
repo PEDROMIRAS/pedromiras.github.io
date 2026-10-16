@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import Icono from './Icono.jsx';
+import { alternarPausa, usePausa } from '../pausa.js';
 
 const SECCIONES = [
   { id: 'about', nombre: 'About' },
@@ -18,6 +20,7 @@ export default function Header() {
   const nombreVisible = useTransform(scrollY, (y) => Math.min(1, Math.max(0, (y - window.innerHeight * 0.4) / (window.innerHeight * 0.3))));
   const botonMenu = useRef(null);
   const [activa, setActiva] = useState(null);
+  const pausado = usePausa();
 
   // Sección actual: la que cruza la mitad de la pantalla
   useEffect(() => {
@@ -73,6 +76,18 @@ export default function Header() {
           ))}
         </ul>
       </nav>
+
+      {/* Para la aurora, la cinta y los vídeos en bucle. Va el último en el HTML y en pantalla: mismo orden al tabular */}
+      <button
+        type="button"
+        className="boton-pausa"
+        aria-label="Pause animations"
+        aria-pressed={pausado}
+        title={pausado ? 'Play animations' : 'Pause animations'}
+        onClick={alternarPausa}
+      >
+        <Icono nombre={pausado ? 'play' : 'pause'} />
+      </button>
     </header>
   );
 }

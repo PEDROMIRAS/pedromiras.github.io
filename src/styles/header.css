@@ -59,7 +59,38 @@ header {
     background: rgba(255, 255, 255, 0.08);
 }
 
+/* Botón de pausar las animaciones (Header.jsx): al final de la barra, del tamaño del botón de menú */
+.boton-pausa {
+    order: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+
+.boton-pausa:hover {
+    color: var(--color-text-light);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Con reducir movimiento ya está todo quieto: el botón sobraría */
+@media (prefers-reduced-motion: reduce) {
+    .boton-pausa { display: none; }
+}
+
 /* MENÚ PRINCIPAL */
+
+.menu {
+    margin-left: auto; /* nombre a la izquierda; menú y botón de pausa juntos a la derecha */
+}
 
 .menu ul {
     list-style: none;

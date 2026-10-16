@@ -7,6 +7,7 @@
 --radius-sm: 10px;                 /* Radio de campos */
 --ease: cubic-bezier(0.16, 1, 0.3, 1); /* arranca rápido y se asienta suave, como las animaciones de Motion */
 --transition: 0.3s var(--ease);    /* Transición global */
+--cabecera: 72px;                  /* Lo que tapa la cabecera fija (56px), con algo de aire */
 --gap-main: 112px;                 /* Aire sobre cada sección: deja el título por debajo de la cabecera fija */
 
 
