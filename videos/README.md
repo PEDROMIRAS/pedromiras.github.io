@@ -1,0 +1,25 @@
+# Vídeos
+
+Vídeos animados para el [portfolio](../README.md), hechos con [Remotion](https://www.remotion.dev/): cada vídeo es un componente de React que se renderiza a MP4 o WebM.
+
+No es una app del sitio: no se publica ni lo construye `scripts/build-sitio.mjs`. Solo se publica el vídeo final, copiado a `public/assets/video/` del portfolio.
+
+## Cómo se usa
+
+```console
+npm i            # una vez
+npm run dev      # Remotion Studio: vista previa en el navegador mientras se edita
+npx remotion render <id> out/<nombre>.mp4   # exporta el vídeo a out/ (no se sube a git)
+```
+
+Después, copiar el vídeo de `out/` a `../public/assets/video/` y ponerlo en la página con `<video autoplay muted loop playsinline>`.
+
+## Código
+
+- [src/Root.tsx](src/Root.tsx): registra los vídeos (`<Composition>`), cada uno con su id, duración, fps y tamaño.
+- [src/Composition.tsx](src/Composition.tsx): el primer vídeo, aún vacío.
+- [remotion.config.ts](remotion.config.ts): opciones del render.
+
+## Licencia
+
+Remotion es gratis para personas y equipos de hasta 3; para una empresa más grande hace falta su licencia ([condiciones](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)).
