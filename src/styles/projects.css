@@ -1,7 +1,8 @@
 .projects-intro {
     max-width: 60ch;
-    margin: -20px auto 40px; /* pegado al título, no a las tarjetas */
-    text-align: center;
+    /* pegado al título, no a las tarjetas, y en el borde izquierdo del contenido como el título */
+    align-self: flex-start;
+    margin: -16px 0 40px max(0px, calc((100% - 68.75rem) / 2));
     line-height: 1.6;
     color: var(--color-text-secondary);
 }

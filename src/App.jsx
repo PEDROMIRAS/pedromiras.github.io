@@ -19,6 +19,9 @@ export default function App() {
   // reducedMotion="user": con «reducir movimiento» nada se desplaza; solo se funde
   return (
     <MotionConfig reducedMotion="user">
+      <a className="saltar" href="#about">
+        Skip to content
+      </a>
       <Header />
       <main>
         <Home />

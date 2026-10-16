@@ -1,22 +1,17 @@
-/* Luces de fondo: se apagan justo en los bordes superior e inferior, sin corte con las secciones vecinas */
-.skills {
-    background:
-        radial-gradient(ellipse 45% 50% at 0% 50%, rgba(142, 68, 173, 0.16), transparent),
-        radial-gradient(ellipse 45% 50% at 100% 50%, rgba(142, 68, 173, 0.16), transparent);
-}
-
-/* Una tarjeta por categoría: 2 columnas (1 en móvil, ver responsive.css) */
+/* Una tarjeta por categoría: Backend, Data y Frontend en tres columnas, y Tools, la más larga, debajo
+   a todo el ancho (1 columna en móvil, ver responsive.css) */
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    align-items: start;
-    position: relative;
-    z-index: 1;
 }
 
 .skills-group {
     padding: 30px;
+}
+
+.skills-group:last-child {
+    grid-column: 1 / -1;
 }
 
 .skill-category-title {

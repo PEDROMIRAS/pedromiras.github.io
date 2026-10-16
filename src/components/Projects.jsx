@@ -108,7 +108,7 @@ const PROYECTOS = [
 export default function Projects() {
   return (
     <section id="projects" className="projects" aria-labelledby="projects-title">
-      <Titulo id="projects-title">PROJECTS</Titulo>
+      <Titulo id="projects-title">Projects</Titulo>
       <p className="projects-intro">
         Small apps I build in my own time to try ideas out. My day-to-day work is back end and data, and it stays
         private.
@@ -139,18 +139,18 @@ export default function Projects() {
                 <a
                   href={`./${p.carpeta}/`}
                   className="btn btn-primary"
-                  aria-label={`Live Demo: ${p.nombre}`}
+                  aria-label={`Live demo: ${p.nombre}`}
                 >
-                  Live Demo
+                  Live demo
                 </a>
                 <a
                   href={`${REPO}/${p.carpeta}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline"
-                  aria-label={`Source Code: ${p.nombre}`}
+                  aria-label={`Source code: ${p.nombre}`}
                 >
-                  Source Code
+                  Source code
                 </a>
               </div>
             </div>

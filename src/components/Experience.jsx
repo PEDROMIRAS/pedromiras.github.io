@@ -30,13 +30,13 @@ const ETAPAS = [
 export default function Experience() {
   return (
     <section id="experience" className="experience" aria-labelledby="experience-title">
-      <Titulo id="experience-title">EXPERIENCE</Titulo>
+      <Titulo id="experience-title">Experience</Titulo>
 
       <div className="experience-container">
         {ETAPAS.map((etapa) => (
           <motion.article
             key={etapa.titulo}
-            className="experience-item glass-card"
+            className="experience-item"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}

@@ -26,13 +26,13 @@ header {
 /* Nombre: enlaza al inicio */
 .brand {
     font-family: var(--font-heading);
+    font-stretch: 125%;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
     color: var(--color-text-light);
-    text-shadow: 1px 1px 0 var(--color-primary-dark), 2px 2px 0 #461c5c;
 }
 
 /* Arriba del todo está transparente (Header.jsx), pero con el teclado tiene que verse dónde está el foco */
@@ -71,10 +71,8 @@ header {
 .menu a {
     color: var(--color-text-secondary);
     text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    letter-spacing: 0.08em;
     padding: 8px 12px;
     border-radius: var(--radius-sm);
     display: inline-block;

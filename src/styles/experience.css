@@ -2,15 +2,16 @@
 .experience-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    border-bottom: 1px solid var(--color-border);
 }
 
 /* En escritorio, las fechas en su columna y el texto con un largo cómodo de leer (unos 70 caracteres) */
 .experience-item {
     display: grid;
-    grid-template-columns: 11rem minmax(0, 70ch);
+    grid-template-columns: 12.5rem minmax(0, 70ch);
     column-gap: 40px;
-    padding: 30px;
+    padding-block: 36px 40px;
+    border-top: 1px solid var(--color-border);
 }
 
 .experience-item > :not(.experience-period) {
@@ -25,7 +26,8 @@
 .experience-period {
     font-size: 0.85rem;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 0.1em;
+    white-space: nowrap; /* la fecha en una línea: su columna ya tiene el ancho justo */
     text-transform: uppercase;
     color: var(--color-primary-light);
 }

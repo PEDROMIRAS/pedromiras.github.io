@@ -8,7 +8,7 @@ export default function About() {
           <img src="./assets/img/portfolio-image.webp" alt="Pedro Miras, Web Developer" width="560" height="560" loading="lazy" />
         </figure>
         <div className="about-text">
-          <Titulo className="about-title">ABOUT ME</Titulo>
+          <Titulo className="about-title">About me</Titulo>
           <p>
             I’m Pedro Miras, a Web Developer from Lorca, Spain. I work at NTT DATA on the software behind a parcel
             delivery service, mostly with Spring Boot, PL/SQL and Talend.

@@ -9,10 +9,9 @@
 .about-img {
     width: 350px;
     height: 350px;
-    border-radius: 50%;
+    border-radius: 28px;
     overflow: hidden;
-    border: 3px solid var(--color-primary-dark);
-    box-shadow: 0 0 20px rgba(142, 68, 173, 0.3);
+    border: 1px solid var(--color-border);
     flex-shrink: 0;
 }
 
@@ -29,18 +28,13 @@
 
 /* Junto a la foto el título va a la izquierda; en una columna, centrado (ver responsive.css) */
 .about-title {
-    text-align: left;
-    margin-bottom: 20px;
-}
-.about-title .titulo-raya {
-    margin-left: 0;
+    margin-bottom: 24px;
 }
 
 .about-text p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--color-text-secondary);
-    text-align: left; /* también en móvil, donde el bloque va centrado */
 }
 .about-text p + p {
     margin-top: 1em;

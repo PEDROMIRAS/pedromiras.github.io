@@ -47,10 +47,10 @@ export default function Home() {
 
         <motion.div className="home-actions" {...aparece(0.75)}>
           <a href="#projects" className="btn btn-primary">
-            View My Projects
+            View my projects
           </a>
           <a href="#contact" className="btn btn-outline">
-            Contact Me
+            Contact me
           </a>
         </motion.div>
 

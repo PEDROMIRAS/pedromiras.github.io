@@ -18,6 +18,35 @@ body {
     overflow-x: hidden;
 }
 
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* Enlace para saltar la cabecera con el teclado: fuera de la pantalla hasta que recibe el foco */
+.saltar {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1001;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-dark);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+}
+
+.saltar:focus-visible {
+    transform: none;
+}
+
 /* Evitar problemas con el ancla y el menú fijo */
 [id] {
     scroll-margin-top: 0; /* Reseteamos esto para que el fondo cubra todo */
@@ -60,15 +89,22 @@ button, input, textarea {
 /* Tipografía */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    font-stretch: 125%;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
 }
 
-/* Títulos de tarjeta en la letra de lectura: Orbitron cuesta de leer en frases largas */
+/* Títulos de tarjeta en la letra de lectura: la ancha cuesta de leer en frases largas */
 h3 {
     font-family: var(--font-primary);
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    font-stretch: normal;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+p {
+    text-wrap: pretty;
 }
 
 /* --- ESTRUCTURA DE SECCIONES (Full Screen) --- */
@@ -141,6 +177,7 @@ h3 {
 /* El separador va detrás de cada palabra, también de la última: así las dos copias miden igual y el bucle no salta */
 .cinta-grupo > span {
     font-family: var(--font-heading);
+    font-stretch: 125%;
     font-size: clamp(1.4rem, 3.5vw, 2.6rem);
     font-weight: 800;
     letter-spacing: 0.06em;
@@ -156,13 +193,12 @@ h3 {
 
 /* Títulos de Sección */
 .section-title {
-    text-align: center;
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    width: 100%;
+    max-width: 68.75rem; /* el ancho del contenido: así empieza en su mismo borde izquierdo */
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    line-height: 1.05;
     color: var(--color-text-light);
     margin-bottom: 40px;
-    text-transform: uppercase;
 }
 /* El morado va en la raya, no en el texto: queda reservado para lo que se puede pulsar */
 .titulo-raya {
@@ -170,7 +206,7 @@ h3 {
     transform-origin: left;
     width: 48px;
     height: 3px;
-    margin: 14px auto 0;
+    margin-top: 18px;
     border-radius: 2px;
     background: var(--color-primary);
 }
@@ -208,9 +244,13 @@ h3 {
     border-radius: var(--radius-sm);
     font-weight: 600;
     text-decoration: none;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
     cursor: pointer;
     text-align: center;
+}
+
+.btn:active:not(:disabled) {
+    transform: scale(0.97);
 }
 
 .btn-primary {

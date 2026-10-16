@@ -1,6 +1,4 @@
 .home {
-    /* El tinte se apaga antes del borde inferior: la portada no hace corte con la sección siguiente */
-    background: radial-gradient(ellipse at top right, #1a051a, transparent 70%);
     z-index: 1;
     overflow-x: clip; /* las líneas del nombre se salen por los lados al bajar: sin barra horizontal */
 }
@@ -24,8 +22,10 @@
     margin-bottom: 12px;
     font-family: var(--font-primary);
     font-size: 1.25rem;
+    font-stretch: normal;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--color-text-secondary);
 }
 
@@ -33,9 +33,8 @@
     display: block;
     font-size: clamp(3.5rem, 14vw, 11.5rem);
     line-height: 0.92;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.02em;
     color: var(--color-text-light);
-    text-shadow: 2px 2px 0 #4a1c61;
 }
 
 .home .home-puesto {

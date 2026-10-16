@@ -1,8 +1,6 @@
 /* --- MÓVILES Y TABLETS ( < 1024px ) --- */
 @media (max-width: 1024px) {
-    .section-title { font-size: 1.5rem; margin-bottom: 30px; }
-    .about-title { text-align: center; }
-    .about-title .titulo-raya { margin-left: auto; }
+    .section-title { margin-bottom: 30px; }
 
     header { padding: 10px 10px 10px 20px; }
     
@@ -14,15 +12,13 @@
 
     .about-content {
         flex-direction: column;
-        text-align: center;
         gap: 30px;
     }
     .about-img { width: 250px; height: 250px; }
     /* En una columna el texto ocupa el ancho disponible: su mínimo de 300px se salía por la derecha */
     .about-text { min-width: 0; width: 100%; }
     
-    .skills-container { grid-template-columns: repeat(2, 1fr); }
-    .project-links .btn { padding-inline: 10px; } /* que "Source Code" quepa en una línea */
+    .project-links .btn { padding-inline: 10px; } /* que "Source code" quepa en una línea */
     
     .contact-container {
         grid-template-columns: 1fr;

@@ -3,7 +3,6 @@ import emailjs from '@emailjs/browser';
 import { motion } from 'motion/react';
 import { TEXTO } from '../movimiento.js';
 import Icono from './Icono.jsx';
-import Titulo from './Titulo.jsx';
 
 const EMAIL = 'p.miraspc35@gmail.com';
 
@@ -73,17 +72,16 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="contact">
-      <Titulo>CONTACT</Titulo>
+    <section id="contact" className="contact" aria-labelledby="contact-title">
       <div className="contact-container">
         <div className="contact-info">
-          <motion.h3 className="contact-titular" initial="oculto" whileInView="visible" viewport={{ once: true, amount: 0.6 }}>
+          <motion.h2 id="contact-title" className="contact-titular" initial="oculto" whileInView="visible" viewport={{ once: true, amount: 0.6 }}>
             <span className="mascara">
               <motion.span className="mascara-texto" variants={TEXTO}>
                 Let’s talk
               </motion.span>
             </span>
-          </motion.h3>
+          </motion.h2>
           <p>
             I’m always happy to talk about technology or compare notes with other developers. I’m not looking for a
             new job right now.
@@ -95,7 +93,7 @@ export default function Contact() {
               {EMAIL}
             </a>
             <button type="button" className="btn btn-outline" onClick={copiarEmail}>
-              {copiado ? 'Copied!' : 'Copy'}
+              {copiado ? 'Copied' : 'Copy'}
             </button>
             <span role="status" className="sr-only">
               {copiado ? 'Email address copied' : ''}
@@ -148,7 +146,7 @@ export default function Contact() {
               ) : enviando ? (
                 'Sending…'
               ) : (
-                'Send Message'
+                'Send message'
               )}
             </button>
           </form>

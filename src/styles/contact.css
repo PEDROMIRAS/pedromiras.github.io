@@ -19,13 +19,11 @@
 }
 
 /* «Let’s talk» como titular, con la letra y la máscara del nombre de la portada */
-.contact-info .contact-titular {
-    margin-bottom: 20px;
-    font-family: var(--font-heading);
-    font-size: clamp(2.2rem, 5vw, 3.75rem);
+.contact-titular {
+    margin-bottom: 8px;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 1;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    letter-spacing: -0.02em;
 }
 
 .btn-check {
@@ -64,6 +62,7 @@
     text-decoration: none;
     font-weight: 500;
     overflow-wrap: anywhere;
+    white-space: nowrap; /* el email entero en una línea: si no cabe con el botón, el botón baja */
 }
 
 .contact-email .btn {

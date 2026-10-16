@@ -1,4 +1,4 @@
-/* Las fuentes (Roboto y Orbitron) se cargan desde index.html */
+/* Las fuentes (Geist y Archivo, esta solo en su anchura de 125%) se cargan desde index.html */
 /* VARIABLES GLOBALES */
 
 :root {
@@ -10,8 +10,8 @@
 
 
 /* Fuentes */
---font-primary: 'Roboto', sans-serif;
---font-heading: 'Orbitron', sans-serif;
+--font-primary: 'Geist', sans-serif;
+--font-heading: 'Archivo', sans-serif;
 
 /* COLORES */
 /* --- Fondo degradado --- */
@@ -20,9 +20,9 @@
 --color-bg-end: #2e2e2e;          /* Gris oscuro más claro */
 
 /* --- Colores principales / detalles --- */
---color-primary: #8e44ad;         /* Violeta / púrpura principal */
---color-primary-dark: #6f2d91;    /* Violeta oscuro para hover */
---color-primary-light: #a569bd;   /* Violeta claro: títulos y foco, con contraste suficiente sobre los fondos oscuros */
+--color-primary: #8d6dba;         /* Violeta principal: rayas, bordes y detalles */
+--color-primary-dark: #6a4c94;    /* Violeta oscuro: fondo de los botones, con texto blanco legible */
+--color-primary-light: #b79ddd;   /* Violeta claro: fechas y foco, con contraste suficiente sobre los fondos oscuros */
 
 /* --- Texto --- */
 --color-text-light: #ffffff;      /* Texto principal claro */
@@ -34,5 +34,5 @@
 --color-border: rgba(255,255,255,0.1);     /* Borde suave */
 
 /* --- Fondos y bordes con alpha para tarjetas y detalles --- */
---bg-alpha-2: rgba(142,68,173,0.2);   /* Fondo hover tarjetas */
+--bg-alpha-2: rgba(141,109,186,0.2);   /* Fondo hover tarjetas */
 }

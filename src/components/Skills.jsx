@@ -56,7 +56,7 @@ const ETIQUETA = { oculto: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, t
 export default function Skills() {
   return (
     <section id="skills" className="skills" aria-label="Skills">
-      <Titulo>SKILLS</Titulo>
+      <Titulo>Skills</Titulo>
 
       <div className="skills-container">
         {CATEGORIAS.map((categoria) => (
