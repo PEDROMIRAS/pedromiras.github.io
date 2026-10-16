@@ -1,25 +1,23 @@
-/* Una tarjeta por categoría: Backend, Data y Frontend en tres columnas, y Tools, la más larga, debajo
-   a todo el ancho (1 columna en móvil, ver responsive.css) */
+/* Una fila por categoría, separadas por líneas como Experience: la categoría en la misma columna que
+   las fechas de allí y las tecnologías al lado (una debajo de otra en pantallas estrechas, ver responsive.css) */
 .skills-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .skills-group {
-    padding: 30px;
-}
-
-.skills-group:last-child {
-    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 12.5rem 1fr;
+    column-gap: 40px;
+    padding-block: 28px;
+    border-top: 1px solid var(--color-border);
 }
 
 .skill-category-title {
+    padding-top: 4px; /* a la altura de la primera línea de tecnologías */
     font-size: 0.85rem;
     color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    margin-bottom: 18px;
 }
 
 .skills-list {

@@ -4,7 +4,9 @@
 
     header { padding: 10px 10px 10px 20px; }
     
-    .experience-item { display: block; } /* sin sitio para dos columnas: las fechas vuelven encima */
+    /* sin sitio para dos columnas: las fechas y las categorías vuelven encima */
+    .experience-item, .skills-group { display: block; }
+    .skill-category-title { margin-bottom: 16px; }
 
     .about-content {
         flex-direction: column;
@@ -29,11 +31,12 @@
     .home .home-puesto { font-size: 1.2rem; }
     .home-linea { font-size: 18vw; } /* en el móvil, el nombre llena el ancho */
     .home-actions .btn { flex: 1 1 auto; } /* uno debajo del otro, los dos a todo el ancho */
+    .home-foto { width: 100vw; filter: brightness(0.35); } /* en el móvil, detrás del nombre a todo el ancho */
     /* Puesto y empresa en dos líneas limpias, sin el punto colgando */
     .home-sep { display: none; }
     .home-empresa { display: block; }
     
-    .skills-container, .projects-container { grid-template-columns: 1fr; }
+    .projects-container { grid-template-columns: 1fr; }
     .projects-container > :last-child:nth-child(odd) { width: auto; } /* en una columna ocupa todo el ancho */
     .project-body, .contact-form { padding: 20px; }
     

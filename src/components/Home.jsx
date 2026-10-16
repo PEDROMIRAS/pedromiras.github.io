@@ -1,7 +1,33 @@
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import Icono from './Icono.jsx';
 import { SUBIDA, aparece } from '../movimiento.js';
+
+const MUELLE = { stiffness: 220, damping: 18 };
+const TIRON = 0.15; // fracción de la distancia al centro que el botón sigue al ratón
+
+// Botón que se deja llevar un poco hacia el ratón mientras está encima. Solo con ratón: en el móvil no hay cursor
+function Magnetico({ className, href, children }) {
+  const quieta = useReducedMotion();
+  const x = useSpring(0, MUELLE);
+  const y = useSpring(0, MUELLE);
+  const mover = (e) => {
+    if (quieta || e.pointerType !== 'mouse') return;
+    const r = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - r.left - r.width / 2) * TIRON);
+    y.set((e.clientY - r.top - r.height / 2) * TIRON);
+  };
+  const soltar = () => {
+    x.set(0);
+    y.set(0);
+  };
+  // whileTap en vez del :active de .btn: el transform en línea de Motion taparía el del CSS
+  return (
+    <motion.a href={href} className={className} style={{ x, y }} onPointerMove={mover} onPointerLeave={soltar} whileTap={{ scale: 0.97 }}>
+      {children}
+    </motion.a>
+  );
+}
 
 export default function Home() {
   const portada = useRef(null);
@@ -11,9 +37,22 @@ export default function Home() {
   const haciaIzquierda = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
   const haciaDerecha = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const desvanece = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const bajaFoto = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
   return (
     <section id="home" className="home" ref={portada}>
+      {/* Decoración: la misma foto está en About con su texto alternativo. Baja algo más lento que la página */}
+      <motion.img
+        className="home-foto"
+        src="./assets/img/portfolio-image.webp"
+        alt=""
+        width="560"
+        height="560"
+        style={quieta ? undefined : { y: bajaFoto }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 0.3 }}
+      />
       <div className="home-content">
         <h1 className="home-nombre">
           <motion.span className="home-saludo" {...aparece(0)}>
@@ -46,12 +85,12 @@ export default function Home() {
         <motion.p {...aparece(0.65)}>I build and maintain web applications, from the database to the interface.</motion.p>
 
         <motion.div className="home-actions" {...aparece(0.75)}>
-          <a href="#projects" className="btn btn-primary">
+          <Magnetico href="#projects" className="btn btn-primary">
             View my projects
-          </a>
-          <a href="#contact" className="btn btn-outline">
+          </Magnetico>
+          <Magnetico href="#contact" className="btn btn-outline">
             Contact me
-          </a>
+          </Magnetico>
         </motion.div>
 
         <motion.ul className="home-social" {...aparece(0.85)}>

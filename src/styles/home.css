@@ -7,6 +7,21 @@
     text-align: left;
 }
 
+/* Foto de fondo: a la derecha, detrás del nombre, fundida en círculo con el negro.
+   shortcut: el original mide 560px y aquí se ve hasta 720px, algo blando; con una foto de 1400px o más quedaría nítida */
+.home-foto {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    width: min(50vw, 720px);
+    height: auto;
+    filter: brightness(0.5); /* oscurecida con filtro y no con opacity, que la usa Motion para la entrada */
+    -webkit-mask-image: radial-gradient(closest-side, #000 15%, transparent);
+    mask-image: radial-gradient(closest-side, #000 15%, transparent);
+    pointer-events: none;
+}
+
 .home-content > p {
     max-width: 36rem;
 }

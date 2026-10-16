@@ -62,7 +62,7 @@ export default function Skills() {
         {CATEGORIAS.map((categoria) => (
           <motion.article
             key={categoria.titulo}
-            className="skills-group glass-card"
+            className="skills-group"
             initial="oculto"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}

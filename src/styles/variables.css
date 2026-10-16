@@ -5,7 +5,8 @@
 /* Variables generales de estilo */
 --radius: 12px;                    /* Radio de tarjetas y cabecera */
 --radius-sm: 8px;                  /* Radio de botones, campos y etiquetas con icono */
---transition: 0.3s ease;           /* Transición global */
+--ease: cubic-bezier(0.16, 1, 0.3, 1); /* arranca rápido y se asienta suave, como las animaciones de Motion */
+--transition: 0.3s var(--ease);    /* Transición global */
 --gap-main: 112px;                 /* Aire sobre cada sección: deja el título por debajo de la cabecera fija */
 
 
