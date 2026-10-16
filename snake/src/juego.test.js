@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { CELDAS, DIRECCIONES, avanzar, entre, estadoInicial, girar } from './juego.js';
 
-const { ArrowUp, ArrowLeft, ArrowRight } = DIRECCIONES;
+const { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } = DIRECCIONES;
 
 test('dos teclas rápidas en el mismo tick no dan la vuelta a la serpiente', () => {
   const e = { ...estadoInicial(), ...ArrowRight, food: { x: 0, y: 0 } };
@@ -13,11 +13,16 @@ test('dos teclas rápidas en el mismo tick no dan la vuelta a la serpiente', () 
   assert.deepEqual(e.snake[0], { x: 5, y: 4 });
 });
 
-test('atraviesa el borde y aparece por el lado contrario', () => {
-  const e = { ...estadoInicial(), ...ArrowRight, food: { x: 0, y: 0 } };
-  e.snake = [{ x: CELDAS - 1, y: 7 }];
-  avanzar(e);
-  assert.deepEqual(e.snake[0], { x: 0, y: 7 });
+test('chocar con un muro termina la partida, por cualquiera de los cuatro lados', () => {
+  for (const [dir, pos] of [[ArrowRight, { x: CELDAS - 1, y: 7 }], [ArrowLeft, { x: 0, y: 7 }], [ArrowUp, { x: 7, y: 0 }], [ArrowDown, { x: 7, y: CELDAS - 1 }]]) {
+    const e = { ...estadoInicial(), ...dir, food: { x: 3, y: 3 } };
+    e.snake = [pos];
+    assert.equal(avanzar(e), false);
+  }
+  // junto al muro, pero sin chocar todavía
+  const e = { ...estadoInicial(), ...ArrowRight, food: { x: 3, y: 3 } };
+  e.snake = [{ x: CELDAS - 2, y: 7 }];
+  assert.equal(avanzar(e), true);
 });
 
 test('al comer crece y la fruta nueva no cae sobre la serpiente', () => {
@@ -35,9 +40,8 @@ test('chocar con su propio cuerpo termina la partida', () => {
   assert.equal(avanzar(e), false);
 });
 
-test('entre dos ticks, cada segmento se dibuja a medio camino y cruza los bordes por el lado corto', () => {
+test('entre dos ticks, cada segmento se dibuja a medio camino', () => {
   assert.deepEqual(entre({ x: 4, y: 5 }, { x: 5, y: 5 }, 0.25), { x: 4.25, y: 5 });
-  assert.deepEqual(entre({ x: CELDAS - 1, y: 3 }, { x: 0, y: 3 }, 0.5), { x: CELDAS - 0.5, y: 3 });
-  assert.deepEqual(entre({ x: 2, y: 0 }, { x: 2, y: CELDAS - 1 }, 0.5), { x: 2, y: -0.5 });
+  assert.deepEqual(entre({ x: 2, y: 3 }, { x: 2, y: 2 }, 0.5), { x: 2, y: 2.5 });
   assert.deepEqual(entre(undefined, { x: 7, y: 7 }, 0.5), { x: 7, y: 7 }); // el que nace al comer no se mueve
 });

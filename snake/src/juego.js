@@ -29,7 +29,7 @@ export function girar(e, d) {
   if (d.dx !== -e.dx || d.dy !== -e.dy) e.siguiente = d;
 }
 
-// Avanza un tick. Devuelve false si la serpiente ha chocado consigo misma.
+// Avanza un tick. Devuelve false si la serpiente ha chocado con un muro o consigo misma.
 export function avanzar(e) {
   if (e.siguiente) {
     Object.assign(e, e.siguiente);
@@ -37,11 +37,9 @@ export function avanzar(e) {
   }
   if (e.dx === 0 && e.dy === 0) return true; // aún no ha empezado a moverse
 
-  // Atraviesa los bordes del tablero (wrapping)
-  const cabeza = {
-    x: (e.snake[0].x + e.dx + CELDAS) % CELDAS,
-    y: (e.snake[0].y + e.dy + CELDAS) % CELDAS,
-  };
+  const cabeza = { x: e.snake[0].x + e.dx, y: e.snake[0].y + e.dy };
+  const fuera = (v) => v < 0 || v >= CELDAS;
+  if (fuera(cabeza.x) || fuera(cabeza.y)) return false; // los bordes del tablero son muros
   const come = cabeza.x === e.food.x && cabeza.y === e.food.y;
   const cuerpo = come ? e.snake : e.snake.slice(0, -1); // si no come, la cola se aparta
   if (cuerpo.some((p) => p.x === cabeza.x && p.y === cabeza.y)) return false;
@@ -52,15 +50,7 @@ export function avanzar(e) {
 }
 
 // Dónde dibujar un segmento entre dos ticks: con t=0 donde estaba y con t=1 donde está ahora.
-// Al cruzar un borde va por el camino corto (sale por un lado del tablero).
-// shortcut: al cruzar un borde el segmento sale por un lado y entra de golpe por el otro; dibujar una copia al otro lado si se nota
 export function entre(antes, ahora, t) {
   if (!antes) return ahora; // segmento que acaba de nacer al comer: aún no se mueve
-  const eje = (a, b) => {
-    let d = b - a;
-    if (d > 1) d -= CELDAS;
-    if (d < -1) d += CELDAS;
-    return a + d * t;
-  };
-  return { x: eje(antes.x, ahora.x), y: eje(antes.y, ahora.y) };
+  return { x: antes.x + (ahora.x - antes.x) * t, y: antes.y + (ahora.y - antes.y) * t };
 }

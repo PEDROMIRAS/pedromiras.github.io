@@ -1,18 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { CELDAS, DIRECCIONES, avanzar, entre, estadoInicial, girar } from './juego.js';
+import { DIRECCIONES, avanzar, entre, estadoInicial, girar } from './juego.js';
 
 const TICK = 100; // ms por casilla: la velocidad del juego (10 casillas por segundo)
 
 const celdas = (n) => `calc(var(--celda) * ${n})`;
 
 // Giro de la cola para que su lado ancho mire al segmento anterior (0 = el anterior está arriba).
-// El módulo cubre el caso en que la serpiente está cruzando un borde.
 function giroCola(cola, anterior) {
-  const mx = (anterior.x - cola.x + CELDAS) % CELDAS;
-  const my = (anterior.y - cola.y + CELDAS) % CELDAS;
-  if (mx === 1) return 90;
-  if (mx === CELDAS - 1) return 270;
-  return my === 1 ? 180 : 0;
+  if (anterior.x - cola.x === 1) return 90;
+  if (anterior.x - cola.x === -1) return 270;
+  return anterior.y - cola.y === 1 ? 180 : 0;
 }
 
 // Estado del juego: vive en un ref porque cambia en cada "tick" del bucle,

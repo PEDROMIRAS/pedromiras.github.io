@@ -97,7 +97,7 @@ const PROYECTOS = [
   {
     nombre: 'Snake',
     descripcion: `The classic game. Move with the arrow keys or by swiping on a phone, eat fruit to grow and
-      cross the edges of the board. It keeps your score and your best result.`,
+      don’t hit the walls or your own tail. It keeps your score and your best result.`,
     etiquetas: ['React', 'JavaScript'],
     carpeta: 'snake',
     imagen: { src: './assets/img/snake.webp', ancho: 1280, alto: 720 },
