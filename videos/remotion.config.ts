@@ -11,3 +11,6 @@ Config.setRspack(true);
 Config.setVideoImageFormat("jpeg");
 Config.setOverwriteOutput(true);
 Config.setDefaultPremountInSeconds(2);
+
+// Las imágenes salen de la carpeta public/ del portfolio: la misma foto que usa la web, sin copiarla
+Config.setPublicDir("../public");
