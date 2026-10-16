@@ -1,0 +1,171 @@
+/* PRUEBA: el portfolio con el DESIGN.md de Framer encima (rama prueba-framer, no va a main).
+   GT Walsheim es de pago: Geist 600 con el tracking muy cerrado hace de sustituto, como sugiere el propio DESIGN.md */
+
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Geist', sans-serif;
+
+    --color-bg-start: #090909;          /* canvas */
+    --superficie-1: #141414;
+    --superficie-2: #1c1c1c;
+    --linea: #262626;                    /* hairline */
+    --color-border: #1a1a1a;             /* hairline-soft */
+    --color-text-light: #ffffff;         /* ink */
+    --color-text-secondary: #999999;     /* ink-muted: la jerarquía es binaria, ink o ink-muted */
+    --color-text-muted: #999999;
+    --color-primary: #0099ff;            /* el único color: enlaces, foco y selección */
+    --color-primary-light: #0099ff;
+    --color-primary-dark: #0099ff;
+    --bg-alpha-2: rgba(0, 153, 255, 0.12);
+    --radius: 20px;
+    --radius-sm: 10px;
+}
+
+body {
+    font-feature-settings: 'cv01', 'cv05', 'cv09', 'cv11', 'ss03';
+    font-size: 15px;
+}
+
+body::after { display: none; } /* sin grano: el lienzo de Framer es plano */
+
+/* Titulares: peso medio, sin mayúsculas, tracking a -5% */
+h1, h2, .brand, .cinta-grupo > span {
+    font-stretch: normal;
+    font-weight: 600;
+}
+.home-nombre { text-transform: none; }
+.home-linea { letter-spacing: -0.06em; line-height: 0.85; }
+.section-title, .contact-titular { letter-spacing: -0.05em; font-size: clamp(2.4rem, 5vw, 3.9rem); line-height: 1; }
+.brand { text-transform: none; letter-spacing: -0.03em; font-size: 1.1rem; }
+.cinta-grupo > span { text-transform: none; letter-spacing: -0.04em; color: #3a3a3a; }
+h3 { letter-spacing: -0.02em; }
+p { line-height: 1.45; }
+.experience-period, .skill-category-title { color: var(--color-text-secondary); letter-spacing: 0.02em; text-transform: none; font-weight: 500; font-size: 0.9rem; }
+
+/* Cabecera: barra plana a todo el ancho, 56px */
+header {
+    width: 100%;
+    top: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 max(20px, calc((100% - 68.75rem) / 2));
+    min-height: 56px;
+    background-color: rgba(9, 9, 9, 0.8);
+}
+.menu a { font-size: 14px; color: var(--color-text-secondary); }
+.menu a::after, .menu-indicador { background-color: var(--color-text-light); }
+
+/* Botones: píldora blanca la principal, píldora carbón la secundaria, nunca con borde */
+.btn {
+    border: none;
+    border-radius: 100px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.btn-primary { background: #ffffff; color: #000000; }
+.btn-primary:hover { background: #e6e6e6; }
+.btn-outline { background: var(--superficie-1); color: var(--color-text-light); }
+.btn-outline:hover { background: var(--superficie-2); }
+
+/* Tarjetas: carbón sin borde ni cristal; la elevación es el cambio de superficie */
+.glass-card {
+    background: var(--superficie-1);
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+}
+.project:hover { border-color: transparent; box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.25); }
+
+/* Capturas como maquetas sobre degradado: el recurso de "escaparate" de Framer, solo en dos tarjetas */
+.project-image {
+    display: block;
+    padding: 28px 28px 0;
+    background: var(--superficie-2);
+}
+.project:nth-child(1) .project-image { background: radial-gradient(120% 120% at 20% 0%, #6a4cf5, #2a1a6b 60%, #141414); }
+.project:nth-child(2) .project-image { background: radial-gradient(120% 120% at 80% 0%, #d44df0, #ff7a3d 55%, #141414); }
+.project-image img { border-radius: 10px 10px 0 0; }
+.project-body { padding: 24px; }
+
+.tags li { border-radius: 6px; border: none; background: var(--superficie-2); color: var(--color-text-secondary); }
+
+/* Formulario */
+.form-group input, .form-group textarea {
+    background: var(--superficie-2);
+    border: 1px solid var(--linea);
+    border-radius: 10px;
+}
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--linea);
+    box-shadow: 0 0 0 1px rgba(0, 153, 255, 0.6);
+}
+.contact-email .icono { color: var(--color-text-secondary); }
+
+.about-img { border: none; border-radius: 20px; }
+
+footer { font-size: 13px; }
+
+
+/* ---------- COLOR: la paleta de degradados del DESIGN.md (violeta, magenta, naranja, coral) ---------- */
+:root {
+    --violeta: #6a4cf5;
+    --magenta: #d44df0;
+    --naranja: #ff7a3d;
+    --coral: #ff5577;
+    --degradado: linear-gradient(135deg, var(--violeta), var(--magenta) 50%, var(--naranja));
+}
+
+/* La tercera captura también con su degradado */
+.project:nth-child(3) .project-image { background: radial-gradient(120% 120% at 50% 0%, var(--coral), var(--violeta) 60%, #141414); }
+
+/* About: la foto montada sobre una tarjeta de degradado */
+.about-img { padding: 12px; background: var(--degradado); border-radius: 30px; }
+.about-img img { border-radius: 20px; }
+
+/* Contact: el formulario es la tarjeta foco. Velo oscuro encima para que el texto blanco pase AA */
+.contact-form.glass-card {
+    background: linear-gradient(rgba(9, 9, 9, 0.35), rgba(9, 9, 9, 0.35)), linear-gradient(160deg, var(--violeta), var(--magenta) 55%, var(--naranja));
+    border-radius: 30px;
+}
+.contact-form .form-group label { color: #ffffff; }
+.contact-form .form-group input, .contact-form .form-group textarea { background: rgba(9, 9, 9, 0.55); border-color: rgba(255, 255, 255, 0.18); }
+
+/* Línea del menú en degradado */
+.menu a::after, .menu-indicador { background: var(--degradado); }
+
+/* Cinta: cada palabra en un color de la paleta (aclarados, es texto grande sobre negro) */
+.cinta-grupo > span:nth-child(4n+1) { color: #8b73ff; }
+.cinta-grupo > span:nth-child(4n+2) { color: #e07af5; }
+.cinta-grupo > span:nth-child(4n+3) { color: #ff9a66; }
+.cinta-grupo > span:nth-child(4n+4) { color: #ff7a93; }
+
+/* Fechas de Experience en naranja: la única etiqueta de color fija */
+.experience-period { color: #ff9a66; }
+
+/* Skills: cada icono en el color de su marca */
+.skills-item:has(use[href$="#java"]) .icono { color: #f89820; }
+.skills-item:has(use[href$="#springboot"]) .icono { color: #6db33f; }
+.skills-item:has(use[href$="#php"]) .icono { color: #8f93d6; }
+.skills-item:has(use[href$="#symfony"]) .icono { color: #ffffff; }
+.skills-item:has(use[href$="#table"]) .icono { color: #ff4b3e; }
+.skills-item:has(use[href$="#talend"]) .icono { color: #ff6d70; }
+.skills-item:has(use[href$="#mysql"]) .icono { color: #5d9bd1; }
+.skills-item:has(use[href$="#mariadb"]) .icono { color: #c98a6f; }
+.skills-item:has(use[href$="#mongodb"]) .icono { color: #47a248; }
+.skills-item:has(use[href$="#html5"]) .icono { color: #e9663f; }
+.skills-item:has(use[href$="#css3-alt"]) .icono { color: #2ea0e8; }
+.skills-item:has(use[href$="#js"]) .icono { color: #f7df1e; }
+.skills-item:has(use[href$="#bootstrap"]) .icono { color: #9b75e0; }
+.skills-item:has(use[href$="#git-alt"]) .icono { color: #f05032; }
+.skills-item:has(use[href$="#github"]) .icono { color: #ffffff; }
+.skills-item:has(use[href$="#gitlab"]) .icono { color: #fc6d26; }
+.skills-item:has(use[href$="#jira"]) .icono { color: #4c9aff; }
+.skills-item:has(use[href$="#microsoft"]) .icono { color: #7b83eb; }
+.skills-item:has(use[href$="#code"]) .icono { color: #23a7f2; }
+.skills-item:has(use[href$="#terminal"]) .icono { color: #ff4b3e; }
+.skills-item:has(use[href$="#claude"]) .icono { color: #d97757; }
+.skills-item:has(use[href$="#brain"]) .icono { color: #e07af5; }
