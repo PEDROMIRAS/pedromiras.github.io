@@ -94,3 +94,57 @@
 .home-social a:hover {
     color: var(--color-text-light);
 }
+
+/* Aurora de la portada: tres luces de la paleta que derivan despacio, detrás de la foto y del nombre.
+   Degradados radiales (ya son suaves) en vez de blur, que es caro de pintar; solo se anima transform.
+   Se funde con el negro antes del final de la portada, sin corte con la cinta */
+.home-aurora {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+.home-aurora span {
+    position: absolute;
+    width: 70vmax;
+    height: 70vmax;
+    border-radius: 50%;
+    animation: aurora 26s ease-in-out infinite alternate;
+}
+
+.home-aurora span:nth-child(1) {
+    top: -35%;
+    left: -20%;
+    background: radial-gradient(closest-side, rgba(106, 76, 245, 0.35), transparent);
+}
+
+.home-aurora span:nth-child(2) {
+    top: -10%;
+    right: -30%;
+    background: radial-gradient(closest-side, rgba(212, 77, 240, 0.25), transparent);
+    animation-duration: 32s;
+    animation-delay: -12s;
+}
+
+.home-aurora span:nth-child(3) {
+    bottom: -45%;
+    left: 15%;
+    background: radial-gradient(closest-side, rgba(255, 122, 61, 0.22), transparent);
+    animation-duration: 38s;
+    animation-delay: -24s;
+}
+
+@keyframes aurora {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(10vw, 8vh) scale(1.15); }
+    100% { transform: translate(-8vw, -5vh) scale(0.92); }
+}
+
+/* Con reducir movimiento: la aurora se queda quieta en su sitio de partida */
+@media (prefers-reduced-motion: reduce) {
+    .home-aurora span { animation: none; }
+}

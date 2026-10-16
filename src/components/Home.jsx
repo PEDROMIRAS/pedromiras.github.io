@@ -41,6 +41,12 @@ export default function Home() {
 
   return (
     <section id="home" className="home" ref={portada}>
+      {/* Aurora: tres luces de la paleta que se mueven despacio por detrás de todo (solo CSS, home.css) */}
+      <div className="home-aurora" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
       {/* Decoración: la misma foto está en About con su texto alternativo. Baja algo más lento que la página */}
       <motion.img
         className="home-foto"
