@@ -1,77 +1,9 @@
-import { useEffect, useRef } from 'react';
-import { motion, useReducedMotion, useSpring } from 'motion/react';
-import { SUBIDA } from '../movimiento.js';
 import Titulo from './Titulo.jsx';
 
 // Datos de cada proyecto. Todos son mini-apps aparte (su propia carpeta, su propio
 // build), enlazadas por ruta relativa: el flujo de trabajo de GitHub Actions las
 // compila y las coloca junto a este sitio, cada una en su propia carpeta.
 const REPO = 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main';
-
-const MUELLE = { stiffness: 220, damping: 22 };
-
-// Entrada al llegar a Projects: cada tarjeta un poco después de la anterior (i), y su captura se descubre
-// de arriba abajo. Solo opacidad y recorte: la inclinación ya usa transform en la misma tarjeta.
-const TARJETA = { oculto: { opacity: 0 }, visible: (i) => ({ opacity: 1, transition: { duration: 0.6, delay: i * 0.12 } }) };
-const CORTINA = {
-  oculto: { clipPath: 'inset(0 0 100% 0)' },
-  visible: (i) => ({ clipPath: 'inset(0 0 0% 0)', transition: { ...SUBIDA, delay: i * 0.12 + 0.1 } }),
-};
-
-/**
- * Tarjeta que se inclina hacia el ratón con un muelle y vuelve recta al salir. Con el dedo no se inclina
- * (no hay puntero que seguir), ni para quien pide menos movimiento. El brillo lo pinta el CSS con --x e --y.
- */
-function Tarjeta({ indice, children }) {
-  const tarjeta = useRef(null);
-  const quieta = useReducedMotion();
-  const giroX = useSpring(0, MUELLE);
-  const giroY = useSpring(0, MUELLE);
-
-  // El giro se aplica a mano: el componente animado de Motion añadiría unos 30 KB a la carga inicial
-  useEffect(() => {
-    const pintar = () => {
-      if (tarjeta.current) tarjeta.current.style.transform = `perspective(900px) rotateX(${giroX.get()}deg) rotateY(${giroY.get()}deg)`;
-    };
-    const quitarX = giroX.on('change', pintar);
-    const quitarY = giroY.on('change', pintar);
-    return () => { quitarX(); quitarY(); };
-  }, [giroX, giroY]);
-
-  const mover = (e) => {
-    if (quieta || e.pointerType !== 'mouse') return;
-    const caja = e.currentTarget.getBoundingClientRect();
-    // Posición del puntero sobre la tarjeta, de -0.5 a 0.5
-    const px = (e.clientX - caja.left) / caja.width - 0.5;
-    const py = (e.clientY - caja.top) / caja.height - 0.5;
-    giroX.set(py * -8);
-    giroY.set(px * 8);
-    e.currentTarget.style.setProperty('--x', px.toFixed(3));
-    e.currentTarget.style.setProperty('--y', py.toFixed(3));
-  };
-  const soltar = (e) => {
-    giroX.set(0);
-    giroY.set(0);
-    e.currentTarget.style.removeProperty('--x');
-    e.currentTarget.style.removeProperty('--y');
-  };
-
-  return (
-    <motion.article
-      ref={tarjeta}
-      className="project glass-card"
-      onPointerMove={mover}
-      onPointerLeave={soltar}
-      custom={indice}
-      variants={TARJETA}
-      initial={quieta ? false : 'oculto'}
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.25 }}
-    >
-      {children}
-    </motion.article>
-  );
-}
 
 // Ramo de flores sigue en el repositorio y publicado en su carpeta, pero no se enseña aquí
 const PROYECTOS = [
@@ -115,18 +47,16 @@ export default function Projects() {
       </p>
 
       <div className="projects-container">
-        {PROYECTOS.map((p, i) => (
-          <Tarjeta key={p.nombre} indice={i}>
-            <motion.a
-              custom={i}
-              variants={CORTINA}
+        {PROYECTOS.map((p) => (
+          <article key={p.nombre} className="project glass-card">
+            <a
               className="project-image"
               href={`./${p.carpeta}/`}
               tabIndex={-1}
               aria-hidden="true"
             >
               <img src={p.imagen.src} alt={p.alt} width={p.imagen.ancho} height={p.imagen.alto} loading="lazy" />
-            </motion.a>
+            </a>
             <div className="project-body">
               <h3 className="project-name">{p.nombre}</h3>
               <p>{p.descripcion}</p>
@@ -154,7 +84,7 @@ export default function Projects() {
                 </a>
               </div>
             </div>
-          </Tarjeta>
+          </article>
         ))}
       </div>
     </section>

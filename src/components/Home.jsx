@@ -1,39 +1,13 @@
 import { useRef } from 'react';
-import { motion, useInView, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icono from './Icono.jsx';
 import { SUBIDA, aparece } from '../movimiento.js';
-
-const MUELLE = { stiffness: 220, damping: 18 };
-const TIRON = 0.15; // fracción de la distancia al centro que el botón sigue al ratón
-
-// Botón que se deja llevar un poco hacia el ratón mientras está encima. Solo con ratón: en el móvil no hay cursor
-function Magnetico({ className, href, children }) {
-  const quieta = useReducedMotion();
-  const x = useSpring(0, MUELLE);
-  const y = useSpring(0, MUELLE);
-  const mover = (e) => {
-    if (quieta || e.pointerType !== 'mouse') return;
-    const r = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - r.left - r.width / 2) * TIRON);
-    y.set((e.clientY - r.top - r.height / 2) * TIRON);
-  };
-  const soltar = () => {
-    x.set(0);
-    y.set(0);
-  };
-  // whileTap en vez del :active de .btn: el transform en línea de Motion taparía el del CSS
-  return (
-    <motion.a href={href} className={className} style={{ x, y }} onPointerMove={mover} onPointerLeave={soltar} whileTap={{ scale: 0.97 }}>
-      {children}
-    </motion.a>
-  );
-}
 
 export default function Home() {
   const portada = useRef(null);
   const quieta = useReducedMotion();
-  // 0 con la portada arriba del todo, 1 cuando ya ha salido de pantalla por arriba
   const enPantalla = useInView(portada); // fuera de pantalla, la aurora se para y no gasta
+  // 0 con la portada arriba del todo, 1 cuando ya ha salido de pantalla por arriba
   const { scrollYProgress } = useScroll({ target: portada, offset: ['start start', 'end start'] });
   const haciaIzquierda = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
   const haciaDerecha = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
@@ -86,18 +60,17 @@ export default function Home() {
         </h1>
 
         <motion.p className="home-puesto" {...aparece(0.55)}>
-          Web Developer<span className="home-sep"> · </span>
-          <span className="home-empresa">NTT DATA</span>
+          Web Developer at NTT DATA
         </motion.p>
         <motion.p {...aparece(0.65)}>I build and maintain web applications, from the database to the interface.</motion.p>
 
         <motion.div className="home-actions" {...aparece(0.75)}>
-          <Magnetico href="#projects" className="btn btn-primary">
+          <a href="#projects" className="btn btn-primary">
             View my projects
-          </Magnetico>
-          <Magnetico href="#contact" className="btn btn-outline">
+          </a>
+          <a href="#contact" className="btn btn-outline">
             Contact me
-          </Magnetico>
+          </a>
         </motion.div>
 
         <motion.ul className="home-social" {...aparece(0.85)}>

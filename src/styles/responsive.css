@@ -32,9 +32,6 @@
     .home-linea { font-size: 18vw; } /* en el móvil, el nombre llena el ancho */
     .home-actions .btn { flex: 1 1 auto; } /* uno debajo del otro, los dos a todo el ancho */
     .home-foto { width: 100vw; filter: brightness(0.35); } /* en el móvil, detrás del nombre a todo el ancho */
-    /* Puesto y empresa en dos líneas limpias, sin el punto colgando */
-    .home-sep { display: none; }
-    .home-empresa { display: block; }
     
     .projects-container { grid-template-columns: 1fr; }
     .projects-container > :last-child:nth-child(odd) { width: auto; } /* en una columna ocupa todo el ancho */

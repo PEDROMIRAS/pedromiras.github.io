@@ -162,20 +162,15 @@ p {
     display: flex;
 }
 
-/* El separador va detrás de cada palabra, también de la última: así las dos copias miden igual y el bucle no salta */
+/* El hueco va detrás de cada palabra, también de la última: así las dos copias miden igual y el bucle no salta */
 .cinta-grupo > span {
+    margin-right: 1.2em;
     font-family: var(--font-heading);
     font-size: clamp(1.4rem, 3.5vw, 2.6rem);
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
-}
-
-.cinta-grupo > span::after {
-    content: '·';
-    margin-inline: 0.6em;
-    color: rgba(255, 255, 255, 0.25);
 }
 
 /* Títulos de Sección */

@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { motion } from 'motion/react';
-import { TEXTO } from '../movimiento.js';
 import Icono from './Icono.jsx';
 
 const EMAIL = 'p.miraspc35@gmail.com';
@@ -75,13 +74,9 @@ export default function Contact() {
     <section id="contact" className="contact" aria-labelledby="contact-title">
       <div className="contact-container">
         <div className="contact-info">
-          <motion.h2 id="contact-title" className="contact-titular" initial="oculto" whileInView="visible" viewport={{ once: true, amount: 0.6 }}>
-            <span className="mascara">
-              <motion.span className="mascara-texto" variants={TEXTO}>
-                Let’s talk
-              </motion.span>
-            </span>
-          </motion.h2>
+          <h2 id="contact-title" className="contact-titular">
+            Let’s talk
+          </h2>
           <p>
             I’m always happy to talk about technology or compare notes with other developers. I’m not looking for a
             new job right now.

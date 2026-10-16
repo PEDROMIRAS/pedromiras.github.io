@@ -1,6 +1,5 @@
-import { motion } from 'motion/react';
+import { useReducedMotion } from 'motion/react';
 import Icono from './Icono.jsx';
-import { SUBIDA } from '../movimiento.js';
 import Titulo from './Titulo.jsx';
 
 // Datos de la sección Skills: una tarjeta por categoría, ordenadas por lo que más uso en el trabajo.
@@ -50,33 +49,36 @@ export const CATEGORIAS = [
   },
 ];
 
-const LISTA = { visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } } };
-const ETIQUETA = { oculto: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { ...SUBIDA, duration: 0.5 } } };
-
 export default function Skills() {
+  const quieta = useReducedMotion();
   return (
     <section id="skills" className="skills" aria-label="Skills">
+      {/* Fondo: ondas de la paleta hechas con Remotion (videos/src/Ondas.tsx). Con reducir movimiento, solo el póster */}
+      <video
+        className="fondo-video"
+        src="./assets/video/ondas.mp4"
+        poster="./assets/video/ondas-poster.jpg"
+        autoPlay={!quieta}
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
       <Titulo>Skills</Titulo>
 
       <div className="skills-container">
         {CATEGORIAS.map((categoria) => (
-          <motion.article
-            key={categoria.titulo}
-            className="skills-group"
-            initial="oculto"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
+          <article key={categoria.titulo} className="skills-group">
             <h3 className="skill-category-title">{categoria.titulo}</h3>
-            <motion.ul className="skills-list" variants={LISTA}>
+            <ul className="skills-list">
               {categoria.items.map((item) => (
-                <motion.li key={item.nombre} className="skills-item" variants={ETIQUETA}>
+                <li key={item.nombre} className="skills-item">
                   <Icono nombre={item.icono} />
                   <span>{item.nombre}</span>
-                </motion.li>
+                </li>
               ))}
-            </motion.ul>
-          </motion.article>
+            </ul>
+          </article>
         ))}
       </div>
     </section>

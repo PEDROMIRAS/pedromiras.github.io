@@ -62,7 +62,6 @@ header {
     -webkit-backdrop-filter: none;
     box-shadow: none;
 }
-.project:hover { border-color: transparent; box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.25); }
 
 /* Capturas como maquetas sobre degradado: el recurso de "escaparate" de Framer, solo en dos tarjetas */
 .project-image {
@@ -149,3 +148,40 @@ footer { font-size: 14px; }
 
 /* Zonas táctiles de 44px: el email del contacto y el nombre de la cabecera */
 .contact-email a, .brand { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Fondos de color en las secciones de abajo: el vídeo de ondas en Skills y una luz cálida quieta en Contact.
+   isolation: el fondo con z-index negativo queda detrás del contenido pero dentro de su sección */
+.about, .projects, .skills, .contact { isolation: isolate; }
+
+.fondo-video {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    pointer-events: none;
+    /* se funde con el negro arriba y abajo: sin corte con las secciones vecinas */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+}
+
+.contact {
+    background:
+        radial-gradient(55% 45% at 12% 35%, rgba(255, 122, 61, 0.14), transparent 70%),
+        radial-gradient(40% 35% at 92% 70%, rgba(212, 77, 240, 0.12), transparent 70%);
+}
+
+/* Cada luz se apaga antes del borde de arriba y de abajo de su sección: así no hay un corte recto.
+   About: luz violeta desde detrás de la foto. Projects: un horizonte magenta y naranja bajo las tarjetas.
+   Experience se queda en negro, de pausa entre el color de Projects y el vídeo de Skills */
+.about {
+    background: radial-gradient(45% 65% at 22% 50%, rgba(106, 76, 245, 0.32), transparent 70%), radial-gradient(30% 40% at 8% 65%, rgba(212, 77, 240, 0.14), transparent 70%);
+}
+
+.projects {
+    background:
+        radial-gradient(60% 30% at 30% 75%, rgba(212, 77, 240, 0.18), transparent 70%),
+        radial-gradient(50% 25% at 75% 78%, rgba(255, 122, 61, 0.16), transparent 70%);
+}
