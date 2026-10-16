@@ -78,6 +78,7 @@
 .contact-social a {
     display: inline-flex;
     align-items: center;
+    min-height: 44px;
     gap: 8px;
     color: var(--color-text-secondary);
     text-decoration: none;

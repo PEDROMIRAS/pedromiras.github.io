@@ -200,16 +200,6 @@ p {
     color: var(--color-text-light);
     margin-bottom: 40px;
 }
-/* El morado va en la raya, no en el texto: queda reservado para lo que se puede pulsar */
-.titulo-raya {
-    display: block;
-    transform-origin: left;
-    width: 48px;
-    height: 3px;
-    margin-top: 18px;
-    border-radius: 2px;
-    background: var(--color-primary);
-}
 
 /* Efecto Cristal (Glassmorphism) */
 .glass-card {

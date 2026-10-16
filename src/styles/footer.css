@@ -32,6 +32,9 @@ footer p {
 }
 
 .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: var(--color-text-secondary);
     text-decoration: none;
     transition: color var(--transition);
