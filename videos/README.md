@@ -9,7 +9,8 @@ No es una app del sitio: no se publica ni lo construye `scripts/build-sitio.mjs`
 ```console
 npm i            # una vez
 npm run dev      # Remotion Studio: vista previa en el navegador mientras se edita
-npx remotion render <id> out/<nombre>.mp4   # exporta el vídeo a out/ (no se sube a git)
+npx remotion render Ondas out/ondas.mp4 --codec=h264 --crf=32 --muted   # exporta a out/ (no se sube a git)
+npx remotion still Ondas out/ondas-poster.jpg --frame=0 --image-format=jpeg --jpeg-quality=70
 ```
 
 Después, copiar el vídeo de `out/` a `../public/assets/video/` y ponerlo en la página con `<video autoplay muted loop playsinline>`.
@@ -17,7 +18,7 @@ Después, copiar el vídeo de `out/` a `../public/assets/video/` y ponerlo en la
 ## Código
 
 - [src/Root.tsx](src/Root.tsx): registra los vídeos (`<Composition>`), cada uno con su id, duración, fps y tamaño.
-- [src/Composition.tsx](src/Composition.tsx): el primer vídeo, aún vacío.
+- [src/Ondas.tsx](src/Ondas.tsx): ondas de luz de la paleta en bucle, el fondo de la sección Skills (`public/assets/video/ondas.mp4` y su póster `ondas-poster.jpg`).
 - [remotion.config.ts](remotion.config.ts): opciones del render.
 
 ## Licencia
