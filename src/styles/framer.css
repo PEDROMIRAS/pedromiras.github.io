@@ -71,7 +71,7 @@ header {
 }
 .project:nth-child(1) .project-image { background: radial-gradient(120% 120% at 20% 0%, #6a4cf5, #2a1a6b 60%, #141414); }
 .project:nth-child(2) .project-image { background: radial-gradient(120% 120% at 80% 0%, #d44df0, #ff7a3d 55%, #141414); }
-.project-image img { border-radius: 10px 10px 0 0; }
+.project-image img, .project-image video { border-radius: 10px 10px 0 0; }
 .project-body { padding: 24px; }
 
 .tags li { font-size: 0.875rem; border-radius: 6px; border: none; background: var(--superficie-2); color: var(--color-text-secondary); }

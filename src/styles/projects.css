@@ -29,7 +29,8 @@
 }
 
 /* Todas las capturas con la misma proporción, aunque los archivos midan distinto */
-.project-image img {
+.project-image img,
+.project-image video {
     display: block;
     width: 100%;
     height: auto;

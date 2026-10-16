@@ -1,9 +1,33 @@
+import { useRef } from 'react';
+import { useInView, useReducedMotion } from 'motion/react';
 import Titulo from './Titulo.jsx';
 
 // Datos de cada proyecto. Todos son mini-apps aparte (su propia carpeta, su propio
 // build), enlazadas por ruta relativa: el flujo de trabajo de GitHub Actions las
 // compila y las coloca junto a este sitio, cada una en su propia carpeta.
 const REPO = 'https://github.com/PEDROMIRAS/pedromiras.github.io/tree/main';
+
+// Clip de la app en uso (grabación real montada con Remotion, videos/src/Demos.tsx). Solo se descarga al
+// acercarse a Projects; hasta entonces, y con reducir movimiento, se ve la captura
+function Clip({ p }) {
+  const clip = useRef(null);
+  const cerca = useInView(clip, { once: true, margin: '300px' });
+  const quieta = useReducedMotion();
+  if (quieta) return <img src={p.imagen.src} alt={p.alt} width={p.imagen.ancho} height={p.imagen.alto} loading="lazy" />;
+  return (
+    <video
+      ref={clip}
+      src={cerca ? p.video : undefined}
+      poster={p.imagen.src}
+      width={p.imagen.ancho}
+      height={p.imagen.alto}
+      autoPlay
+      muted
+      loop
+      playsInline
+    />
+  );
+}
 
 // Ramo de flores sigue en el repositorio y publicado en su carpeta, pero no se enseña aquí
 const PROYECTOS = [
@@ -14,6 +38,7 @@ const PROYECTOS = [
     etiquetas: ['React', 'localStorage', 'UI in Spanish'],
     carpeta: 'todoApp',
     imagen: { src: './assets/img/todo-app.webp', ancho: 1280, alto: 720 },
+    video: './assets/video/todo-app.mp4',
     alt: 'Task list application',
   },
   {
@@ -24,6 +49,7 @@ const PROYECTOS = [
     etiquetas: ['React', 'Tailwind CSS', 'Supabase', 'PWA', 'UI in Spanish'],
     carpeta: 'sushi-tracker',
     imagen: { src: './assets/img/sushi-tracker.webp', ancho: 1280, alto: 720 },
+    video: './assets/video/sushi-tracker.mp4',
     alt: 'Sushi counter application',
   },
   {
@@ -33,6 +59,7 @@ const PROYECTOS = [
     etiquetas: ['React', 'JavaScript'],
     carpeta: 'snake',
     imagen: { src: './assets/img/snake.webp', ancho: 1280, alto: 720 },
+    video: './assets/video/snake.mp4',
     alt: 'Snake game board',
   },
 ];
@@ -55,7 +82,7 @@ export default function Projects() {
               tabIndex={-1}
               aria-hidden="true"
             >
-              <img src={p.imagen.src} alt={p.alt} width={p.imagen.ancho} height={p.imagen.alto} loading="lazy" />
+              <Clip p={p} />
             </a>
             <div className="project-body">
               <h3 className="project-name">{p.nombre}</h3>
