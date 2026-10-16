@@ -9,7 +9,7 @@
 .about-img {
     width: 350px;
     height: 350px;
-    border-radius: 28px;
+    border-radius: var(--radius);
     overflow: hidden;
     border: 1px solid var(--color-border);
     flex-shrink: 0;

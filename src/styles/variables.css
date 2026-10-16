@@ -26,7 +26,7 @@
 --color-primary-light: #b79ddd;   /* Violeta claro: fechas y foco, con contraste suficiente sobre los fondos oscuros */
 
 /* --- Texto --- */
---color-text-light: #ffffff;      /* Texto principal claro */
+--color-text-light: #f4f4f5;      /* Texto principal: blanco roto, el blanco puro deslumbra sobre el negro */
 --color-text-secondary: #bbbbbb;  /* Texto secundario gris claro */
 --color-text-muted: #888888;      /* Texto más suave */
 

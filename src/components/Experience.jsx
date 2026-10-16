@@ -5,7 +5,7 @@ import { SUBIDA } from '../movimiento.js';
 // Trayectoria: trabajo actual y formación. Los datos van en una lista, igual que en Skills y Projects.
 const ETAPAS = [
   {
-    periodo: 'Jul 2026 – Present',
+    periodo: 'Jul 2026 - Present',
     titulo: 'Rising Software Engineer',
     lugar: 'NTT DATA · Logistics industry',
     descripcion:
@@ -19,7 +19,7 @@ const ETAPAS = [
     descripcion: 'Work placement for my degree, on the same project I work on today.',
   },
   {
-    periodo: '2024 – 2026',
+    periodo: '2024 - 2026',
     titulo: 'Higher Degree in Web Application Development',
     lugar: 'IES Miguel Hernández · Alhama de Murcia',
     descripcion:

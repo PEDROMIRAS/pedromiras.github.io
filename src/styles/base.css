@@ -37,7 +37,7 @@ body::after {
     padding: 10px 16px;
     border-radius: var(--radius-sm);
     background: var(--color-primary-dark);
-    color: white;
+    color: var(--color-text-light);
     font-weight: 600;
     text-decoration: none;
     transform: translateY(-200%);
@@ -246,7 +246,7 @@ p {
 
 .btn-primary {
     background-color: var(--color-primary-dark);
-    color: white;
+    color: var(--color-text-light);
 }
 .btn-primary:hover {
     background-color: var(--color-primary);

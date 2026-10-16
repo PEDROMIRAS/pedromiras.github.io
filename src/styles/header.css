@@ -50,7 +50,7 @@ header {
     font-size: 1.4rem;
     line-height: 1;
     background: transparent;
-    color: white;
+    color: var(--color-text-light);
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;

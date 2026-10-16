@@ -117,7 +117,7 @@
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.45); /* visible sobre la tarjeta */
     border-radius: 8px;
-    color: white;
+    color: var(--color-text-light);
     font-size: 1rem; /* por debajo de 16px, iOS amplía la página al tocar el campo */
     margin-bottom: 15px;
 }

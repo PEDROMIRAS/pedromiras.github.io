@@ -95,25 +95,3 @@
 .home-social a:hover {
     color: var(--color-text-light);
 }
-
-/* Flecha que invita a seguir bajando */
-.home-scroll {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    font-size: 1.3rem;
-    color: var(--color-text-secondary);
-    animation: home-rebote 2s ease-in-out infinite;
-}
-
-@keyframes home-rebote {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, 8px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .home-scroll {
-        animation: none;
-        transform: translateX(-50%);
-    }
-}

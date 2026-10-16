@@ -112,9 +112,6 @@ export default function Home() {
         </motion.ul>
       </div>
 
-      <a href="#about" className="home-scroll" aria-label="Scroll to About">
-        <Icono nombre="chevron-down" />
-      </a>
     </section>
   );
 }
