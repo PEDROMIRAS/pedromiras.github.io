@@ -1,39 +1,48 @@
-/* Las fuentes (Geist y Archivo, esta solo en su anchura de 125%) se cargan desde index.html */
+/* Las fuentes (Inter y Geist) se cargan desde index.html. El estilo sigue el DESIGN.md de la raíz (Framer) */
 /* VARIABLES GLOBALES */
 
 :root {
 /* Variables generales de estilo */
---radius: 12px;                    /* Radio de tarjetas y cabecera */
---radius-sm: 8px;                  /* Radio de botones, campos y etiquetas con icono */
+--radius: 20px;                    /* Radio de tarjetas */
+--radius-sm: 10px;                 /* Radio de campos */
 --ease: cubic-bezier(0.16, 1, 0.3, 1); /* arranca rápido y se asienta suave, como las animaciones de Motion */
 --transition: 0.3s var(--ease);    /* Transición global */
 --gap-main: 112px;                 /* Aire sobre cada sección: deja el título por debajo de la cabecera fija */
 
 
 /* Fuentes */
---font-primary: 'Geist', sans-serif;
---font-heading: 'Archivo', sans-serif;
+--font-primary: 'Inter', sans-serif;
+--font-heading: 'Geist', sans-serif; /* sustituye a GT Walsheim, que es de pago */
 
 /* COLORES */
 /* --- Fondo degradado --- */
---color-bg-start: #0a0a0a;        /* Negro profundo */
+--color-bg-start: #090909;        /* Lienzo casi negro */
+--superficie-1: #141414;          /* Un paso por encima: tarjetas y botón secundario */
+--superficie-2: #1c1c1c;          /* Dos pasos: campos y etiquetas */
+--linea: #262626;                 /* Borde de los campos */
 --color-bg-mid: #1c1c1c;          /* Gris muy oscuro */
 --color-bg-end: #2e2e2e;          /* Gris oscuro más claro */
 
 /* --- Colores principales / detalles --- */
---color-primary: #8d6dba;         /* Violeta principal: rayas, bordes y detalles */
---color-primary-dark: #6a4c94;    /* Violeta oscuro: fondo de los botones, con texto blanco legible */
---color-primary-light: #b79ddd;   /* Violeta claro: fechas y foco, con contraste suficiente sobre los fondos oscuros */
+--color-primary: #0099ff;         /* Azul: solo enlaces, foco y selección */
+--color-primary-dark: #0099ff;
+--color-primary-light: #0099ff;
+/* --- El color de la página: la paleta de degradados --- */
+--violeta: #6a4cf5;
+--magenta: #d44df0;
+--naranja: #ff7a3d;
+--coral: #ff5577;
+--degradado: linear-gradient(135deg, var(--violeta), var(--magenta) 50%, var(--naranja));
 
 /* --- Texto --- */
 --color-text-light: #f4f4f5;      /* Texto principal: blanco roto, el blanco puro deslumbra sobre el negro */
---color-text-secondary: #bbbbbb;  /* Texto secundario gris claro */
---color-text-muted: #888888;      /* Texto más suave */
+--color-text-secondary: #999999;  /* Texto secundario: la jerarquía es binaria, texto principal o este */
+--color-text-muted: #999999;
 
 /* --- Header y bordes --- */
 --color-header-bg: rgba(255,255,255,0.02); /* Fondo translúcido header */
---color-border: rgba(255,255,255,0.1);     /* Borde suave */
+--color-border: #1a1a1a;                   /* Líneas separadoras */
 
 /* --- Fondos y bordes con alpha para tarjetas y detalles --- */
---bg-alpha-2: rgba(141,109,186,0.2);   /* Fondo hover tarjetas */
+--bg-alpha-2: rgba(0,153,255,0.12);    /* Fondo del enlace activo en el menú del móvil */
 }

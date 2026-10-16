@@ -1,36 +1,13 @@
-/* PRUEBA: el portfolio con el DESIGN.md de Framer encima (rama prueba-framer, no va a main).
-   GT Walsheim es de pago: Geist 600 con el tracking muy cerrado hace de sustituto, como sugiere el propio DESIGN.md */
-
-:root {
-    --font-primary: 'Inter', sans-serif;
-    --font-heading: 'Geist', sans-serif;
-
-    --color-bg-start: #090909;          /* canvas */
-    --superficie-1: #141414;
-    --superficie-2: #1c1c1c;
-    --linea: #262626;                    /* hairline */
-    --color-border: #1a1a1a;             /* hairline-soft */
-    --color-text-light: #ffffff;         /* ink */
-    --color-text-secondary: #999999;     /* ink-muted: la jerarquía es binaria, ink o ink-muted */
-    --color-text-muted: #999999;
-    --color-primary: #0099ff;            /* el único color: enlaces, foco y selección */
-    --color-primary-light: #0099ff;
-    --color-primary-dark: #0099ff;
-    --bg-alpha-2: rgba(0, 153, 255, 0.12);
-    --radius: 20px;
-    --radius-sm: 10px;
-}
+/* Capa de estilo del DESIGN.md (Framer) sobre la base: lienzo negro, superficies carbón, botones en píldora,
+   titulares apretados y el color en degradados. Va la última en index.css para ganar a la base */
 
 body {
     font-feature-settings: 'cv01', 'cv05', 'cv09', 'cv11', 'ss03';
     font-size: 15px;
 }
 
-body::after { display: none; } /* sin grano: el lienzo de Framer es plano */
-
 /* Titulares: peso medio, sin mayúsculas, tracking a -5% */
 h1, h2, .brand, .cinta-grupo > span {
-    font-stretch: normal;
     font-weight: 600;
 }
 .home-nombre { text-transform: none; }
@@ -54,6 +31,9 @@ header {
     background-color: rgba(9, 9, 9, 0.8);
 }
 .menu a { font-size: 14px; color: var(--color-text-secondary); }
+@media (max-width: 1024px) {
+    .menu { left: 12px; right: 12px; } /* la barra va a todo el ancho: el desplegable no se pega a los bordes */
+}
 .menu a::after, .menu-indicador { background-color: var(--color-text-light); }
 
 /* Botones: píldora blanca la principal, píldora carbón la secundaria, nunca con borde */
@@ -109,15 +89,7 @@ header {
 
 footer { font-size: 13px; }
 
-
-/* ---------- COLOR: la paleta de degradados del DESIGN.md (violeta, magenta, naranja, coral) ---------- */
-:root {
-    --violeta: #6a4cf5;
-    --magenta: #d44df0;
-    --naranja: #ff7a3d;
-    --coral: #ff5577;
-    --degradado: linear-gradient(135deg, var(--violeta), var(--magenta) 50%, var(--naranja));
-}
+/* ---------- COLOR ---------- */
 
 /* La tercera captura también con su degradado */
 .project:nth-child(3) .project-image { background: radial-gradient(120% 120% at 50% 0%, var(--coral), var(--violeta) 60%, #141414); }

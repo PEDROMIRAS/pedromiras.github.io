@@ -14,7 +14,7 @@ Developer. It is built with a focus on modern UI/UX trends, performance, and cle
 
 ## 🚀 Key Features
 
-* **Modern Design:** Dark theme with a single purple accent.
+* **Modern Design:** Black canvas with charcoal surfaces, pill buttons and colour from violet-to-orange gradients, following the Framer-inspired [DESIGN.md](DESIGN.md).
 * **Clear Navigation:** Fixed header that highlights the section you are in, with smooth scrolling between sections.
 * **Responsive & Adaptive:** Fully responsive layout with a dropdown navigation menu on small screens.
 * **Working Contact Form:** Fully functional form integrated with **EmailJS**.
