@@ -50,3 +50,17 @@ export function avanzar(e) {
   if (come) e.food = frutaLibre(e.snake);
   return true;
 }
+
+// Dónde dibujar un segmento entre dos ticks: con t=0 donde estaba y con t=1 donde está ahora.
+// Al cruzar un borde va por el camino corto (sale por un lado del tablero).
+// shortcut: al cruzar un borde el segmento sale por un lado y entra de golpe por el otro; dibujar una copia al otro lado si se nota
+export function entre(antes, ahora, t) {
+  if (!antes) return ahora; // segmento que acaba de nacer al comer: aún no se mueve
+  const eje = (a, b) => {
+    let d = b - a;
+    if (d > 1) d -= CELDAS;
+    if (d < -1) d += CELDAS;
+    return a + d * t;
+  };
+  return { x: eje(antes.x, ahora.x), y: eje(antes.y, ahora.y) };
+}

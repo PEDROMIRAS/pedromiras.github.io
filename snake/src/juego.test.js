@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { CELDAS, DIRECCIONES, avanzar, estadoInicial, girar } from './juego.js';
+import { CELDAS, DIRECCIONES, avanzar, entre, estadoInicial, girar } from './juego.js';
 
 const { ArrowUp, ArrowLeft, ArrowRight } = DIRECCIONES;
 
@@ -33,4 +33,11 @@ test('chocar con su propio cuerpo termina la partida', () => {
   // cabeza en (5,5) rodeada por su cuerpo: al subir pisa (5,4)
   e.snake = [{ x: 5, y: 5 }, { x: 6, y: 5 }, { x: 6, y: 4 }, { x: 5, y: 4 }, { x: 4, y: 4 }];
   assert.equal(avanzar(e), false);
+});
+
+test('entre dos ticks, cada segmento se dibuja a medio camino y cruza los bordes por el lado corto', () => {
+  assert.deepEqual(entre({ x: 4, y: 5 }, { x: 5, y: 5 }, 0.25), { x: 4.25, y: 5 });
+  assert.deepEqual(entre({ x: CELDAS - 1, y: 3 }, { x: 0, y: 3 }, 0.5), { x: CELDAS - 0.5, y: 3 });
+  assert.deepEqual(entre({ x: 2, y: 0 }, { x: 2, y: CELDAS - 1 }, 0.5), { x: 2, y: -0.5 });
+  assert.deepEqual(entre(undefined, { x: 7, y: 7 }, 0.5), { x: 7, y: 7 }); // el que nace al comer no se mueve
 });

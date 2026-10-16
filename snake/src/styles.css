@@ -40,6 +40,12 @@ body{
     background-size: calc(var(--celda) * 2) calc(var(--celda) * 2);
 }
 
+/* Arriba a la izquierda del tablero: cada segmento se coloca con translate (App.jsx) */
+.snake-head, .snake-body, .snake-tail {
+    left: 0;
+    top: 0;
+}
+
 .snake-head {
     width: var(--celda);
     height: var(--celda);
