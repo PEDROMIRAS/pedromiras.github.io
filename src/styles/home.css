@@ -1,4 +1,5 @@
 .home {
+    padding-top: 96px; /* menos aire que el resto de secciones: la cabecera mide 56px */
     z-index: 1;
     overflow-x: clip; /* las líneas del nombre se salen por los lados al bajar: sin barra horizontal */
 }
@@ -51,14 +52,10 @@
     color: var(--color-text-light);
 }
 
-.home .home-puesto {
-    font-family: var(--font-primary);
-    font-size: 1.25rem;
+/* El puesto, al principio de la frase: más claro que el resto */
+.home-puesto {
     font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--color-text-secondary);
-    line-height: 1.5;
-    margin: 0 0 20px;
+    color: var(--color-text-light);
 }
 
 .home p {

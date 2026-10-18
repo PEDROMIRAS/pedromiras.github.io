@@ -28,7 +28,6 @@
 @media (max-width: 600px) {
     
     /* --- AJUSTES DE CONTENIDO --- */
-    .home .home-puesto { font-size: 1.2rem; }
     .home-linea { font-size: 18vw; } /* en el móvil, el nombre llena el ancho */
     .home-actions .btn { flex: 1 1 auto; } /* uno debajo del otro, los dos a todo el ancho */
     .home-foto { width: 100vw; filter: brightness(0.35); } /* en el móvil, detrás del nombre a todo el ancho */

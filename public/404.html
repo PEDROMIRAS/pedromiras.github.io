@@ -9,10 +9,11 @@
          Por eso los enlaces son absolutos y los estilos van aquí dentro, sin depender del build de React.
          shortcut: asume el sitio en la raíz del dominio (pedromiras.github.io); si se publica en una subcarpeta, cambiar "/" -->
     <link rel="icon" href="/assets/img/favicon.png" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* Las mismas fuentes que la web, servidas desde ella (ver src/styles/fuentes.css) */
+        @font-face { font-family: 'Geist'; font-weight: 400 700; font-display: swap; src: url('/assets/fonts/geist-latin.woff2') format('woff2'); }
+        @font-face { font-family: 'Inter'; font-weight: 400 700; font-display: swap; src: url('/assets/fonts/inter-latin.woff2') format('woff2'); }
+
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -25,7 +26,7 @@
             padding: 20px;
             text-align: center;
             font-family: 'Inter', sans-serif;
-            color: #ffffff;
+            color: #f4f4f5;
             background: #090909;
         }
 
@@ -35,7 +36,7 @@
             font-size: clamp(5rem, 22vw, 10rem);
             line-height: 1;
             letter-spacing: -0.06em;
-            color: #ffffff;
+            color: #f4f4f5;
         }
 
         h1 {
@@ -57,8 +58,8 @@
             border-radius: 100px;
             font-weight: 500;
             text-decoration: none;
-            color: #000000;
-            background-color: #ffffff;
+            color: #090909;
+            background-color: #f4f4f5;
             transition: background-color 0.2s ease;
         }
 

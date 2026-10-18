@@ -61,21 +61,21 @@ export default function Home() {
           ))}
         </h1>
 
-        <motion.p className="home-puesto" {...aparece(0.55)}>
-          Web Developer at NTT DATA
+        <motion.p {...aparece(0.55)}>
+          <strong className="home-puesto">Web Developer at NTT DATA.</strong> I build and maintain web applications, from
+          the database to the interface.
         </motion.p>
-        <motion.p {...aparece(0.65)}>I build and maintain web applications, from the database to the interface.</motion.p>
 
-        <motion.div className="home-actions" {...aparece(0.75)}>
+        <motion.div className="home-actions" {...aparece(0.65)}>
           <a href="#projects" className="btn btn-primary">
-            View my projects
+            Projects
           </a>
           <a href="#contact" className="btn btn-outline">
-            Contact me
+            Contact
           </a>
         </motion.div>
 
-        <motion.ul className="home-social" {...aparece(0.85)}>
+        <motion.ul className="home-social" {...aparece(0.75)}>
           <li>
             <a href="https://github.com/PEDROMIRAS" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <Icono nombre="github" />
