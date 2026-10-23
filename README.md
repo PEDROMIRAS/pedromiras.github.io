@@ -59,6 +59,10 @@ Projects section — the same pattern the site already used for Ramo de flores a
 /sushi-tracker/          # "Sushi Tracker": sushi-eating counter with history (React + Vite + Tailwind)
 /snake/                  # "Snake": the classic game, rebuilt with React state instead of manual DOM (React + Vite)
 
+# Lives in its own repository and deploys itself to /yo-pago-lo-mio/ (same domain); the card links to it:
+# "Yo pago lo mío": splits a group dinner bill (React + TypeScript + Tailwind + Motion, PWA)
+# https://github.com/PEDROMIRAS/yo-pago-lo-mio
+
 /.github/workflows/deploy.yml   # Builds all 5 apps and publishes them together to GitHub Pages
 ```
 

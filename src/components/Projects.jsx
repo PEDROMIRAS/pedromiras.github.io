@@ -32,8 +32,20 @@ function Clip({ p }) {
   );
 }
 
-// Ramo de flores sigue en el repositorio y publicado en su carpeta, pero no se enseña aquí
+// Ramo de flores sigue en el repositorio y publicado en su carpeta, pero no se enseña aquí.
+// `demo` y `codigo` solo hacen falta en proyectos con repo propio; los demás salen de `carpeta`.
 const PROYECTOS = [
+  {
+    nombre: 'Yo pago lo mío',
+    descripcion: `Splits the bill of a group dinner. Pick the restaurant’s menu, mark who shares each dish, and it
+      works out what everyone owes and who pays whom, to the cent. Installable, and it works offline.`,
+    etiquetas: ['React', 'TypeScript', 'Tailwind CSS', 'PWA', 'UI in Spanish'],
+    demo: 'https://pedromiras.github.io/yo-pago-lo-mio/',
+    codigo: 'https://github.com/PEDROMIRAS/yo-pago-lo-mio',
+    imagen: { src: './assets/img/yo-pago-lo-mio.webp', ancho: 1280, alto: 720 },
+    video: './assets/video/yo-pago-lo-mio.mp4',
+    alt: 'Dinner bill splitting application',
+  },
   {
     nombre: 'Todo App',
     descripcion: `A task manager: add, complete and delete tasks, filter them and see live statistics.
@@ -77,45 +89,49 @@ export default function Projects() {
       </p>
 
       <div className="projects-container">
-        {PROYECTOS.map((p) => (
-          <article key={p.nombre} className="project glass-card">
-            <a
-              className="project-image"
-              href={`./${p.carpeta}/`}
-              tabIndex={-1}
-              aria-hidden="true"
-            >
-              <Clip p={p} />
-            </a>
-            <div className="project-body">
-              <h3 className="project-name">{p.nombre}</h3>
-              <p>{p.descripcion}</p>
-              <ul className="tags" aria-label="Technologies">
-                {p.etiquetas.map((etiqueta) => (
-                  <li key={etiqueta}>{etiqueta}</li>
-                ))}
-              </ul>
-              <div className="project-links">
-                <a
-                  href={`./${p.carpeta}/`}
-                  className="btn btn-primary"
-                  aria-label={`Live demo: ${p.nombre}`}
-                >
-                  Live demo
-                </a>
-                <a
-                  href={`${REPO}/${p.carpeta}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline"
-                  aria-label={`Source code: ${p.nombre}`}
-                >
-                  Source code
-                </a>
+        {PROYECTOS.map((p) => {
+          const demo = p.demo ?? `./${p.carpeta}/`;
+          const codigo = p.codigo ?? `${REPO}/${p.carpeta}`;
+          return (
+            <article key={p.nombre} className="project glass-card">
+              <a
+                className="project-image"
+                href={demo}
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <Clip p={p} />
+              </a>
+              <div className="project-body">
+                <h3 className="project-name">{p.nombre}</h3>
+                <p>{p.descripcion}</p>
+                <ul className="tags" aria-label="Technologies">
+                  {p.etiquetas.map((etiqueta) => (
+                    <li key={etiqueta}>{etiqueta}</li>
+                  ))}
+                </ul>
+                <div className="project-links">
+                  <a
+                    href={demo}
+                    className="btn btn-primary"
+                    aria-label={`Live demo: ${p.nombre}`}
+                  >
+                    Live demo
+                  </a>
+                  <a
+                    href={codigo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                    aria-label={`Source code: ${p.nombre}`}
+                  >
+                    Source code
+                  </a>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </section>
   );

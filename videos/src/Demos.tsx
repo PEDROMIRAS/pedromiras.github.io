@@ -52,6 +52,17 @@ const Movil: React.FC<{ archivo: string; desde: number }> = ({ archivo, desde })
   );
 };
 
+// Yo pago lo mío: a la izquierda se apuntan platos en la carta y a la derecha se paga y salen las
+// transferencias. Grabaciones de la app publicada en su propio repo (pedromiras.github.io/yo-pago-lo-mio/)
+export const YoPagoDemo: React.FC = () => (
+  <Fundido fondo="#111317">
+    <AbsoluteFill style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 48 }}>
+      <Movil archivo="yopago-carta.mp4" desde={7.5} />
+      <Movil archivo="yopago-pagar.mp4" desde={8.3} />
+    </AbsoluteFill>
+  </Fundido>
+);
+
 export const SushiDemo: React.FC = () => (
   <Fundido fondo="#0b1120">
     <AbsoluteFill style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 48 }}>
